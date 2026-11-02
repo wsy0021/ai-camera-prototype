@@ -68,7 +68,7 @@ document.querySelector('#permission-state').addEventListener('change',saveDevice
 try{sessionStorage.removeItem('camera-entry-photo-access')}catch{}
 syncAccess();
 if(params.get('guideDemo')==='first'&&!activeTaskId&&!params.get('retryTask')){photoAccess='unknown';syncAccess();const clean=new URL(location.href);clean.searchParams.delete('guideDemo');history.replaceState(history.state,'',clean)}
-if(params.get('entry')==='create'&&!activeTaskId&&!params.get('retryTask')&&photoAccess==='unknown'){openAlbumAccess()}else if(pendingTips)openPhotoGuide()
+if(!params.has('requirementsDemo')){if(params.get('entry')==='create'&&!activeTaskId&&!params.get('retryTask')&&photoAccess==='unknown'){openAlbumAccess()}else if(pendingTips)openPhotoGuide()}
 
 // Review control replays first entry without clearing photos or other app data.
 document.querySelector('#replay-first-selection').onclick=()=>{
