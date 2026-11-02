@@ -1,0 +1,11 @@
+/* Shared, restrained transition between photo preparation and browsing. */
+@view-transition{navigation:auto}
+.phone{view-transition-name:camera-phone}
+::view-transition-old(root),::view-transition-new(root){animation:none}
+::view-transition-old(camera-phone){animation:camera-flow-out 180ms ease-out both}
+::view-transition-new(camera-phone){animation:camera-flow-in 240ms ease-out both}
+@keyframes camera-flow-out{to{opacity:0}}
+@keyframes camera-flow-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.creation-progress-guide.is-new-task{animation:camera-guide-arrive 600ms ease-out both}
+@keyframes camera-guide-arrive{from{background:#414244;transform:translateY(5px)}to{transform:none}}
+@media(prefers-reduced-motion:reduce){::view-transition-old(camera-phone),::view-transition-new(camera-phone){animation:none}.creation-progress-guide.is-new-task{animation:none}}
