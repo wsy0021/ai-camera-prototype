@@ -1,118 +1,23 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>模板详情页 · 沉浸式探索 v0.2</title><style>
 *{box-sizing:border-box}body{margin:0;background:#141516;color:#f3f1ed;font-family:-apple-system,BlinkMacSystemFont,'SF Pro',sans-serif}button,a{font:inherit}button{color:inherit;cursor:pointer}button:focus-visible,a:focus-visible,.rail:focus-visible{outline:2px solid #f3f1ed;outline-offset:3px}.stage{display:flex;justify-content:center;gap:48px;padding:32px 24px}.phone{width:390px;height:844px;flex:none;position:relative;background:#202123;border-radius:28px;overflow:hidden}.status{height:54px;padding:18px 24px;display:flex;justify-content:space-between;font-weight:600;font-size:13px}.rail{height:756px;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;scrollbar-width:none;padding:4px 20px 12px;overscroll-behavior-x:contain;touch-action:pan-x pan-y}.rail::-webkit-scrollbar{display:none}.style{position:relative;width:350px;height:736px;flex:none;scroll-snap-align:start;scroll-snap-stop:always;border-radius:20px;overflow:hidden;background:#34312d;isolation:isolate}.portrait{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:-2}.shade{position:absolute;inset:0;background:linear-gradient(180deg,#0002 0%,transparent 28%,transparent 42%,#14151616 53%,#141516d9 74%,#141516 90%);z-index:-1;pointer-events:none}.card-top{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center}.icon{border:0;border-radius:50%;background:#20212399;backdrop-filter:blur(8px);width:40px;height:40px;display:grid;place-items:center;font-size:26px;line-height:1}.icon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7}.top-actions{display:flex;gap:8px}.content{position:absolute;bottom:18px;left:20px;right:20px}.type{font-size:12px;color:#d2d0cc;margin:0 0 8px}h1{font-size:29px;letter-spacing:-.7px;line-height:1.15;margin:0 0 20px;font-weight:600}.description{font-size:14px;line-height:1.55;color:#d0cecb;min-height:44px;margin:0 0 10px;max-width:290px}.tips{border:0;background:none;padding:0;min-height:36px;text-decoration:underline;text-underline-offset:4px;font-size:12px;color:#e3e1dd;margin-bottom:12px}.primary{height:52px;width:100%;border:0;border-radius:28px;background:#f3f1ed;color:#202123;font-size:15px;font-weight:600}.hint{font-size:10px;letter-spacing:.1px;color:#aaa9a5;text-align:center;margin:12px 0 0}.home{position:absolute;bottom:9px;left:calc(50% - 66px);width:132px;height:5px;border-radius:8px;background:#f3f1ed}.notes{width:285px;flex:none;padding-top:35px;color:#aaa9a5;font-size:13px;line-height:1.9}.notes h2{font-size:22px;color:#f3f1ed;line-height:1.5;margin:0 0 20px}.notes strong,.notes a{color:#f3f1ed}.notes p{margin:0 0 18px}.controls{display:flex;gap:12px;align-items:center;margin:24px 0}.controls button{border:1px solid #666;border-radius:50%;width:40px;height:40px;background:none;font-size:20px}.controls button:disabled{opacity:.3;cursor:default}.sheet{position:absolute;inset:54px 0 0;background:#202123;z-index:10;padding:0 20px 40px;overflow:auto}.sheet[hidden],.lightbox[hidden]{display:none}.sheet header{height:64px;display:flex;align-items:center;justify-content:space-between}.sheet h2{font-size:20px;margin:0}.sheet p{font-size:14px;color:#aaa9a5;line-height:1.8}.sheet .example{width:120px;height:152px;object-fit:cover;border-radius:12px}.sheet .summary{display:flex;align-items:center;gap:16px;margin:30px 0}.summary img{width:72px;height:90px;object-fit:cover;border-radius:8px}.summary h2{font-size:20px}.summary p{margin:8px 0 0}.placeholder{border:1px dashed #666;border-radius:12px;padding:24px;font-size:14px;color:#aaa9a5;line-height:1.9}.lightbox{position:absolute;inset:0;background:#101112;z-index:20;display:flex;align-items:center;justify-content:center}.lightbox img{max-width:100%;max-height:100%;object-fit:contain}.lightbox .icon{position:absolute;top:60px;right:16px}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}@media(max-width:720px){.stage{display:block;padding:0}.phone{margin:0 auto;border-radius:0}.notes{width:390px;max-width:100%;padding:28px 20px;margin:auto}}@media(max-width:389px){.phone{width:100%;height:100dvh;min-height:650px}.rail{height:calc(100% - 88px)}.style{width:calc(100vw - 40px);height:100%}.content{left:18px;right:18px}h1{font-size:26px}.description{font-size:13px}}
-.favorite[aria-pressed="true"] svg{fill:#f3f1ed;stroke:#f3f1ed}.toast{position:absolute;z-index:30;bottom:160px;left:40px;right:40px;display:flex;align-items:center;justify-content:space-between;background:#f3f1ed;color:#202123;border-radius:12px;padding:12px 16px;font-size:13px;box-shadow:0 4px 20px #0003}.toast[hidden]{display:none}.toast button{border:0;background:none;color:#202123;font-size:13px;font-weight:600;padding:4px}.favorite-list{display:grid;grid-template-columns:1fr 1fr;gap:20px 12px;margin-top:16px}.favorite-item{border:0;background:none;padding:0;text-align:left;font-size:14px}.favorite-item img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;margin-bottom:8px}.preview-favorites{background:none;border:1px solid #666;border-radius:20px;padding:9px 14px;font-size:13px;margin-bottom:20px}.content h1{margin-bottom:8px}.style-tagline{font-size:13px;line-height:1.5;color:#bcbab6;margin:0 0 20px}</style><link rel="stylesheet" href="照片来源流程.css"><link rel="stylesheet" href="标题层级规范.css?v=20261029"><main class="stage"><section class="phone" aria-label="Immersive template details"><div class="status"><span>9:41</span><span>▮▮▮　⌁　▰</span></div><div class="rail" tabindex="0" aria-label="Swipe left or right to browse different styles"></div><div class="home"></div><section class="sheet" hidden></section><div class="toast" role="status" hidden><span></span><button>View</button></div><div class="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged comparison" hidden><img alt="Enlarged original to AI portrait comparison"><button class="icon" aria-label="Close image">×</button></div></section><aside class="notes"><h2>模板详情页 v0.2<br>沉浸式探索</h2><p><strong>更大的照片</strong><br>390pt 屏宽下，照片展示面由 350×400 增至 350×736。底部用渐暗承接标题和操作，保留照片的视觉主体。</p><p><strong>左右滑动切换模板</strong><br>当前卡片右侧露出下一张。滑动切换 Golden Hour、Dark Studio、City Film；每张保留标题、对比动图和使用入口。</p><div class="controls"><button id="previous" aria-label="Previous style">‹</button><span id="position" aria-live="polite">1 / 3</span><button id="next" aria-label="Next style">›</button></div><p>也可用上方箭头体验。手机直接在大图上横滑；键盘聚焦卡片区域后用左右方向键。</p><p><strong>单模板内仍为自动对比</strong><br>先展示写真结果，再过渡到原图并循环；不展示暂停、放大按钮。左右滑动仅切换模板，不切换原图与结果。</p><p>素材为 AI 示意；使用入口已连接照片准备页。输出张数待定，价格与热度未加入。</p><button class="preview-favorites">查看我的收藏（预览）</button><p>右上角爱心可一键收藏／取消，当前浏览器保存；当前详情页可查看本地收藏；与我的收藏使用同一份记录；此处框外预览只展示当前详情集合内的收藏。</p><a href="1.0.0一级页面框架_v0.4.html?tab=discover">返回首页对比</a></aside></main><script src="主题合集配置.js"></script><script>
+.favorite[aria-pressed="true"] svg{fill:#f3f1ed;stroke:#f3f1ed}.toast{position:absolute;z-index:30;bottom:160px;left:40px;right:40px;display:flex;align-items:center;justify-content:space-between;background:#f3f1ed;color:#202123;border-radius:12px;padding:12px 16px;font-size:13px;box-shadow:0 4px 20px #0003}.toast[hidden]{display:none}.toast button{border:0;background:none;color:#202123;font-size:13px;font-weight:600;padding:4px}.favorite-list{display:grid;grid-template-columns:1fr 1fr;gap:20px 12px;margin-top:16px}.favorite-item{border:0;background:none;padding:0;text-align:left;font-size:14px}.favorite-item img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;margin-bottom:8px}.preview-favorites{background:none;border:1px solid #666;border-radius:20px;padding:9px 14px;font-size:13px;margin-bottom:20px}.content h1{margin-bottom:8px}.style-tagline{font-size:13px;line-height:1.5;color:#bcbab6;margin:0 0 20px}</style><link rel="stylesheet" href="照片来源流程.css"><link rel="stylesheet" href="标题层级规范.css?v=20261029"><main class="stage"><section class="phone" aria-label="Immersive template details"><div class="status"><span>9:41</span><span>▮▮▮　⌁　▰</span></div><div class="rail" tabindex="0" aria-label="Swipe left or right to browse different styles"></div><div class="home"></div><section class="sheet" hidden></section><div class="toast" role="status" hidden><span></span><button>View</button></div><div class="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged comparison" hidden><img alt="Enlarged original to AI portrait comparison"><button class="icon" aria-label="Close image">×</button></div></section><aside class="notes"><h2>模板详情页 v0.2<br>沉浸式探索</h2><p><strong>更大的照片</strong><br>390pt 屏宽下，照片展示面由 350×400 增至 350×736。底部用渐暗承接标题和操作，保留照片的视觉主体。</p><p><strong>左右滑动切换模板</strong><br>当前卡片右侧露出下一张。按入口主题或分类的顺序循环切换；首张向右可回末张，末张向左可回首张。只有一张时不切换。</p><div class="controls"><button id="previous" aria-label="Previous style">‹</button><span id="position" aria-live="polite">1 / 3</span><button id="next" aria-label="Next style">›</button></div><p>也可用上方箭头体验。手机直接在大图上横滑；键盘聚焦卡片区域后用左右方向键。</p><p><strong>单模板内仍为自动对比</strong><br>先展示写真结果，再过渡到原图并循环；不展示暂停、放大按钮。左右滑动仅切换模板，不切换原图与结果。</p><p>素材为 AI 示意；已配置模板可进入照片准备页，未配置模板仅预览。输出张数待定，价格与热度未加入。</p><button class="preview-favorites">查看我的收藏（预览）</button><p>右上角爱心可一键收藏／取消，当前浏览器保存；当前详情页可查看本地收藏；与我的收藏使用同一份记录；此处框外预览只展示当前详情集合内的收藏。</p><a href="1.0.0一级页面框架_v0.4.html?tab=discover">返回首页对比</a></aside></main><script src="主题合集配置.js"></script><script src="模板详情浏览.js?v=20261102-scope"></script><script>
 const collectionId=new URLSearchParams(location.search).get('collection');
-const styles=[{id:'golden-hour',name:'Golden Hour',description:'Soft sunlight and warm tones.\nYour own golden-hour moment.'},{id:'dark-studio',name:'Dark Studio',description:'Soft light. A quiet backdrop.\nA studio portrait that feels like you.'},{id:'city-film',name:'City Film',description:'City scenes with a cinematic feel.\nMake the everyday look extraordinary.'}].filter(s=>!collectionId||!CameraCollections[collectionId]||CameraCollections[collectionId].items.includes(s.id));
+const styles=CameraTemplateBrowse.resolve(location.search).filter(t=>t.mediaType==='photo');
 const rail=document.querySelector('.rail'),sheet=document.querySelector('.sheet'),lightbox=document.querySelector('.lightbox');const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;let current=0,lastFocus;const favoriteKey='ai-camera-framework-100-v3-favorites';let favoriteIds=[];function readFavorites(){try{const stored=JSON.parse(localStorage.getItem(favoriteKey)||'[]'),legacy=JSON.parse(localStorage.getItem('ai-camera-favorite-styles')||'[]');favoriteIds=[...new Set([...(Array.isArray(stored)?stored:[]),...(Array.isArray(legacy)?legacy:[])])].filter(x=>typeof x==='string');if(legacy.length){localStorage.setItem(favoriteKey,JSON.stringify(favoriteIds));localStorage.removeItem('ai-camera-favorite-styles')}}catch{}}readFavorites();let toastTimer;const toast=document.querySelector('.toast');
 function showToast(message,view=false){clearTimeout(toastTimer);toast.querySelector('span').textContent=message;toast.querySelector('button').hidden=!view;toast.hidden=false;toastTimer=setTimeout(()=>toast.hidden=true,4000)}
 function toggleFavorite(i){readFavorites();const id=styles[i].id;const exists=favoriteIds.includes(id);const next=exists?favoriteIds.filter(x=>x!==id):[id,...favoriteIds];try{localStorage.setItem(favoriteKey,JSON.stringify(next));favoriteIds=next;refresh();showToast(exists?'Removed from favorites':'Saved to My favorites',!exists)}catch{showToast('Could not save. Please try again.')}}
-function openFavorites(){toast.hidden=true;const saved=favoriteIds.map(id=>styles.find(s=>s.id===id)).filter(Boolean);openSheet('My favorites',saved.length?'<div class="favorite-list">'+saved.map(s=>`<button class="favorite-item" data-style="${s.id}"><img src="assets/portraits-v3/${s.id}-still.jpg" alt="${s.name}">${s.name}</button>`).join('')+'</div>':'<p>No saved styles yet. Tap the heart on a style to save it here.</p>');sheet.querySelectorAll('.favorite-item').forEach(b=>b.onclick=()=>{closeSheet();move(styles.findIndex(s=>s.id===b.dataset.style));rail.focus()})}toast.querySelector('button').onclick=openFavorites;document.querySelector('.preview-favorites').onclick=openFavorites;
+function openFavorites(){toast.hidden=true;const saved=favoriteIds.map(id=>styles.find(s=>s.id===id)).filter(Boolean);openSheet('My favorites',saved.length?'<div class="favorite-list">'+saved.map(s=>`<button class="favorite-item" data-style="${s.id}"><img src="${s.image}" alt="${s.name}">${s.name}</button>`).join('')+'</div>':'<p>No saved styles yet. Tap the heart on a style to save it here.</p>');sheet.querySelectorAll('.favorite-item').forEach(b=>b.onclick=()=>{closeSheet();move(styles.findIndex(s=>s.id===b.dataset.style));rail.focus()})}toast.querySelector('button').onclick=openFavorites;document.querySelector('.preview-favorites').onclick=openFavorites;
 const paused=styles.map(()=>reduced);
-function src(i,play=true){return 'assets/portraits-v3/'+styles[i].id+(play?'.gif':'-still.jpg')}
-styles.forEach((s,i)=>{const card=document.createElement('article');card.className='style';card.setAttribute('aria-label',s.name+' style');card.innerHTML=`<img class="portrait" src="${src(i,false)}" alt="${s.name}: original selfie and AI portrait comparison"><div class="shade"></div><div class="card-top"><button class="icon back" aria-label="Back to browsing">‹</button><div class="top-actions"><button class="icon favorite" aria-label="Save ${s.name} to favorites" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></div></div><div class="content"><h1>${s.name}</h1><p class="style-tagline">A new way to see yourself.</p><button class="primary">Use this style</button></div>`;rail.append(card);card.querySelector('.favorite').onclick=()=>toggleFavorite(i);card.querySelector('.back').onclick=returnToBrowse;card.querySelector('.primary').onclick=()=>requestStylePhotos(s.id)});
+function src(i,play=true){return play&&styles[i].animation?styles[i].animation:styles[i].image}
+styles.forEach((s,i)=>{const card=document.createElement('article');card.className='style';card.setAttribute('aria-label',s.name+' style');card.innerHTML=`<img class="portrait" src="${src(i,false)}" alt="${s.name}: original selfie and AI portrait comparison"><div class="shade"></div><div class="card-top"><button class="icon back" aria-label="Back to browsing">‹</button><div class="top-actions"><button class="icon favorite" aria-label="Save ${s.name} to favorites" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></div></div><div class="content"><h1>${s.name}</h1><p class="style-tagline">A new way to see yourself.</p><button class="primary" ${s.canCreate?'':'disabled'}>${s.canCreate?'Use this style':'Preview only'}</button></div>`;rail.append(card);card.querySelector('.favorite').onclick=()=>toggleFavorite(i);card.querySelector('.back').onclick=returnToBrowse;card.querySelector('.primary').onclick=()=>requestStylePhotos(s.id)});
 
 function returnToBrowse(){if(collectionId){location.href='主题合集页_v0.1.html?collection='+encodeURIComponent(collectionId);return}const dest=new URL('1.0.0一级页面框架_v0.4.html',location.href);dest.searchParams.set('tab','templates');try{const ctx=JSON.parse(sessionStorage.getItem('camera-creation-origin'));if(['discover','templates','videos'].includes(ctx?.tab)){const tab=ctx.tab==='templates'&&ctx.type==='video'?'videos':ctx.tab;dest.searchParams.set('tab',tab);dest.searchParams.set('type',ctx.type||'photo');if(ctx.category)dest.searchParams.set('category',ctx.category);dest.searchParams.set('creationReturn','1');sessionStorage.setItem('camera-browse-return',JSON.stringify({...ctx,tab,type:ctx.type||'photo'}))}}catch{}location.href=dest.href}
-function requestStylePhotos(styleId){location.href='照片准备页_v0.3.html?style='+encodeURIComponent(styleId)+'&entry=create&permissionEntry=selection'+(collectionId?'&collection='+encodeURIComponent(collectionId):'')}
+function requestStylePhotos(styleId){location.href='照片准备页_v0.3.html?style='+encodeURIComponent(styleId)+'&entry=create&permissionEntry=selection'+(collectionId?'&collection='+encodeURIComponent(collectionId):'')+'&group='+encodeURIComponent(styles.map(t=>t.id).join(','))}
 function openSheet(title,body){lastFocus=document.activeElement;sheet.innerHTML=`<header><h2>${title}</h2><button class="icon" aria-label="Close details">×</button></header>${body}`;sheet.hidden=false;rail.inert=true;sheet.querySelector('button').onclick=closeSheet;sheet.querySelector('button').focus()}
 function closeSheet(){sheet.hidden=true;rail.inert=false;lastFocus?.focus()}function closeImage(){lightbox.hidden=true;rail.inert=false;lastFocus?.focus()}lightbox.querySelector('button').onclick=closeImage;document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!lightbox.hidden)closeImage();else if(!sheet.hidden)closeSheet()}if(e.key==='Tab'&&(!sheet.hidden||!lightbox.hidden)){const root=!lightbox.hidden?lightbox:sheet;const buttons=[...root.querySelectorAll('button')];if(e.shiftKey&&document.activeElement===buttons[0]){e.preventDefault();buttons.at(-1).focus()}else if(!e.shiftKey&&document.activeElement===buttons.at(-1)){e.preventDefault();buttons[0].focus()}}});
 const requested=new URLSearchParams(location.search).get('style');const start=styles.findIndex(s=>s.id===requested);if(start>=0)current=start;
 
-let refresh, move;
-(() => {
-  const count = styles.length;
-  const originals = [...rail.children];
-  originals.forEach((card, index) => { card.dataset.templateIndex = String(index); });
-
-  const lastClone = originals.at(-1).cloneNode(true);
-  const firstClone = originals[0].cloneNode(true);
-  lastClone.dataset.templateClone = 'true';
-  firstClone.dataset.templateClone = 'true';
-  rail.insertBefore(lastClone, originals[0]);
-  rail.append(firstClone);
-
-  const cards = [...rail.children];
-  cards.forEach((card, position) => {
-    if (card.dataset.templateClone !== 'true') return;
-    const original = originals[Number(card.dataset.templateIndex)];
-    const originalButtons = [...original.querySelectorAll('button')];
-    card.querySelectorAll('button').forEach((button, index) => {
-      button.addEventListener('click', () => originalButtons[index].click());
-    });
-    card.dataset.position = String(position);
-  });
-
-  let activePosition = current + 1;
-  let settleTimer;
-  const step = () => cards[0].offsetWidth + 12;
-  const logicalIndex = position => (position === 0 ? count - 1 : position === count + 1 ? 0 : position - 1);
-
-  function refreshLoop() {
-    cards.forEach((card, position) => {
-      const index = Number(card.dataset.templateIndex);
-      const isActive = position === activePosition;
-      const image = card.querySelector('.portrait');
-      const imagePath = src(index, isActive && !paused[index]);
-      if (image.getAttribute('src') !== imagePath) image.src = imagePath;
-
-      const favorite = card.querySelector('.favorite');
-      const isFavorite = favoriteIds.includes(styles[index].id);
-      favorite.setAttribute('aria-pressed', String(isFavorite));
-      favorite.setAttribute('aria-label', (isFavorite ? 'Remove ' : 'Save ') + styles[index].name + (isFavorite ? ' from favorites' : ' to favorites'));
-      card.inert = !isActive;
-    });
-
-    document.querySelector('#position').textContent = (current + 1) + ' / ' + count;
-    document.querySelector('#previous').disabled = false;
-    document.querySelector('#next').disabled = false;
-  }
-
-  function wrappedMove(index) {
-    clearTimeout(settleTimer);
-    if (activePosition === 0 || activePosition === count + 1) {
-      activePosition = current + 1;
-      rail.scrollTo({ left: activePosition * step(), behavior: 'instant' });
-    }
-    const target = ((index % count) + count) % count;
-    const wrapsLeft = current === 0 && index < 0 && target === count - 1;
-    const wrapsRight = current === count - 1 && index >= count && target === 0;
-    activePosition = wrapsLeft ? 0 : wrapsRight ? count + 1 : target + 1;
-    current = target;
-    refreshLoop();
-    rail.scrollTo({ left: activePosition * step(), behavior: reduced ? 'instant' : 'smooth' });
-  }
-
-  function settle() {
-    clearTimeout(settleTimer);
-    const position = Math.max(0, Math.min(count + 1, Math.round(rail.scrollLeft / step())));
-    activePosition = position;
-    current = logicalIndex(position);
-
-    if (position === 0 || position === count + 1) {
-      activePosition = position === 0 ? count : 1;
-      rail.scrollTo({ left: activePosition * step(), behavior: 'instant' });
-    }
-    refreshLoop();
-  }
-
-  rail.addEventListener('scroll', event => {
-    event.stopImmediatePropagation();
-    clearTimeout(settleTimer);
-    settleTimer = setTimeout(settle, 140);
-  }, true);
-  rail.addEventListener('scrollend', settle, true);
-
-  refresh = refreshLoop;
-  move = wrappedMove;
-  document.querySelector('#previous').onclick = () => move(current - 1);
-  document.querySelector('#next').onclick = () => move(current + 1);
-  rail.addEventListener('keydown', event => {
-    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
-      event.preventDefault();
-      move(current + (event.key === 'ArrowRight' ? 1 : -1));
-    }
-  });
-  document.querySelector('.controls').insertAdjacentHTML('beforebegin', '<p><strong>当前主题内循环吸附</strong><br>第一款与末款首尾衔接，滑动停止后对齐到模板。</p>');
-  rail.scrollLeft = activePosition * step();
-  refreshLoop();
-})();
-</script></html>
+let refresh,move;
+const loop=CameraTemplateBrowse.loop(rail,current,(index,active,cards)=>{current=index;cards.forEach(card=>{const i=Number(card.dataset.templateIndex),image=card.querySelector('.portrait'),imagePath=src(i,card===active&&!paused[i]);if(image.getAttribute('src')!==imagePath)image.src=imagePath;const favorite=card.querySelector('.favorite'),saved=favoriteIds.includes(styles[i].id);favorite.setAttribute('aria-pressed',String(saved));favorite.setAttribute('aria-label',(saved?'Remove ':'Save ')+styles[i].name+(saved?' from favorites':' to favorites'));card.inert=card!==active});document.querySelector('#position').textContent=(current+1)+' / '+styles.length;document.querySelector('#previous').disabled=document.querySelector('#next').disabled=styles.length<2;const url=new URL(location.href);url.searchParams.set('style',styles[current].id);history.replaceState(null,'',url)});
+refresh=loop.refresh;move=loop.move;
+</script><script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script></html>
