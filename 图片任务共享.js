@@ -65,3 +65,9 @@ window.CameraCreationFlow=(()=>{
  }
  return {browseURL,retryURL,videoSource,taskBackURL};
 })();
+
+/* Local mood demo completion by timestamp; no real generation service. */
+(()=>{
+ function tick(){const now=Date.now();for(const t of CameraPhotoTasks.visible())if(t.mood&&['queued','generating'].includes(t.status)&&t.previewFinishAt&&now>=t.previewFinishAt)CameraPhotoTasks.update(t.id,{status:t.previewOutcome==='failed'?'failed':'completed',previewFinishAt:null});}
+ if(typeof setInterval==='function')setInterval(tick,500);if(typeof setTimeout==='function')setTimeout(tick,50);
+})();
