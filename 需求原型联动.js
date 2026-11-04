@@ -5,7 +5,8 @@
   let url;try{url=new URL(href)}catch{return null}
   const page=decodeURIComponent(url.pathname).split('/').pop(),q=url.searchParams,has=s=>!!doc.querySelector(s);
   let stage=null,state='page',scene=null;
-  if(page==='照片准备页_v0.3.html'){
+  if(page==='情绪盲盒页_v0.1.html'){stage=8;state=has('#waiting:not([hidden])')?'mood-generating':has('#picker:not([hidden])')?'mood-photo':'mood-preparing'}
+  else if(page==='照片准备页_v0.3.html'){
    scene=q.get('style')==='duo-portrait'?'duo':'single';
    if(has('.photo-guide-layer:not([hidden]),.device-flow.system-permission-layer:not([hidden]),#permission-dialog[open]')){stage=2;state='permission-guide'}
    else if(has('.phone.editor-waiting')){stage=5;state='generating'}
