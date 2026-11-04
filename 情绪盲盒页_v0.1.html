@@ -11,7 +11,7 @@ const navigationSvg=k=>`<svg class="nav-art" viewBox="0 0 24 24" aria-hidden="tr
 
 const jarIcon='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4H7zM6 8h12l2 4v7a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-7Z"/><path d="m12 10 1.3 3.7L17 15l-3.7 1.3L12 20l-1.3-3.7L7 15l3.7-1.3Z"/></svg>';
 const labels={discover:'Discover',templates:'AI Photo',videos:'AI Video',me:'Me'};document.querySelector('#dock').innerHTML=Object.entries(labels).map(([k,v])=>`<a href="1.0.0一级页面框架_v0.4.html?tab=${k}" aria-label="${v}">${navigationSvg(k)}</a>`).join('');document.querySelector('#activity').innerHTML=jarIcon;
-const options=[['☾','Slow down','You, at your own pace.','warm-portrait.jpg'],['↗','Feel bold','You, a little bolder.','studio-portrait.jpg'],['✧','Celebrate me','You, worth celebrating.','golden-hour-still.jpg'],['≈','Let it go','You, turning a new page.','city-film-still.jpg'],['♡','Feel nostalgic','You, with a touch of yesterday.','city-portrait.jpg'],['✦','Surprise me','You, in a new light.','warm-portrait.jpg']];
+const options=[['☾','Slow down','You, at your own pace.','warm-portrait.jpg'],['↗','Feel bold','You, a little bolder.','studio-portrait.jpg'],['✧','Celebrate me','You, worth celebrating.','golden-hour-still.jpg'],['≈','Cheer me up','You, with a little more joy.','city-film-still.jpg'],['♡','Feel nostalgic','You, with a touch of yesterday.','city-portrait.jpg'],['✦','Surprise me','You, in a new light.','warm-portrait.jpg']];
 const $=s=>document.querySelector(s);let selected=-1,photo='',objectURL='',timer=null;
 $('#moods').innerHTML=options.map((o,i)=>`<button class="mood" data-mood="${i}" aria-pressed="false"><span aria-hidden="true">${o[0]}</span>${o[1]}</button>`).join('');
 function ready(){$('#open').disabled=selected<0||!photo}
