@@ -10,7 +10,7 @@
     if(!doc?.body)return;
     void win.location.href;
     const style=doc.createElement('style');
-    style.textContent='body{margin:0!important}main{display:block!important;padding:0!important;max-width:none!important}main>aside{display:none!important}main>.phone{width:390px!important;max-width:100%!important;height:100dvh!important;min-height:0!important;margin:0 auto!important;border:0!important;border-radius:0!important}';
+    style.textContent='body{margin:0!important}main{display:block!important;padding:0!important;max-width:none!important}main>aside{display:none!important}main>.phone{width:402px!important;max-width:100%!important;height:100dvh!important;min-height:0!important;margin:0 auto!important;border:0!important;border-radius:0!important}';
     doc.head.append(style);
     let bindings=[],stopped=false,rendered=false;
     function sync(){
