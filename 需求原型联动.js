@@ -23,7 +23,7 @@
   else if(page==='图片上传示例页_v0.1.html')stage=2;
   else if(page==='生成承接页_v0.1.html')stage=5;
   else if(['生成成功页_v0.1.html','图片任务与结果_v0.1.html','视频任务与结果_v0.1.html'].includes(page))stage=6;
-  else if(['反馈页_v0.1.html','隐私与数据页_v0.1.html','账户登录流程_v0.1.html'].includes(page))stage=7;
+  else if(['反馈页_v0.1.html','隐私与数据页_v0.1.html','权限管理页_v0.1.html','账户登录流程_v0.1.html'].includes(page))stage=7;
   if(stage===null)return null;
   return {stage,scene,state,href:url.href,key:[page,stage,scene,state,url.search].join('|')};
  }
