@@ -2,6 +2,12 @@
 window.CameraPhotoTasks=(()=>{
  const key='camera-photo-tasks-preview-v1';
  const styles={
+ 'retro-film80':{name:'80s Film',image:'../assets/portraits-v3/studio-portrait.jpg',prototypeOnly:true},
+ 'retro-faded':{name:'Faded',image:'../assets/portraits-v3/studio-portrait.jpg',prototypeOnly:true},
+ 'retro-warm':{name:'Warm Film',image:'../assets/portraits-v3/studio-portrait.jpg',prototypeOnly:true},
+ 'retro-mono':{name:'Classic B&W',image:'../assets/portraits-v3/studio-portrait.jpg',prototypeOnly:true},
+ 'retro-cool':{name:'Cool Film',image:'../assets/portraits-v3/studio-portrait.jpg',prototypeOnly:true},
+
  'studio-glow':{name:'Studio Glow',image:'../assets/portraits-v3/avatar-portrait.jpg',mediaType:'video'},
  'city-closeup':{name:'City Close-up',image:'../assets/portraits-v3/city-portrait.jpg',mediaType:'video'},
  'motion-portrait':{name:'Motion Portrait',image:'../assets/motion-portrait-cover-v2.jpg',mediaType:'video'},
