@@ -8,10 +8,11 @@ if(current<0)current=0;
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 if(window.mermaid)mermaid.initialize({startOnLoad:false,theme:'neutral',securityLevel:'strict',flowchart:{htmlLabels:false},themeVariables:{fontFamily:'-apple-system, PingFang SC, sans-serif'}});
 async function diagrams(root){if(!window.mermaid)return;const nodes=[...root.querySelectorAll('pre.mermaid:not([data-processed])')];if(nodes.length)try{await mermaid.run({nodes});}catch{nodes.forEach(n=>n.classList.add('diagram-source'));}}
-function setTab(value){tab=value;for(const id of ['requirements','checklist']){$('#'+id).hidden=id!==value;const b=$('#'+id+'-tab');b.setAttribute('aria-selected',String(id===value));b.tabIndex=id===value?0:-1;}diagrams($('#'+value));}
+function setTab(value){tab=value;for(const id of ['requirements','rules','checklist']){$('#'+id).hidden=id!==value;const b=$('#'+id+'-tab');b.setAttribute('aria-selected',String(id===value));b.tabIndex=id===value?0:-1;}diagrams($('#'+value));}
 function render(){
 const s=stages[current];$('#chapters').innerHTML=stages.map((x,i)=>`<button data-module="${i}" aria-current="${current===i}">${escape(x.name)}</button>`).join('');
 $('#requirements').innerHTML='<h2>'+escape(s.name)+'</h2>'+s.html;
+$('#rules').innerHTML='<h2>'+escape(s.name)+' · 状态与规则</h2>'+s.rulesHtml;
 $('#checklist').innerHTML=`<h2>${escape(s.name)}</h2><h3>评审路径</h3><ol>${s.steps.map(x=>`<li>${escape(x)}</li>`).join('')}</ol><h3>本次核对</h3><p>勾选仅作本页临时记录，不表示验收结果已归档。</p><ul class="check-list">${s.checks.map(x=>`<li><input type="checkbox" aria-label="${escape(x)}"><span>${escape(x)}</span></li>`).join('')}</ul><h3>实现与验收边界</h3><p class="boundary">${escape(s.boundary)}</p>`;
 $('#previous').disabled=current===0;$('#next').disabled=current===stages.length-1;$('#position').textContent=`${current+1} / ${stages.length}`;
 history.replaceState(null,'','#'+s.id);setTab(tab);
@@ -47,7 +48,8 @@ function context(){
  else if(/隐私|权限|反馈/.test(file)){id='settings';description=file.replace(/_v.*$/,'');}
  else if(/生成成功/.test(file)){id='result';description='结果';}
  else if(/任务与结果|照片准备/.test(file)){id='generation';description='视频／兼容制作链路';}
- else {id='templates';description=file.replace(/_v.*$/,'');}
+ else if(['模板详情页_v0.1.html','模板详情页_v0.2.html','视频模板详情页_v0.1.html','主题合集页_v0.1.html','发型详情页_v0.1.html','AI头像工作室_v0.1.html','情绪盲盒页_v0.1.html'].includes(file)){id='templates';description=file.replace(/_v.*$/,'');}
+ else {id=null;description='未映射页面：'+file;}
  return{id,description,href:url.href,file};
 }
 function addSelect(label,options,value,onchange){
@@ -89,8 +91,8 @@ function sync(force=false){
 }
 function setFull(value){full=value;$('.workspace').hidden=full;$('#full-document').hidden=!full;$('#parallel').setAttribute('aria-pressed',String(!full));$('#full').setAttribute('aria-pressed',String(full));if(full)diagrams($('#full-document'));}
 $('#chapters').onclick=e=>{const b=e.target.closest('[data-module]');if(b){setFull(false);select(Number(b.dataset.module));}};
-$('#requirements-tab').onclick=()=>setTab('requirements');$('#checklist-tab').onclick=()=>setTab('checklist');
-$('.notes-tabs').onkeydown=e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();setTab(e.key==='Home'?'requirements':e.key==='End'?'checklist':tab==='requirements'?'checklist':'requirements');$('#'+tab+'-tab').focus();}};
+$('#requirements-tab').onclick=()=>setTab('requirements');$('#rules-tab').onclick=()=>setTab('rules');$('#checklist-tab').onclick=()=>setTab('checklist');
+$('.notes-tabs').onkeydown=e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const tabs=['requirements','rules','checklist'];const index=e.key==='Home'?0:e.key==='End'?2:(tabs.indexOf(tab)+(e.key==='ArrowRight'?1:2))%3;setTab(tabs[index]);$('#'+tab+'-tab').focus();}};
 $('#canvas-size').onchange=e=>{size=e.target.value.split(',').map(Number);applySize();};
 $('#reposition').onclick=load;$('#parallel').onclick=()=>setFull(false);$('#full').onclick=()=>setFull(true);$('#print').onclick=()=>window.print();
 $('#previous').onclick=()=>{if(current>0)select(current-1);};$('#next').onclick=()=>{if(current<stages.length-1)select(current+1);};
