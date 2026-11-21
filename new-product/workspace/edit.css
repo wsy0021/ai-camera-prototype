@@ -1,0 +1,88 @@
+/* Edit uses the existing conversation tokens, scale and compact media. */
+.editingworkspace{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;overflow:hidden;padding:0}
+.edithome{flex:1;overflow:auto;padding:32px 20px 24px}
+.edithome h2{font-size:22px;line-height:1.45;font-weight:500;max-width:290px;margin:0 0 28px}
+.editscenes{display:flex;flex-direction:column;gap:12px}
+.editscenecard{display:flex;align-items:center;gap:20px;min-height:112px;width:100%;padding:0;text-align:left;background:var(--surface);border:1px solid #2b2c2e;border-radius:16px;overflow:hidden}
+.editscenecover{flex:none;display:block;width:108px;height:112px;object-fit:cover}
+.editscenename{flex:1;font-size:17px;font-weight:500;min-width:0}
+.editscenearrow{flex:none;margin-right:20px;color:var(--muted);font-size:20px}
+.editscenecard:hover{border-color:#635b6d}
+.editroom{flex:1;display:flex;flex-direction:column;min-height:0}
+.editroomhead{flex:none;display:flex;align-items:center;gap:4px;padding:0 20px 8px;min-height:52px}
+.editroomhead h2{margin:0;font-size:17px;font-weight:500}
+.editroomhead button{width:44px;height:44px;margin-left:-12px;padding:0;display:grid;place-items:center;color:var(--muted)}
+.editroomhead svg{width:20px;height:20px}
+.editscroll{flex:1;min-height:0;overflow:auto;padding:12px 20px 20px;scrollbar-width:thin;scrollbar-color:#424345 transparent}
+.editgreeting{font-size:22px;font-weight:500;line-height:1.5;margin:12px 0}
+.edittasks{display:flex;flex-direction:column;gap:28px}
+.editstyles{flex:none;padding:6px 20px 12px;display:flex;gap:12px;overflow:auto;scrollbar-width:none;-ms-overflow-style:none}
+.editstyles::-webkit-scrollbar{display:none}
+.editstyle{position:relative;flex:0 0 88px;width:88px;height:96px;border-radius:12px;padding:0;overflow:hidden;background:var(--subtle);border:2px solid transparent}
+.editstyle img{display:block;width:100%;height:100%;object-fit:cover}
+.editstyle[aria-pressed="true"]{border-color:#c0afd6}
+.editstylename{position:absolute;left:0;right:0;bottom:0;padding:20px 3px 6px;text-align:center;line-height:1.3;font-size:12px;background:linear-gradient(transparent,#000c);color:#fff}
+.editown{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:13px;color:#d8d3e1}
+.editcomposer{margin-bottom:12px}
+.editcomposer .attachment{display:flex}
+.editcomposer .attachment img{object-fit:cover}
+.editcomposer .error{display:block}
+.editcomposer .submit{margin-left:auto}
+.editresultactions{gap:4px;width:184px;max-width:100%;margin-top:12px}
+.editresultactions .resultaction{padding:0 10px;background:var(--surface);border:1px solid var(--line);color:var(--text)}
+.editresultactions [data-edit-action="download"]{width:44px;min-width:44px;padding:0;background:transparent;border:0}
+.editresultactions [data-edit-action="download"] svg{width:18px;height:18px}
+.editcomparetabs{display:flex;gap:8px;margin-bottom:12px}
+.editcomparetabs button{flex:1;color:var(--muted)}
+.editcomparetabs [aria-pressed="true"]{background:#403947;color:var(--text)}
+.edithistorytitle{font-size:14px;color:var(--muted);margin:0 0 8px}
+@media(max-width:520px){.edithome{padding-top:24px}.editcomposer{margin-bottom:8px}}
+@media(max-height:720px){.edithome{padding-top:16px}.edithome h2{margin-bottom:20px}.editscenecard{min-height:88px}.editscenecover{height:88px;width:96px}.editstyles{padding-bottom:8px}.editstyle{height:80px}.editgreeting{font-size:20px;margin:4px 0}.editroomhead{min-height:44px;padding-bottom:0}}
+/* Edit interaction refinement · graphite / off-white */
+.editingworkspace{align-items:stretch;justify-content:flex-start;padding:0;overflow:hidden}
+.edithome{padding:28px 20px}.edithome h2{font-size:28px;line-height:34px;font-weight:600;max-width:310px;margin-bottom:28px;letter-spacing:-.5px}
+.editscenes{gap:12px}.editscenecard{border-radius:12px;border:0;background:var(--surface);min-height:104px;gap:18px}.editscenecover{width:104px;height:104px}.editscenecard:hover{background:#2c3134}.editscenename{font-size:18px}
+.editstarters{display:flex;flex-direction:column;align-items:flex-start;margin:24px 0 12px;gap:4px}.editstarter{font-size:14px;color:var(--muted);padding:0;text-align:left;min-height:44px}.editstarter::after{content:'↗';padding-left:8px;color:var(--text)}
+.recentheading{font-size:18px;font-weight:600;margin:24px 0 12px}.recentedit{display:flex;align-items:center;gap:12px;width:100%;padding:8px 0;text-align:left}.recentedit img{width:48px;height:56px;object-fit:cover;border-radius:6px}.recentedit span{min-width:0}.recentedit strong{display:block;font-size:14px;font-weight:500;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.recentedit small{display:block;font-size:12px;color:var(--muted)}
+.editroomhead{padding:0 20px;min-height:52px;border-bottom:1px solid #ffffff09;margin-bottom:4px}.editroomhead h2{font-size:18px;font-weight:600}.editroomhead button{color:var(--text)}
+.editscroll{padding-top:12px}.editgreeting{font-size:24px;line-height:30px;letter-spacing:-.3px;margin:8px 0 16px;max-width:260px}.edittasks{gap:28px}
+.editstyles{padding:8px 20px 12px;gap:10px}.editstyle{flex-basis:78px;width:78px;height:88px;border:1.5px solid transparent;border-radius:8px}.editstyle[aria-pressed="true"]{border-color:var(--accent,#BFA58F)}.editown{color:var(--text)}.editcomparetabs [aria-pressed="true"]{background:var(--surface)}
+.editcomposer .attachment img{object-fit:contain;background:#141719}.editcomposer .context{padding:4px 0;background:transparent;border-radius:0}.editcomposer .context span{color:var(--muted)}
+.editresultactions{width:216px;gap:8px;margin-top:8px}.editresultactions .resultaction{font-size:13px;min-height:44px;border:0;border-radius:8px;background:var(--surface);padding:0 12px}.editresultactions [data-edit-action="download"]{background:transparent;flex:none}
+.edittask .resultpreview{width:184px;max-width:100%;border-radius:10px;background:#131618;display:block;padding:0}.edittask .taskimage{display:block;width:184px;height:232px;max-width:100%;object-fit:contain;border-radius:10px}.edittask .requestphoto{object-fit:contain;background:#171a1c}.edittask .requestbubble{max-width:88%}
+.continuechoices{display:flex;flex-direction:column;gap:8px}.continuechoice{text-align:left;padding:12px 16px;background:var(--surface);border-radius:10px}.continuechoice::after{content:'↗';float:right;color:var(--muted)}
+#editError .inlineaction{display:block;color:var(--text);text-align:left;text-decoration:underline;text-underline-offset:4px}
+.filterpreview{margin:0 0 20px}.filterframe{display:grid;place-items:center;min-height:190px;height:240px;width:100%;background:#141719;border-radius:10px;overflow:hidden}.filterframe p{font-size:15px;color:var(--muted);max-width:210px;text-align:center;margin:24px}.filterphoto{display:block;width:100%;height:100%;object-fit:contain;min-height:0}.previewcaption{font-size:12px;margin:8px 0 0;color:var(--muted);min-height:20px}
+@media(max-height:720px){.filterframe{height:190px;min-height:160px}.editstyles{padding-top:4px;padding-bottom:6px}.editstyle{height:72px;flex-basis:70px}.editscroll{padding-top:8px}.editgreeting{font-size:22px;margin:4px 0}.editroomhead{min-height:44px}.editstarters{margin-top:16px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+@media(max-height:720px){.filterframe{height:140px;min-height:120px}.filterpreview{margin-bottom:12px}}
+
+.recentplaceholder{display:grid;place-items:center;width:48px;height:56px;flex:none;background:var(--surface);border-radius:6px;color:var(--muted)}.recentedit>span:last-child{flex:1;min-width:0}
+
+/* Scene is an in-place editing mode, not another back-navigation level. */
+.editroomhead{min-height:48px;padding:0 20px 4px;border:0;margin:0}
+.edit-scene-picker{position:relative;display:inline-flex;align-items:center;color:var(--muted)}
+.edit-scene-picker select{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:var(--text);font:inherit;font-size:14px;font-weight:500;min-height:44px;padding:0 26px 0 0;cursor:pointer;border-radius:0;max-width:100%}
+.edit-scene-picker option{background:var(--page);color:var(--text)}
+.edit-scene-picker svg{position:absolute;right:2px;width:14px;height:14px;pointer-events:none}
+
+/* Recent chats stay compact; the existing history drawer owns the full list. */
+.recentsection{margin-top:24px;padding-top:16px;border-top:1px solid var(--line,rgba(255,255,255,.08))}
+.recenthead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px}
+.recenthead .recentheading{margin:0;font-size:17px}
+.recentall{min-height:44px;padding:0 0 0 16px;font-size:12px;color:var(--accent,#f2b181)}
+.recentrail{display:flex;gap:10px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 2px 8px;}
+.recentrail::-webkit-scrollbar{display:none}
+.recentrail .recentedit{flex:0 0 88%;width:88%;min-width:0;gap:12px;padding:12px;min-height:96px;background:var(--surface,#24201e);border:0;border-radius:12px;scroll-snap-align:start}
+.recentrail .recentedit:only-child{flex-basis:100%;width:100%}
+.recentrail .recenttop{flex-wrap:wrap;gap:4px 8px}
+.recentrail .recenttime{margin-left:auto}
+.recentedit img,.recentedit .recentplaceholder{width:56px;height:64px;flex:none;border-radius:8px}
+.recentedit .recentcopy{display:flex;flex-direction:column;gap:5px;overflow:hidden}
+.recenttop{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.recenttop strong{font-size:14px;font-weight:600}
+.recenttime{flex:none;color:var(--muted);font-size:11px}
+.recentdescription{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;color:var(--muted);line-height:1.4}
+.recentedit .recentstatus{font-size:11px;line-height:1.2;color:var(--muted)}
+.recentall:focus-visible,.recentedit:focus-visible{outline:2px solid var(--accent,#f2b181);outline-offset:3px}

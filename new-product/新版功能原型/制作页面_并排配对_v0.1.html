@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Upload photos · Create photo</title>
+<style>
+:root{color-scheme:dark;--bg:#111112;--surface:#24201e;--fg:#f3f1ed;--muted:#b9b3ad;--accent:#f2b181;--line:#ffffff20}
+html{scrollbar-width:none}html::-webkit-scrollbar{display:none}
+*{box-sizing:border-box}body{margin:0;background:#1b1b1d;color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif}button,select{font:inherit}button{color:inherit;cursor:pointer;border:0;background:none;min-height:44px;min-width:44px;-webkit-tap-highlight-color:transparent}button:disabled{cursor:default}button:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:3px}h1,h2,p,figure{margin:0}svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}[hidden]{display:none!important}
+.stage{display:flex;justify-content:center;align-items:flex-start;gap:44px;padding:32px 24px}.phone{--w:402px;--h:874px;width:var(--w);height:var(--h);flex:none;position:relative;border:1px solid #ffffff26;border-radius:32px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column;isolation:isolate}.status{height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:14px;font-weight:600;background:var(--bg)}.status-icons{display:flex;gap:6px;align-items:center}.status-icons svg{width:17px;height:14px}.status-icons svg:last-child{width:23px}header{height:56px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 16px}header h1{font-size:18px;line-height:24px;font-weight:600}.top-name{display:flex;align-items:center;gap:4px}.icon{display:grid;place-items:center;width:44px;padding:0}.back{margin-left:-4px}.content{flex:1;min-height:0;overflow:auto;scrollbar-width:none;display:flex;flex-direction:column}.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:24px 20px 0;position:relative;flex:none}.paired-image{height:230px;display:flex;align-items:center;justify-content:center;background:#1c1b1b;border-radius:7px;overflow:hidden;width:100%;padding:0}.paired-image img{width:100%;height:100%;object-fit:contain;display:block}.pair figcaption{font-size:14px;line-height:20px;margin-top:10px;color:var(--muted)}.pair figure:last-child figcaption{color:var(--fg)}.pair-link{position:absolute;left:calc(50% - 18px);top:121px;width:36px;height:36px;border-radius:50%;background:#30302f;border:1px solid #ffffff24;display:grid;place-items:center;pointer-events:none}.pair-link svg{width:18px;height:18px}.empty-photo{display:grid;place-items:center;align-content:center;gap:12px;color:var(--muted);font-size:14px}.empty-photo svg{width:26px;height:26px}
+.gallery{padding:24px 20px 16px;flex:1;min-height:0;display:flex;flex-direction:column}.gallery-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex:none}.gallery-head h2{font-size:17px;line-height:24px;font-weight:600}.add{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:14px;padding:0}.add svg{width:18px;height:18px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;overflow:auto;scrollbar-width:none;align-content:start;padding:2px;margin:-2px;flex:1;min-height:90px}.thumb{padding:0;position:relative;border-radius:5px;overflow:hidden;aspect-ratio:1;min-height:44px;background:#28272a}.thumb img{width:100%;height:100%;object-fit:cover;display:block}.thumb[aria-pressed=true]{outline:2px solid var(--accent);outline-offset:-2px}.thumb[aria-pressed=true]:after{content:'✓';position:absolute;right:6px;bottom:6px;display:grid;place-items:center;background:var(--accent);color:#281a12;border-radius:50%;width:21px;height:21px;font-size:13px;font-weight:600}
+.footer{padding:20px 20px max(32px,env(safe-area-inset-bottom));flex:none}.primary,.secondary{height:52px;min-height:52px;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:12px;width:100%;font-size:16px;font-weight:600}.primary{background:var(--accent);color:#281a12}.primary:active{background:#dfa276}.primary:disabled{background:#35312e;color:#a7a09a}.primary svg{width:19px;height:19px}.secondary{border:1px solid #ffffff32;background:#ffffff05;font-weight:500}.secondary-actions{display:flex;justify-content:center;gap:24px;margin-top:8px}.secondary-actions button{font-size:14px;color:var(--muted);padding:0 4px}.home{position:absolute;bottom:8px;left:calc(50% - 66px);width:132px;height:5px;background:var(--fg);border-radius:6px;pointer-events:none}
+.photo-sources{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;flex:none}.photo-sources button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;background:#ffffff04;font-size:14px;font-weight:500}.photo-sources svg{width:18px;height:18px;flex:none}.gallery-head{min-height:28px;margin-bottom:12px}
+.camera-dialog{width:min(402px,calc(100vw - 24px));max-height:calc(100svh - 24px);color:var(--fg);overflow:auto}.camera-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px}.camera-header h2{font-size:18px;line-height:24px}.camera-view{aspect-ratio:3/4;max-height:50svh;position:relative;background:#1c1b1b;display:flex;align-items:center;justify-content:center}.camera-view video,.camera-view img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0;max-width:none;max-height:none}.camera-view video{transform:scaleX(-1)}.camera-message{padding:24px;color:var(--muted);font-size:15px;line-height:22px;text-align:center;z-index:1}.camera-footer{padding:16px;display:grid;gap:10px}.camera-footer .secondary-actions{margin-top:0}.camera-footer .shutter{height:60px;width:60px;border:3px solid var(--fg);border-radius:50%;margin:0 auto;background:var(--fg);box-shadow:inset 0 0 0 4px var(--bg);padding:0}.shutter:disabled{opacity:.35}.camera-footer .primary{margin-top:0}
+.task{padding:36px 20px 16px;flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px}.task h2{display:flex;align-items:center;gap:10px;font-size:19px;line-height:26px;font-weight:600}.task p{font-size:15px;line-height:22px;color:var(--muted);max-width:32ch}.spinner{width:18px;height:18px;border:1.5px solid #ffffff30;border-top-color:var(--fg);border-radius:50%;animation:spin 1.4s linear infinite;flex:none}.task.error h2{color:#ffb0a3}@keyframes spin{to{transform:rotate(360deg)}}
+.result-photo{flex:1;min-height:0;width:calc(100% - 40px);margin:12px 20px 0;padding:0;overflow:hidden;display:flex;align-items:center;justify-content:center}.result-photo img{width:100%;height:100%;object-fit:contain;display:block}.result-status{padding:20px 20px 0;font-size:17px;font-weight:500;line-height:24px}.phone[data-state=success] .content{overflow:hidden}.phone[data-state=success] .footer{padding-top:20px}.toast{position:absolute;left:20px;right:20px;bottom:108px;background:var(--fg);color:#24201e;padding:13px 16px;border-radius:10px;font-size:14px;line-height:20px;z-index:5}
+.review{width:300px;flex:none;padding-top:8px;font-size:14px;line-height:1.6}.review h2{font-size:23px;line-height:32px;font-weight:600;margin-bottom:12px}.review p{color:var(--muted);margin-bottom:20px}.label,.review label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px}.states{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:24px}.states button,.sizes button,.review-link{border:1px solid var(--line);border-radius:8px;font-size:14px;padding:8px}.states button[aria-pressed=true]{background:#eee9e1;color:#24201e}.sizes{display:flex;gap:5px;margin-bottom:24px}.sizes button{flex:1;white-space:nowrap;padding:4px;font-size:13px}.sizes button[aria-pressed=true]{border-color:var(--accent);color:var(--accent)}.review select{display:block;width:100%;min-height:44px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg);padding:8px;margin-bottom:24px}.review .note{font-size:12px;line-height:19px;color:#b9b3ad;border-top:1px solid var(--line);padding-top:20px}.review-link{width:100%}dialog{padding:0;background:#111112;border:1px solid var(--line);border-radius:16px;max-width:90vw;max-height:90vh;overflow:hidden}dialog::backdrop{background:#000c}dialog img{display:block;max-width:86vw;max-height:82vh;object-fit:contain}dialog .close{position:absolute;right:8px;top:8px;border-radius:50%;background:#111e;color:var(--fg)}.info-dialog{padding:28px;max-width:min(360px,90vw);color:var(--fg)}.info-dialog h2{font-size:20px;line-height:26px;margin-right:30px;margin-bottom:18px}.info-dialog p{font-size:16px;line-height:24px;color:var(--muted)}.info-dialog .primary{margin-top:24px}
+.phone[data-small=true] .pair{padding-top:8px}.phone[data-small=true] .paired-image{height:150px}.phone[data-small=true] .pair-link{top:65px}.phone[data-small=true] .gallery{padding-top:14px;padding-bottom:8px}.phone[data-small=true] .footer{padding-top:12px;padding-bottom:28px}.phone[data-small=true] .task{padding-top:20px;gap:8px}.phone[data-small=true] .task h2{font-size:18px}.phone[data-small=true] .result-status{padding-top:12px}
+@media(max-width:820px){.stage{flex-direction:column;align-items:center;padding:24px 12px;gap:28px}.review{width:min(440px,100%);padding:0 10px}}
+@media(max-width:480px){.stage{padding:0;gap:28px}.phone{width:100%;height:100svh;border:0;border-radius:0}.review{padding:0 20px 28px}.paired-image{height:clamp(150px,27svh,250px)}.pair-link{top:calc(6px + clamp(75px,13.5svh,125px))}}
+
+/* Success follows MuseMe: save in the header, large result, paired next actions. */
+.phone[data-state=success] .content{padding:12px 20px 16px;overflow:hidden}
+.phone[data-state=success] .result-photo{position:relative;flex:1;min-height:100px;width:100%;margin:0;border-radius:16px;background:#24201e}
+.phone[data-state=success] .result-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.phone[data-state=success] .result-caption{flex:none;text-align:center;padding:16px 0 0}
+.result-caption h2{font-size:20px;line-height:26px;font-weight:600;letter-spacing:-.4px}
+.result-caption p{font-size:13px;line-height:20px;color:var(--muted);margin-top:6px}
+.phone[data-state=success] .footer{padding-top:0;padding-bottom:32px}
+.success-tools{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.success-tools button{height:auto;min-height:52px;padding:10px 6px;font-size:14px;line-height:20px;border-radius:14px}
+.phone[data-state=success] header h1{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.phone[data-state=success] .toast{bottom:112px}
+
+/* Upload step: input photos only. */
+.grid{grid-auto-rows:max-content;align-items:start}.thumb{width:100%;flex:none}
+.pair{gap:12px;justify-content:center}.pair.single{grid-template-columns:minmax(0,220px)}.pair figure{position:relative;min-width:0}.slot-image{border:1px solid #ffffff1c}.slot-image[aria-pressed=true]{outline:2px solid var(--accent);outline-offset:2px}.photo-error{color:#ffb0a3;font-size:12px;line-height:17px;text-align:center;padding:8px 0 0;flex:none}.slot-image[aria-invalid=true],.slot-image[aria-invalid=true]:focus-visible{border-color:#e5988d;outline:2px solid #e5988d;outline-offset:2px}.slot-preview{position:relative;width:100%;flex:none}.slot-caption{display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px}.pair figcaption{margin-top:4px;color:var(--muted)}.slot-remove{position:absolute;right:0;top:0;display:grid;place-items:center;width:44px;height:44px;padding:0;z-index:1;color:#fff}.slot-remove:before{content:"";position:absolute;inset:7px;border-radius:50%;background:#111112b8;border:1px solid #ffffff24;backdrop-filter:blur(8px)}.slot-remove svg{position:relative;width:16px;height:16px}.pair.single .paired-image{height:230px}.gallery-head h2{font-size:15px;font-weight:500;color:var(--muted)}.phone[data-small=true] .pair.single .paired-image{height:150px}
+
+/* Keep the title on the screen center, independently of the side actions. */
+header{position:relative}header h1{position:absolute;left:64px;right:64px;top:50%;transform:translateY(-50%);text-align:center;pointer-events:none}
+/* The library has tucked, browsing, and expanded positions. */
+.phone:is([data-state=pick],[data-state=checking],[data-state=generating]) .content{overflow:hidden;--sheet-progress:0;--sheet-collapse:0;--preview-rest:230px;--preview-compact:96px;--preview-top:24px}
+.phone:is([data-state=pick],[data-state=checking],[data-state=generating])[data-small=true] .content{--preview-rest:150px;--preview-compact:72px;--preview-top:8px}
+.phone:is([data-state=pick],[data-state=checking],[data-state=generating]) .pair{padding-top:calc(var(--preview-top) * (1 - var(--sheet-progress)) + 8px * var(--sheet-progress));flex:var(--sheet-collapse) 0 auto;min-height:0;align-items:start;align-content:center;transition:padding-top .24s ease,flex-grow .24s ease}
+.phone:is([data-state=pick],[data-state=checking],[data-state=generating]) .pair figure{display:flex;flex-direction:column;min-height:0}.phone:is([data-state=pick],[data-state=checking],[data-state=generating]) .slot-caption{flex:none}
+.phone:is([data-state=pick],[data-state=checking],[data-state=generating]) .pair.single .slot-preview{width:calc(100% - 108px * var(--sheet-progress));margin-inline:auto;transition:width .24s ease}
+.phone:is([data-state=pick],[data-state=checking],[data-state=generating]) .paired-image,.phone:is([data-state=pick],[data-state=checking],[data-state=generating])[data-small=true] .pair.single .paired-image{height:calc(var(--preview-rest) * (1 - var(--sheet-progress)) + var(--preview-compact) * var(--sheet-progress));flex:var(--sheet-collapse) 1 auto;min-height:72px;transition:height .24s ease,flex-grow .24s ease}
+.phone:is([data-state=pick],[data-state=checking],[data-state=generating]) .photo-sources{margin:0 0 calc(16px * (1 - var(--sheet-collapse)))}
+.phone:is([data-state=pick],[data-state=checking],[data-state=generating]) .gallery{flex:calc(1 - var(--sheet-collapse)) 1 80px;min-height:80px;margin-top:20px;padding:0 20px 12px;transition:flex-grow .24s ease,padding-bottom .24s ease;border-radius:22px 22px 0 0;background:#1d1b1a;border-top:1px solid #ffffff12;overflow:hidden}
+.sheet-handle{width:calc(100% + 40px);margin:0 -20px;padding:0 20px;flex:none;height:24px;min-height:24px;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;touch-action:none;cursor:ns-resize;user-select:none}
+.sheet-grip{width:32px;height:4px;border-radius:4px;background:#817972;margin:10px auto;flex:none}
+.sheet-library{display:flex;flex:1;min-height:0;flex-direction:column}.sheet-heading{margin-bottom:12px;flex:none;display:flex;align-items:center;justify-content:space-between;font-size:15px;line-height:22px;font-weight:500;color:var(--muted)}
+.phone:is([data-state=pick],[data-state=checking],[data-state=generating]) .grid[aria-hidden=true]{visibility:hidden}
+.phone:is([data-state=pick],[data-state=checking],[data-state=generating]) .grid{min-height:0;overscroll-behavior:contain;touch-action:pan-y}
+.phone[data-dragging=true] .pair,.phone[data-dragging=true] .slot-preview,.phone[data-dragging=true] .paired-image,.phone[data-dragging=true] .gallery{transition:none!important}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* Processing stays over the submitted upload screen. */
+.processing-overlay{position:absolute;inset:50px 0 24px;z-index:8;display:flex;align-items:center;justify-content:center;background:#080809cc;padding:24px;backdrop-filter:blur(2px)}
+.processing-center{width:100%;max-width:280px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:0}
+.processing-mark{width:44px;height:44px;margin-bottom:20px;position:relative;display:grid;place-items:center;color:var(--accent)}
+.processing-mark:before{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid #f2b18130;border-top:2px solid var(--accent);animation:spin 1.8s linear infinite}
+.processing-mark svg{width:23px;height:23px;stroke-width:1.4}
+.processing-center h2{font-size:18px;line-height:25px;font-weight:600;color:var(--fg)}
+.processing-center p{font-size:13px;line-height:20px;color:#b9b3ad;margin-top:6px}
+.processing-track{height:3px;width:100%;overflow:hidden;border-radius:3px;background:#ffffff26;margin-top:24px;position:relative}
+.processing-track:after{content:"";position:absolute;inset:0 auto 0 0;width:42%;border-radius:3px;background:linear-gradient(90deg,#d99260,var(--accent),#ffe2ca);animation:processing-flow 1.8s ease-in-out infinite alternate}
+.processing-minimize{margin-top:16px;min-width:100px;min-height:44px;font-size:13px;color:var(--muted);padding:0 16px}
+.processing-minimize span{border:1px solid #ffffff38;border-radius:20px;padding:7px 16px}
+.processing-compact{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:48px;border:1px solid #f2b18155;border-radius:12px;background:#f2b1810b;font-size:15px}
+.processing-compact .spinner{border-top-color:var(--accent)}
+@keyframes processing-flow{from{transform:translateX(-40%)}to{transform:translateX(180%)}}
+@media(prefers-reduced-motion:reduce){.processing-track:after{left:25%;animation:none}.processing-mark:before{animation:none}}
+
+</style>
+</head>
+<body>
+<main class="stage">
+<section class="phone" aria-label="Template creation">
+ <div class="status"><span>9:41</span><span class="status-icons" aria-hidden="true"><svg viewBox="0 0 20 14"><path d="M2 12V9m5 3V6m5 6V3m5 9V1" stroke-width="3"/></svg><svg viewBox="0 0 20 14"><path d="M2 4a12 12 0 0 1 16 0M5 7a7 7 0 0 1 10 0m-7 3a3 3 0 0 1 4 0"/><circle cx="10" cy="12" r="1" fill="currentColor" stroke="none"/></svg><svg viewBox="0 0 26 14"><rect x="1" y="2" width="21" height="10" rx="2"/><path d="M24 5v4"/><rect x="3" y="4" width="17" height="6" rx="1" fill="currentColor" stroke="none"/></svg></span></div>
+ <header><div class="top-name"><button class="icon back" id="back" aria-label="Back"><svg viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg></button><h1 id="page-title">Upload photo</h1></div><button class="icon" id="requirements" aria-label="Photo requirements"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/></svg></button></header>
+ <div class="content" id="content"></div>
+ <footer class="footer" id="footer"></footer>
+ <div class="processing-overlay" id="processing" role="dialog" aria-modal="true" aria-labelledby="processing-title" hidden></div>
+ <div class="home"></div><div class="toast" role="status" hidden></div>
+</section>
+<aside class="review" lang="zh-CN">
+ <h2>上传照片</h2><p>拖动 Recent photos 顶部把手，或在图库内上滑／滚轮上推：图库展开，输入预览同步缩小；下拉可进一步收起，仅保留相册／自拍两个来源按钮和把手；上滑恢复标题与图库，Generate 固定。点击把手也可切换。</p><div class="label">输入数量（评审演示）</div><div class="sizes"><button data-count="1" aria-pressed="true">单图</button><button data-count="2" aria-pressed="false">双图</button></div>
+ <div class="label">页面状态</div><div class="states"><button data-state="empty">未选照片</button><button data-state="pick" aria-pressed="true">已选照片</button><button data-state="checking">检查照片</button><button data-state="checkfailed">检查未通过</button><button data-state="generating">生成中</button><button data-state="success">结果</button><button data-state="failed">失败</button><button data-state="unknown">状态待确认</button></div>
+ <div class="label">画板尺寸</div><div class="sizes"><button data-size="402,874" aria-pressed="true">402 × 874</button><button data-size="375,667">375 × 667</button><button data-size="440,956">440 × 956</button></div>
+ <label for="check-outcome">照片检查演示</label><select id="check-outcome"><option value="pass">通过</option><option value="fail">未通过</option></select>
+ <label for="outcome">生成演示结果</label><select id="outcome"><option value="success">成功</option><option value="failed">失败</option><option value="unknown">状态待确认</option></select>
+ <p class="note">相册上传与自拍已纳入需求；两种来源并列，照片确认后更新当前照片位，取消保留原选择。Photo library打开系统文件／照片选择器，自拍按浏览器支持使用摄像头或系统相机；权限与真机行为待验。下方图库及生成结果仍是样片，照片检查与生成由计时器演示，进度条为不定量动效；Minimize收起状态层；Continue exploring返回来源列表，演示任务按本地时间完成并进入Me，可重开／刷新恢复。照片以浏览器本地存储保留供重试；存储不可用时需重选。未接真实AI与服务端任务。Save photo下载当前模板演示图。</p>
+
+</aside>
+</main>
+<input type="file" id="file" accept="image/*" hidden>
+<input type="file" id="selfie-file" accept="image/*" capture="user" hidden>
+<dialog id="camera" class="camera-dialog" aria-labelledby="camera-title"><div class="camera-header"><h2 id="camera-title">Take a selfie</h2><button class="icon" id="close-camera" aria-label="Cancel selfie"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div><div class="camera-view"><video id="camera-video" autoplay muted playsinline hidden></video><img id="camera-photo" alt="Your captured selfie" hidden><p class="camera-message" id="camera-message" role="status">Opening camera…</p></div><div class="camera-footer"><button class="shutter" id="shutter" aria-label="Take photo" disabled></button><button class="primary" id="use-selfie" hidden>Use photo</button><div class="secondary-actions"><button id="retake" hidden>Retake</button><button id="retry-camera" hidden>Try again</button><button id="native-camera" hidden>Open camera app</button><button id="camera-library" hidden>Photo library</button></div></div></dialog>
+<dialog id="preview" aria-label="Photo preview"><button class="icon close" id="close-preview" aria-label="Close preview"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></svg></button><img alt="Full size photo" id="preview-image"></dialog>
+<dialog id="info" class="info-dialog" aria-labelledby="info-title"><h2 id="info-title">Choose a clear photo</h2><p>Use a photo of one person with their face clearly visible.</p><button class="primary" id="close-info">Got it</button></dialog>
+<script src="图片任务共享.js?v=photo-flow-95"></script>
+<script src="照片编辑恢复.js"></script>
+<script src="照片制作接入.js?v=photo-flow-95"></script>
+<script>
+const $=s=>document.querySelector(s),asset='../assets/portraits-v3/';
+const files=['soft-portrait.jpg','studio-portrait.jpg','selfie-portrait.jpg','avatar-portrait.jpg','city-portrait.jpg','warm-portrait.jpg','city-film-still.jpg','dark-studio-still.jpg'];
+const samples=files.map(f=>asset+f);
+const params=new URLSearchParams(location.search),requestedTask=params.get('task')||params.get('retryTask');
+let task=CameraPhotoTasks.read().find(t=>t.id===requestedTask)||null;
+const styleId=task?.styleId||params.get('style')||'golden-hour',style=CameraPhotoTasks.styles[styleId];
+const unsupported=!style||style.mediaType==='video',historyEntry=params.get('entry')==='history';
+if(task?.sourceParams)for(const [key,value] of Object.entries(task.sourceParams))if(!params.has(key))params.set(key,value);
+const flowContext=task||CameraPhotoCreation.context(params),example=task?.resultImage||style?.image||asset+'warm-portrait.jpg';
+let taskStatus=task?.status,integrationReady=false;
+function writeTaskURL(){const dest=new URL(location.href);dest.searchParams.delete('retryTask');if(task)dest.searchParams.set('task',task.id);else dest.searchParams.delete('task');history.replaceState(null,'',dest.href)}
+function clearTask(){task=null;taskStatus=null;writeTaskURL()}
+
+const icons={arrow:'<svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>',add:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',library:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 5-5 4 4 4-6 5 7"/></svg>',camera:'<svg viewBox="0 0 24 24"><path d="M4 6h4l2-3h4l2 3h4a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="4"/></svg>'};
+let state='pick',inputCount=task?.inputCount||(styleId==='duo-portrait'||(!params.has('style')&&params.get('count')==='2')?2:1),slots=[null,null],activeSlot=0,submitted=null,uploaded=[],timer=null,toastTimer=null,busy=false,uploadTarget=0,selfieTarget=0;
+let processingMinimized=false,slotErrors=[false,false];
+let cameraStream=null,cameraAttempt=0,captured=null;
+let sheetProgress=0,sheetScroll=0,sheetGesture=null,sheetWheelTimer=null,suppressSheetClickUntil=0;
+function notify(message){$('.toast').textContent=message;$('.toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('.toast').hidden=true,3200)}
+function change(next){clearTimeout(timer);timer=null;processingMinimized=false;if(next==='checkfailed'){slotErrors[0]=true;activeSlot=0;state='pick'}else state=next;render();if(next==='checkfailed')$('[data-slot="0"]').focus({preventScroll:true})}
+function fillSlot(src,index=activeSlot){if(slots[index]!==src)slotErrors[index]=false;slots[index]=src;activeSlot=slots.slice(0,inputCount).findIndex(x=>!x);if(activeSlot<0)activeSlot=index;change('pick')}
+function ready(){return slots.slice(0,inputCount).every((src,i)=>src&&!slotErrors[i])}
+function pair(){const photos=state==='pick'?slots:submitted||slots;return `<div class="pair ${inputCount===1?'single':''}" aria-label="Input photos">${photos.slice(0,inputCount).map((src,i)=>`<figure><div class="slot-preview"><button class="paired-image slot-image ${src?'':'empty-photo'}" data-slot="${i}" aria-label="Select photo ${i+1} slot" ${state==='pick'&&slotErrors[i]?`aria-invalid="true" aria-describedby="photo-error-${i}"`: ''} aria-pressed="${state==='pick'&&activeSlot===i}">${src?`<img src="${src}" alt="Input photo ${i+1}">`:`${icons.add}<span>${inputCount===1?'Add photo':'Add photo '+(i+1)}</span>`}</button>${src&&state==='pick'?`<button class="slot-remove" data-remove="${i}" aria-label="Remove photo ${i+1}"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></svg></button>`:''}</div>${inputCount===2?`<figcaption class="slot-caption"><span>Photo ${i+1}</span></figcaption>`:''}${state==='pick'&&slotErrors[i]?`<p class="photo-error" id="photo-error-${i}" role="status">Photo check failed. Choose a clearer photo.</p>`:''}</figure>`).join('')}</div>`}
+function gallery(){const photos=uploaded.concat(samples);return `<section class="gallery" aria-label="Photo selection panel"><button class="sheet-handle" id="sheet-toggle" aria-label="${sheetProgress>-.99?'Collapse':'Expand'} recent photos" aria-expanded="${sheetProgress>-.99}" aria-controls="sheet-library"><span class="sheet-grip" aria-hidden="true"></span></button><div class="photo-sources"><button data-upload>${icons.library} Photo library</button><button data-selfie>${icons.camera} Take a selfie</button></div><div class="sheet-library" id="sheet-library"><span class="sheet-heading">Recent photos</span><div class="grid" id="recent-grid">${photos.map((src,i)=>`<button class="thumb" data-photo="${i}" aria-label="Choose photo ${i+1}" aria-pressed="${src===slots[activeSlot]}"><img src="${src}" alt="Photo ${i+1}"></button>`).join('')}</div></div></section>`}
+function sheetTravel(){return $('.phone').dataset.small==='true'?78:150}
+function sheetCollapseTravel(){
+ const style=getComputedStyle($('#content')),pair=$('.pair');if(!pair)return 150;
+ const captionHeight=Math.max(...Array.from(pair.querySelectorAll('figure'),figure=>Array.from(figure.children).slice(1).reduce((height,el)=>height+el.offsetHeight+parseFloat(getComputedStyle(el).marginTop),0)));
+ return Math.max(48,$('#content').clientHeight-parseFloat(style.getPropertyValue('--preview-rest'))-parseFloat(style.getPropertyValue('--preview-top'))-captionHeight-100);
+}
+function sheetOffset(progress){return progress*(progress<0?sheetCollapseTravel():sheetTravel())}
+function sheetFromOffset(offset){return offset/(offset<0?sheetCollapseTravel():sheetTravel())}
+function setSheet(progress,dragging=false){
+ sheetProgress=Math.max(-1,Math.min(1,progress));$('#content').style.setProperty('--sheet-progress',Math.max(0,sheetProgress));$('#content').style.setProperty('--sheet-collapse',Math.max(0,-sheetProgress));
+ $('.phone').dataset.dragging=String(dragging);
+ const handle=$('#sheet-toggle'),grid=$('#recent-grid'),closed=sheetProgress<=-.99;
+ if(handle){handle.setAttribute('aria-expanded',String(!closed));handle.setAttribute('aria-label',(closed?'Expand':'Collapse')+' recent photos')}
+ const library=$('#sheet-library');if(library){library.hidden=closed;library.inert=closed}if(grid){grid.inert=closed;grid.setAttribute('aria-hidden',String(closed))}
+}
+function settleSheet(){clearTimeout(sheetWheelTimer);sheetGesture=null;setSheet(sheetProgress<-.5?-1:sheetProgress>.5?1:0)}
+
+function bindSheet(){
+ const handle=$('#sheet-toggle'),grid=$('#recent-grid');if(!handle)return;
+ grid.scrollTop=sheetScroll;grid.addEventListener('scroll',()=>sheetScroll=grid.scrollTop,{passive:true});setSheet(sheetProgress);
+ handle.addEventListener('pointerdown',event=>{
+  if(event.button!==0)return;clearTimeout(sheetWheelTimer);sheetGesture={kind:'handle',y:event.clientY,start:sheetProgress,moved:false};handle.setPointerCapture(event.pointerId);
+ });
+ handle.addEventListener('pointermove',event=>{
+  if(sheetGesture?.kind!=='handle')return;const delta=sheetGesture.y-event.clientY;
+  if(Math.abs(delta)>5)sheetGesture.moved=true;if(sheetGesture.moved)setSheet(sheetFromOffset(sheetOffset(sheetGesture.start)+delta),true);
+ });
+ const release=()=>{if(sheetGesture?.kind!=='handle')return;const moved=sheetGesture.moved;if(moved){suppressSheetClickUntil=Date.now()+400;settleSheet()}else{sheetGesture=null;$('.phone').dataset.dragging='false'}};
+ handle.addEventListener('pointerup',release);handle.addEventListener('pointercancel',()=>settleSheet());
+ handle.addEventListener('keydown',event=>{if(['ArrowUp','ArrowDown','Home','End'].includes(event.key)){event.preventDefault();setSheet(event.key==='Home'?-1:event.key==='End'?1:Math.round(sheetProgress)+(event.key==='ArrowUp'?1:-1))}});
+ handle.addEventListener('click',()=>{if(Date.now()<suppressSheetClickUntil)return;clearTimeout(sheetWheelTimer);setSheet(sheetProgress>-.99?-1:0)});
+ $('.gallery').addEventListener('wheel',event=>{
+  if(Math.abs(event.deltaY)<=Math.abs(event.deltaX))return;
+  if((event.deltaY>0&&sheetProgress<1)||(event.deltaY<0&&grid.scrollTop<=0&&sheetProgress>-1)){
+   event.preventDefault();sheetGesture=null;setSheet(sheetFromOffset(sheetOffset(sheetProgress)+event.deltaY),true);clearTimeout(sheetWheelTimer);sheetWheelTimer=setTimeout(settleSheet,130);
+  }
+ },{passive:false});
+ grid.addEventListener('touchstart',event=>{
+  if(event.touches.length!==1)return;clearTimeout(sheetWheelTimer);sheetGesture={kind:'grid',y:event.touches[0].clientY,start:sheetProgress,top:grid.scrollTop,moved:false,owned:false};
+ },{passive:true});
+ grid.addEventListener('touchmove',event=>{
+  const gesture=sheetGesture;if(gesture?.kind!=='grid'||event.touches.length!==1)return;
+  const delta=gesture.y-event.touches[0].clientY;if(Math.abs(delta)<5&&!gesture.owned)return;
+  if(!gesture.owned){gesture.owned=(delta>0&&gesture.start<1)||(delta<0&&gesture.top<=0&&gesture.start>-1);if(!gesture.owned)return}
+  if(event.cancelable)event.preventDefault();gesture.moved=true;setSheet(sheetFromOffset(sheetOffset(gesture.start)+delta),true);
+ },{passive:false});
+ const endTouch=()=>{if(sheetGesture?.kind!=='grid')return;if(sheetGesture.moved){suppressSheetClickUntil=Date.now()+400;settleSheet()}else sheetGesture=null};
+ grid.addEventListener('touchend',endTouch);grid.addEventListener('touchcancel',endTouch);
+}
+document.addEventListener('click',event=>{if(Date.now()<suppressSheetClickUntil&&event.target.closest('.gallery')){event.preventDefault();event.stopImmediatePropagation()}},true);
+
+function render(){
+ const processing=state==='checking'||state==='generating';
+ $('.phone').dataset.state=state;$('#page-title').textContent=state==='pick'||processing?(inputCount===1?'Upload photo':'Upload photos'):(style?.name||'Create photo');document.querySelectorAll('[data-count]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.count)===inputCount)));
+ document.querySelectorAll('button[data-state]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.state===(state==='pick'&&slotErrors.slice(0,inputCount).some(Boolean)?'checkfailed':state==='pick'&&!slots.slice(0,inputCount).some(Boolean)?'empty':state))));
+ const headerAction=$('.phone header > button');
+ headerAction.id=state==='success'?'save':'requirements';
+ headerAction.setAttribute('aria-label',state==='success'?'Save photo':'Photo requirements');
+ headerAction.innerHTML=state==='success'?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></svg>':'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/></svg>';
+ let body='',foot='';
+ if(state==='pick'||processing){
+  body=pair()+gallery();foot=processingMinimized?'<button class="processing-compact" id="show-processing"><span class="spinner" aria-hidden="true"></span>Generating…</button><div class="secondary-actions"><button id="explore">Continue exploring</button></div>':`<button class="primary" id="generate" ${ready()&&!processing?'':'disabled'}>Generate ${icons.arrow}</button>`;
+ }else if(state==='success'){
+  body=`<button class="result-photo" data-preview="result" aria-label="Preview result"><img src="${example}" alt="Demonstration result"></button><section class="result-caption" role="status"><h2>Your new look is ready.</h2><p>Made for you. Make it yours.</p></section>`;
+  foot='<div class="success-tools"><button class="secondary" id="remake">Create another</button><button class="primary" id="explore">Continue exploring</button></div>';
+ }else if(state==='missing'){
+  body='<section class="task" role="status"><h2>This request is unavailable</h2><p>Return to browse and choose a template to start again.</p></section>';foot='<button class="primary" id="explore">Continue exploring</button>';
+ }else{
+  const copy={failed:['Couldn’t create this photo','Choose Try again, or change your photo.'],unknown:['Waiting for confirmation','Check this request before starting again.']}[state];
+  body=pair()+`<section class="task ${state==='failed'?'error':''}" role="status"><h2>${copy[0]}</h2><p>${copy[1]}</p></section>`;
+  foot=state==='failed'?'<button class="primary" id="retry">Try again</button><div class="secondary-actions"><button id="change-photo">Change photo</button></div>':'<button class="primary" id="check">Check status</button><div class="secondary-actions"><button id="explore">Continue exploring</button></div>';
+ }
+ clearTimeout(sheetWheelTimer);sheetGesture=null;$('#content').innerHTML=body;$('#footer').innerHTML=foot;bindSheet();
+ const expanded=processing&&!processingMinimized,overlay=$('#processing');
+ overlay.hidden=!expanded;overlay.innerHTML=processing?`<div class="processing-center"><div class="processing-mark" aria-hidden="true"><svg viewBox="0 0 24 24">${state==='checking'?'<path d="m7 12 3 3 7-7"/>':'<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/>'}</svg></div><div role="status" aria-live="polite"><h2 id="processing-title">${state==='checking'?'Checking photos…':'Generating…'}</h2><p>${state==='checking'?'Making sure your photos are ready.':'Your photo is on its way.'}</p></div><div class="processing-track" role="progressbar" aria-label="${state==='checking'?'Photo check in progress':'Photo generation in progress'}"></div>${state==='generating'?'<button class="processing-minimize" id="minimize"><span>Minimize</span></button>':''}</div>`:'';
+ $('#content').inert=processing;$('#footer').inert=expanded;$('.phone header').inert=processing;
+ if(expanded){overlay.tabIndex=-1;overlay.focus({preventScroll:true})}
+}
+async function startGeneration(outcome){
+ try{
+  const retryOf=task?.status==='failed'?task.id:null;
+  integrationReady=false;
+  task=CameraPhotoTasks.create(styleId,retryOf);
+  const sourceParams=Object.fromEntries(['sourceTab','collection','group','avatarEntry','hairEntry','filter','retroEntry','filterCategory','transformEntry','look'].filter(k=>params.has(k)).map(k=>[k,params.get(k)]));
+  task=CameraPhotoTasks.update(task.id,{backgroundReturn:flowContext.backgroundReturn,browseOrigin:flowContext.browseOrigin,status:'generating',id:task.id,styleId,mediaType:'photo',photoFlow:true,inputCount,resultImage:example,sourceParams,previewOutcome:outcome,previewFinishAt:Date.now()+6500});
+  const fresh=CameraPhotoTasks.read().find(t=>t.id===task.id);
+  taskStatus='generating';writeTaskURL();change('generating');integrationReady=true;
+  const saved=await CameraEditorRecovery.save(task.id,submitted.map((src,i)=>({src,name:'Photo '+(i+1),zoom:1,x:0,y:0})),0);
+  if(CameraPhotoTasks.read().some(t=>t.id===fresh.id))CameraPhotoTasks.update(fresh.id,{inputRecovery:saved});
+ }catch{
+  integrationReady=true;change('pick');notify('Couldn’t save this request. Check browser storage and try again.');
+ }
+}
+function submit(){
+ if(state!=='pick'&&state!=='failed')return;if(!ready())return;
+ submitted=slots.slice(0,inputCount);const outcome=$('#outcome').value,checkFailed=$('#check-outcome').value==='fail';change('checking');
+ timer=setTimeout(()=>{if(checkFailed){change('checkfailed');return}startGeneration(outcome)},2000);
+}
+function syncTask(){
+ if(!integrationReady||!task)return;
+ const current=CameraPhotoTasks.read().find(t=>t.id===task.id);
+ if(!current){task=null;change('missing');return}
+ task=current;if(task.status===taskStatus)return;taskStatus=task.status;
+ const next={queued:'generating',generating:'generating',completed:'success',failed:'failed',timeout:'unknown'}[task.status];
+ if(next==='success')CameraTaskNotices.markViewed(task.id);
+ change(next);
+}
+function explore(){location.href=CameraCreationFlow.browseURL(task||flowContext,state==='generating')}
+function back(){location.href=historyEntry&&task?CameraCreationFlow.taskBackURL(task):state==='pick'?CameraPhotoCreation.detailURL(params,styleId):CameraCreationFlow.browseURL(task||flowContext)}
+async function initialize(){
+ if(unsupported||requestedTask&&!task){state='missing';integrationReady=true;render();return}
+ if(task){
+  $('.phone').inert=true;
+  const recovered=await CameraEditorRecovery.load(task.id);
+  if(recovered){slots=[...recovered.photos.slice(0,inputCount).map(p=>p?.src||null)];while(slots.length<2)slots.push(null);for(const p of recovered.photos)if(p?.objectUrl)uploaded.push(p.objectUrl);submitted=slots.slice(0,inputCount)}
+  task=CameraPhotoTasks.read().find(t=>t.id===task.id);
+  if(!task){state='missing'}else{
+   taskStatus=task.status;state={queued:'generating',generating:'generating',completed:'success',failed:'failed',timeout:'unknown'}[task.status];
+   if(state==='success')CameraTaskNotices.markViewed(task.id);
+   if(state==='failed'&&!ready()){state='pick';setTimeout(()=>notify('Choose your photos again to retry this request.'),0)}
+  }
+  $('.phone').inert=false;
+ }
+ integrationReady=true;render();
+}
+window.addEventListener('camera-task-change',syncTask);
+window.addEventListener('storage',event=>{if(event.key==='camera-photo-tasks-preview-v1')syncTask()});
+function openPreview(which,index=activeSlot){const src=which==='result'?example:(state==='pick'?slots:submitted||slots)[index];if(!src)return;$('#preview-image').src=src;$('#preview').showModal()}
+async function importPhoto(file,target=uploadTarget){if(!file)return false;if(file.type&&!file.type.startsWith('image/')){notify('Choose a photo file.');return false}const url=URL.createObjectURL(file);try{const img=new Image();img.src=url;await img.decode();uploaded.unshift(url);fillSlot(url,target);return true}catch{URL.revokeObjectURL(url);notify('This photo couldn’t be opened. Try another.');return false}}
+function stopCamera(){cameraAttempt++;if(cameraStream)cameraStream.getTracks().forEach(track=>track.stop());cameraStream=null;$('#camera-video').srcObject=null}
+function clearCapture(){if(captured)URL.revokeObjectURL(captured.url);captured=null;$('#camera-photo').removeAttribute('src')}
+function closeCamera(){stopCamera();if($('#camera').open)$('#camera').close();clearCapture()}
+async function openCamera(){
+ stopCamera();clearCapture();const attempt=cameraAttempt;
+ if(!$('#camera').open)$('#camera').showModal();
+ $('#camera-video').hidden=true;$('#camera-photo').hidden=true;$('#camera-message').hidden=false;$('#camera-message').textContent='Opening camera…';
+ $('#shutter').hidden=false;$('#shutter').disabled=true;['use-selfie','retake','retry-camera','native-camera','camera-library'].forEach(id=>$('#'+id).hidden=true);
+ try{
+  if(!navigator.mediaDevices?.getUserMedia)throw Object.assign(new Error(),{name:'NotSupportedError'});
+  const stream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:{ideal:'user'}}});
+  if(attempt!==cameraAttempt||!$('#camera').open){stream.getTracks().forEach(track=>track.stop());return}
+  cameraStream=stream;$('#camera-video').srcObject=stream;await $('#camera-video').play();
+  if(attempt!==cameraAttempt||!$('#camera').open)return;
+  $('#camera-video').hidden=false;$('#camera-message').hidden=true;$('#shutter').disabled=false;$('#shutter').focus();
+ }catch(error){
+  if(attempt!==cameraAttempt||!$('#camera').open)return;
+  stopCamera();$('#camera-video').hidden=true;$('#shutter').hidden=true;
+  const denied=['NotAllowedError','SecurityError'].includes(error.name);
+  $('#camera-message').textContent=denied?'Camera access is off. Allow camera access in your browser settings, then try again.':error.name==='NotFoundError'?'No camera was found. Choose a photo from your library.':'The camera couldn’t open. Try again or choose a photo.';
+  $('#camera-message').hidden=false;$('#retry-camera').hidden=false;$('#camera-library').hidden=false;
+  $('#native-camera').hidden=!(matchMedia('(pointer:coarse)').matches&&'capture'in $('#selfie-file'));
+ }
+}
+async function capturePhoto(){
+ const video=$('#camera-video');if(!cameraStream||!video.videoWidth||!video.videoHeight)return;
+ const attempt=cameraAttempt;$('#shutter').disabled=true;
+ const canvas=document.createElement('canvas');canvas.width=video.videoWidth;canvas.height=video.videoHeight;
+ const context=canvas.getContext('2d');context.translate(canvas.width,0);context.scale(-1,1);context.drawImage(video,0,0);
+ const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.94));
+ if(attempt!==cameraAttempt||!$('#camera').open)return;
+ if(!blob){$('#shutter').disabled=false;notify('Couldn’t take the photo. Try again.');return}
+ captured={blob,url:URL.createObjectURL(blob)};$('#camera-photo').src=captured.url;$('#camera-photo').hidden=false;$('#camera-video').hidden=true;
+ stopCamera();$('#shutter').hidden=true;$('#use-selfie').hidden=false;$('#retake').hidden=false;$('#use-selfie').focus();
+}
+async function save(){if(busy)return;busy=true;$('#save').disabled=true;try{const response=await fetch(example);if(!response.ok)throw Error();const url=URL.createObjectURL(await response.blob()),a=document.createElement('a');a.href=url;a.download=styleId+'-demo.jpg';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);notify('Download started.')}catch{notify('Couldn’t download this photo. Try again.')}finally{busy=false;if($('#save'))$('#save').disabled=false}}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b||b.disabled)return;const d=b.dataset;
+ if(b.id==='minimize'){processingMinimized=true;render();$('#show-processing').focus();return}
+ if(b.id==='show-processing'){processingMinimized=false;render();return}
+ if(d.count){clearTask();inputCount=Number(d.count);activeSlot=Math.min(activeSlot,inputCount-1);submitted=null;change('pick');return}
+ if(d.state){clearTask();slotErrors=[false,false];if(d.state==='empty'){slots=[null,null];activeSlot=0;change('pick')}else{for(let i=0;i<inputCount;i++)if(!slots[i])slots[i]=samples[i];if(d.state!=='pick')submitted=slots.slice(0,inputCount);change(d.state)}return}
+ if((state==='checking'||state==='generating')&&b.closest('.phone')&&b.id!=='explore')return;
+ if('slot'in d){if(state==='pick'){activeSlot=Number(d.slot);render()}else openPreview('slot',Number(d.slot));return}
+ if('remove'in d){const i=Number(d.remove);slots[i]=null;slotErrors[i]=false;activeSlot=i;change('pick');return}
+ if(d.size){const[w,h]=d.size.split(',');$('.phone').style.setProperty('--w',w+'px');$('.phone').style.setProperty('--h',h+'px');$('.phone').dataset.small=String(Number(h)<720);document.querySelectorAll('[data-size]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));return}
+ if('photo'in d&&state==='pick'){fillSlot(uploaded.concat(samples)[Number(d.photo)]);return}
+ if('upload'in d){uploadTarget=activeSlot;$('#file').click();return}
+ if('selfie'in d){selfieTarget=activeSlot;openCamera();return}
+ if('choose'in d){$('[data-upload]')?.focus();return}
+ if(d.preview){openPreview(d.preview,Number(d.index||0));return}
+ if(b.id==='generate'||b.id==='retry')submit();
+ else if(b.id==='remake'){clearTask();slots=[null,null];slotErrors=[false,false];activeSlot=0;submitted=null;change('pick')}
+ else if(b.id==='change-photo'||b.id==='again'){if(submitted)submitted.forEach((src,i)=>slots[i]=src);change('pick')}
+ else if(b.id==='check'){if(task){CameraPhotoCreation.tick();syncTask();if(task.status==='timeout'){const outcome=$('#outcome').value;if(outcome==='unknown')notify('This request is still waiting for confirmation.');else CameraPhotoTasks.update(task.id,{status:outcome==='failed'?'failed':'completed'})}}else{const result=$('#outcome').value;if(result==='unknown')notify('This request is still waiting for confirmation.');else change(result)}}
+ else if(b.id==='save')save();
+ else if(b.id==='requirements')$('#info').showModal();
+ else if(b.id==='close-info')$('#info').close();
+ else if(b.id==='close-preview')$('#preview').close();
+ else if(b.id==='close-camera')closeCamera();
+ else if(b.id==='retry-camera'||b.id==='retake')openCamera();
+ else if(b.id==='shutter')capturePhoto();
+ else if(b.id==='use-selfie'){const photo=captured?.blob;if(photo){closeCamera();importPhoto(photo,selfieTarget)}}
+ else if(b.id==='camera-library'){uploadTarget=selfieTarget;closeCamera();$('#file').click()}
+ else if(b.id==='native-camera'){uploadTarget=selfieTarget;closeCamera();$('#selfie-file').click()}
+ else if(b.id==='explore')explore();
+ else if(b.id==='back')back();
+ else if(b.id==='compare')location.href='../review/index.html#upload';
+});
+$('#processing').addEventListener('keydown',event=>{
+ if(event.key==='Tab'){event.preventDefault();($('#minimize')||$('#processing')).focus({preventScroll:true})}
+ if(event.key==='Escape'&&state==='generating'){event.preventDefault();processingMinimized=true;render();$('#show-processing').focus()}
+});
+for(const id of ['file','selfie-file'])$('#'+id).onchange=async e=>{const input=e.target;const target=uploadTarget;await importPhoto(input.files[0],target);input.value=''};
+$('#camera').addEventListener('close',()=>{stopCamera();clearCapture()});
+$('#camera').addEventListener('cancel',event=>{event.preventDefault();closeCamera()});
+function syncSmall(){if(matchMedia('(max-width:480px)').matches)$('.phone').dataset.small=String(innerHeight<720);else $('.phone').dataset.small=String(parseInt(getComputedStyle($('.phone')).getPropertyValue('--h'))<720)}
+window.addEventListener('resize',syncSmall);
+window.addEventListener('pagehide',()=>{clearTimeout(timer);clearTimeout(sheetWheelTimer);stopCamera();uploaded.forEach(url=>URL.revokeObjectURL(url))});
+syncSmall();
+render();
+initialize();
+</script>
+</body>
+</html>

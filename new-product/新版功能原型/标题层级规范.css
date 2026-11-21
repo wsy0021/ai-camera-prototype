@@ -1,0 +1,22 @@
+/* Shared title hierarchy. Scoped to product UI; review sidebars and campaign artwork are independent. */
+:root{--type-page:26px;--type-subpage:22px;--type-section:18px;--type-state:16px;--type-card:14px;--type-card-small:12px;--type-body:13px;--type-meta:11px}
+.phone .top h1{font-size:var(--type-page);font-weight:600;line-height:1.2;letter-spacing:-.5px}
+.phone .top>.catalog-types button{font-size:var(--type-page);font-weight:600;line-height:1.2}
+#saved-templates .saved-top h2,.phone .settings-head h2{font-size:var(--type-subpage);font-weight:600;line-height:1.25;letter-spacing:-.35px}
+.phone>header h1{font-size:var(--type-subpage);font-weight:600;line-height:1.25;letter-spacing:-.35px}
+.phone .me-module-heading h2,.phone .theme-heading h2,.phone .editorial-heading h2,.phone .home-template-feed .theme-heading h2{font-size:var(--type-section);font-weight:600;line-height:1.35;letter-spacing:-.2px}
+.phone .recommendation-heading h2{font-size:var(--type-section);font-weight:600;line-height:1.35}
+.phone .compact-empty h2,#saved-templates .favorites-empty h2,.phone .creation-empty h2{font-family:inherit;font-size:var(--type-state);font-weight:500;line-height:1.4;letter-spacing:0}
+.phone .state h2{font-size:var(--type-state);font-weight:500;line-height:1.4;letter-spacing:0}
+.phone .media-tabs button,#saved-templates .saved-navigation .catalog-types button{font-size:14px;font-weight:500;line-height:1.4}
+.phone .me-task-module .media-tabs button{font-size:14px}
+.phone .creation-card h3,.phone .creation-grid .creation-card h3{font-size:var(--type-card-small);font-weight:500;line-height:1.4}
+.phone .settings-group h3{font-size:var(--type-card-small);font-weight:500;line-height:1.4}
+.phone .library-heading{font-size:var(--type-section);font-weight:600;line-height:1.35}
+.phone .gallery-tabs button{font-size:14px;font-weight:500}
+.phone .generation-summary-copy h2{font-size:13px;font-weight:500;line-height:1.4}
+.phone .result-summary .generation-summary-copy h2{font-size:var(--type-state);font-weight:600;line-height:1.4}
+.phone .content h1{font-size:28px;font-weight:600;line-height:1.15;letter-spacing:-.5px}
+.phone .device-flow .device-top h2{font-size:var(--type-subpage);font-weight:600;line-height:1.25}
+.phone .device-flow .system-permission h2{font-size:16px;line-height:1.4}
+@media(max-width:370px){.phone>header h1{font-size:20px}}

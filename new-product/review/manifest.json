@@ -1,0 +1,19 @@
+{
+  "version": "review-20261121",
+  "date": "2026-11-21",
+  "requirementsSHA256": "29c964b701f529377fa0031353ae974c06dda8f99f956b34a3c7d69f2e8f5512",
+  "modules": [
+    "overview",
+    "home",
+    "templates",
+    "upload",
+    "generation",
+    "result",
+    "create",
+    "edit",
+    "events",
+    "me",
+    "settings",
+    "decisions"
+  ]
+}

@@ -1,0 +1,11 @@
+/* Secondary browsing pages: content continues beneath a fading title scrim. */
+.phone.gradient-title-page{position:relative;background:#111112}
+.gradient-title-page>.status{position:absolute;inset:0 0 auto;height:50px;z-index:12;background:linear-gradient(#111112ed,#111112a8);pointer-events:none}
+.gradient-title-page>header{position:absolute;top:50px;left:0;right:0;z-index:11;height:64px;border:0;background:transparent;isolation:isolate}
+.gradient-title-page>header:before{content:'';position:absolute;z-index:-1;top:0;left:0;right:0;height:108px;background:linear-gradient(180deg,#111112d9 0%,#111112b8 36%,#11111264 69%,#11111200 100%);pointer-events:none}
+.gradient-title-page>header h1{text-shadow:0 1px 8px #0008}
+.gradient-title-page>header #back{border-radius:50%;text-shadow:0 1px 8px #0008}
+.gradient-title-page>#content{padding-top:50px;scroll-padding-top:118px}
+.gradient-title-page:not(.retro-page) .collection-grid{padding-top:12px}
+.gradient-title-page.retro-page #content{padding-top:62px}
+.gradient-title-page.retro-page .retro-gallery{border-radius:0 0 16px 16px}
