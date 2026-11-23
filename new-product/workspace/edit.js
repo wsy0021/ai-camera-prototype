@@ -41,8 +41,12 @@
       const list=el('div','editscenes');
       Object.entries(scenes).forEach(([key,s])=>{
         const b=btn('',()=>enter(key),'editscenecard');b.dataset.editScene=key;
-        const cover=image(s.cover,'','editscenecover');if(key==='filters')cover.style.filter='sepia(.25)';
-        b.append(cover,el('span','editscenename',s.name),el('span','editscenearrow','↗'));list.append(b);
+        const visual=el('span','editmodulevisual');
+        const covers={background:'../assets/portraits-v3/warm-portrait.jpg',hairstyle:'../assets/portraits-v3/soft-portrait.jpg',filters:portrait};
+        visual.append(image(covers[key],'','editscenecover'));
+        if(key==='filters'){const mono=image(covers[key],'','editmodulemono');visual.append(mono,el('span','editmoduledivider'));}
+        const footer=el('span','editmodulefooter');footer.append(el('span','editscenename',s.name),el('span','editscenearrow','↗'));
+        b.append(visual,footer);b.setAttribute('aria-label','Explore '+s.name);list.append(b);
       });home.append(list);
       const starters=el('div','editstarters');
       [['background','Take me somewhere new','A quiet beach at sunset'],['hairstyle','Try a shorter cut','Give me a soft, chin-length bob'],['filters','Find my film look','Warm film at 60%']].forEach(([scene,label,prompt])=>{
