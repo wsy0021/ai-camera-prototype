@@ -241,3 +241,21 @@
 .experience-card-copy>span{color:#ffffffb8;font-size:11px;line-height:1.4}
 .product-experiences button:focus-visible{outline:2px solid var(--product-accent);outline-offset:3px}
 @media(max-height:720px){.experience-hero{height:164px}}
+
+/* Six Home shortcuts, with the complete catalogue in a bottom sheet. */
+.product-task-surface{position:relative;z-index:1;margin-top:-12px;border:1px solid #ffffff29;border-top-color:#ffffff52;border-radius:20px;background:linear-gradient(115deg,#ffffff13,#ffffff04 42%,#ffffff0a),#242220ed;box-shadow:inset 0 1px 0 #ffffff12,0 10px 30px #0004;overflow:hidden}
+.product-task-surface>.product-task-grid{margin:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none}
+.product-tools-more{display:flex;align-items:center;justify-content:center;gap:6px;width:calc(100% - 32px);min-height:40px;margin:0 16px;padding:0 0 2px;border-top:1px solid #ffffff14;color:var(--muted);font-size:12px}
+.product-tools-more svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.5}
+.product-tools-overlay{position:absolute;inset:0;z-index:70;background:#0009;display:flex;align-items:flex-end;overscroll-behavior:contain}
+.product-tools-sheet{width:100%;max-height:78%;min-height:300px;display:flex;flex-direction:column;border:1px solid #ffffff24;border-bottom:0;border-radius:28px 28px 0 0;background:#242220;color:var(--fg);padding:10px 20px max(24px,env(safe-area-inset-bottom));box-shadow:0 -12px 50px #0005;animation:product-tools-enter .24s ease-out}
+.product-tools-handle{width:32px;height:4px;background:#ffffff35;border-radius:4px;margin:0 auto 10px;flex-shrink:0}
+.product-tools-sheet header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-shrink:0}
+.product-tools-sheet h2{font-size:20px;font-weight:600;margin:0}
+.product-tools-sheet header button{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ffffff09}
+.product-tools-sheet header svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5}
+.product-tools-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 8px;overflow-y:auto;overscroll-behavior:contain;min-height:0}
+.product-tools-list .product-task{min-height:88px;gap:12px;border-radius:14px;background:#ffffff05}
+.product-tools-list .product-task:hover{background:#ffffff0b}
+@keyframes product-tools-enter{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.product-tools-sheet{animation:none}}

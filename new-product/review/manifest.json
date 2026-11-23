@@ -1,7 +1,7 @@
 {
   "version": "review-20261121-r2",
   "date": "2026-11-21",
-  "requirementsSHA256": "e6771037dfc139eec2fe1cef2e66b015d7f05beb6438b8f9eee87e77da6774a8",
+  "requirementsSHA256": "8f0270ee3f26c6fd16c91e477b8a25005b879fa0c3483628fe4f6e00c21370f7",
   "modules": [
     "overview",
     "home",
