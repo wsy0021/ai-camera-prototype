@@ -13,7 +13,10 @@ productTask('Headshots','<rect x="3" y="3" width="18" height="18" rx="3"/><circl
 productTask('Transform','<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/>','data-product-link="创作功能预览_v0.1.html?feature=transform"'),
 productTask('Background','<rect x="3" y="3" width="18" height="18" rx="3"/><path d="m3 17 6-6 5 5 3-3 4 4"/>','data-product-studio="background"'),
 productTask('Hairstyle','<path d="M5 17V9a7 7 0 0 1 14 0v8M8 9c4 0 5-3 5-3s0 4 4 5M8 13v2a4 4 0 0 0 8 0v-2"/>','data-product-link="发型详情页_v0.1.html?v=me-tabs-full-74"'),
-productTask('Filters','<circle cx="9" cy="10" r="6"/><circle cx="15" cy="14" r="6"/>','data-product-link="主题合集页_v0.1.html?collection=back-to-80s&filterCategory=all&v=me-tabs-full-74"')];}
+productTask('Filters','<circle cx="9" cy="10" r="6"/><circle cx="15" cy="14" r="6"/>','data-product-link="主题合集页_v0.1.html?collection=back-to-80s&filterCategory=all&v=me-tabs-full-74"'),
+...(new URLSearchParams(location.search).get('toolsDemo')==='8'?[
+productTask('Tool 7','<path d="M4 8V4h4m8 0h4v4M4 16v4h4m8 0h4v-4M8 12h8m-4-4v8"/>','disabled title="Layout placeholder"'),
+productTask('Tool 8','<circle cx="12" cy="12" r="8"/><path d="m9 12 2 2 4-4"/>','disabled title="Layout placeholder"')]:[])];}
 function productTaskSection(){const items=productToolItems();return `<div class="product-task-surface"><div class="product-task-grid">${items.slice(0,6).join('')}</div>${items.length>6?'<button class="product-tools-more" data-product-tools-open aria-haspopup="dialog" aria-expanded="false">All tools '+productIcon('<path d="m7 10 5 5 5-5"/>')+'</button>':''}</div>`;}
 let productToolsPanel=null;
 function productCloseTools(restore=true){if(!productToolsPanel)return;const {overlay,focus,blocked}=productToolsPanel;productToolsPanel=null;overlay.remove();blocked.forEach(([node,inert])=>node.inert=inert);document.querySelector('[data-product-tools-open]')?.setAttribute('aria-expanded','false');if(restore&&focus?.isConnected)focus.focus({preventScroll:true});}
