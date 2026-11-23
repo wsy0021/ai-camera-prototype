@@ -18,10 +18,12 @@
   const tasks = [], objectURLs = new Set();
   let materialBrowserState=demo.startsWith('styles-')?demo.slice(7):'ready';
   let nextChatId = 2, nextTaskId = 1, currentChatId = 1, workspace = 'create';
-  let historyView = 'Chats', historyFilter = 'All', noticeTask = null, noticeEditTask = null, editor = null, toastTimer;
+  let noticeTask = null, noticeEditTask = null, editor = null, toastTimer;
+  const historyDrafts=new WeakMap();
+  const historySignature=c=>JSON.stringify([c.draft.prompt,c.draft.selected,c.draft.photo?.name,c.draft.photo?.url,c.draft.mode,c.draft.ratio,c.descriptions]);
   function newChat(id) {
-    return {id, title:'New chat', descriptions:{free:''}, browseType:'Image', showMaterials:false, templatesOnDemand:true, scrollTop:0, photoRevision:0, idea:null,
-      draft:{prompt:'', selected:null, photo:null, mode:'Image', ratio:'3:4', sourceTaskId:null,styleUnavailable:false}};
+    const c={id, title:'New chat', createdAt:Date.now(),updatedAt:0, descriptions:{free:''}, browseType:'Image', showMaterials:false, templatesOnDemand:true, scrollTop:0, photoRevision:0, idea:null,
+      draft:{prompt:'', selected:null, photo:null, mode:'Image', ratio:'3:4', sourceTaskId:null,styleUnavailable:false}};historyDrafts.set(c,historySignature(c));return c;
   }
   const chats = [newChat(1)];
   const chat = () => chats.find(c => c.id === currentChatId);
@@ -93,6 +95,7 @@
       return next;
     }
     chats.splice(0,chats.length,...value.chats.map(c=>({...c,photoRevision:0,scrollTop:c.scrollTop||0,idea:c.idea||null,draft:{...c.draft,photo:revivePhoto(c.draft.photo)}})));
+    chats.forEach(c=>historyDrafts.set(c,historySignature(c)));
     tasks.splice(0,tasks.length,...value.tasks.map(raw=>{
       const t={...raw,photo:revivePhoto(raw.photo),checking:false,element:element('article','task')};
       if(['submitting','processing'].includes(t.status)){t.status='unknown';t.checkError='Check this creation to pick up where you left off.';}
@@ -139,8 +142,9 @@
   function remember() {
     draft().prompt = $('prompt').value; saveDescription();
     chat().scrollTop = document.querySelector('.scroll').scrollTop;
+    const signature=historySignature(chat());if(historyDrafts.has(chat())&&historyDrafts.get(chat())!==signature)chat().updatedAt=Date.now();historyDrafts.set(chat(),signature);
     if (!tasks.some(t => t.chatId === currentChatId)) {
-      chat().title = chatTitle(draft().prompt) || (draft().photo ? 'Photo idea' : 'New chat');
+      chat().title = chatTitle(draft().prompt) || 'New chat';
     }
   }
   function chatTitle(text) {
@@ -427,7 +431,7 @@
     const owner=chats.find(c=>c.id===chatId);if(!owner)return null;
     const t={id:nextTaskId++,chatId,parentId:snapshot.sourceTaskId??null,prompt:snapshot.prompt,photo:snapshot.photo?{...snapshot.photo}:null,
       selected:snapshot.selected,mode:snapshot.mode,ratio:snapshot.ratio,status:'submitting',element:element('article','task'),fail:$('fail').checked,outcome:$('fail').checked?'failed':$('nextOutcome').value,styleUnavailable:Boolean(snapshot.styleUnavailable)};
-    t.element.dataset.taskId=String(t.id);tasks.push(t);owner.title=chatTitle(tasks.find(item=>item.chatId===chatId).prompt);
+    t.element.dataset.taskId=String(t.id);tasks.push(t);owner.updatedAt=Date.now();owner.title=chatTitle(tasks.find(item=>item.chatId===chatId&&item.prompt.trim())?.prompt||'')||'New chat';
     renderTask(t);if(chatId===currentChatId){$('tasks').append(t.element);showMaterials(false);error('');scrollToTask(t);}
     updateRunControl();setTimeout(()=>{if(t.status==='submitting'){t.status='processing';renderTask(t);scheduleSave();}},600);setTimeout(()=>{if(['submitting','processing'].includes(t.status))finishTask(t);},delay);scheduleSave();return t;
   }
@@ -467,42 +471,38 @@
     Object.assign(drawer.style,{left:bounds.left+'px',top:bounds.top+'px',width:bounds.width+'px',height:bounds.height+'px'});
   }
   function closeHistory() {$('historyDrawer').close();$('history').setAttribute('aria-expanded','false');}
-  function renderHistory() {
-    const body=$('historyBody');if(workspace==='edit'){editor.history(body);return;}body.replaceChildren();const tabs=element('div','historytabs');tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','History views');
-    const panel=element('div');panel.id='historyPanel';panel.setAttribute('role','tabpanel');
-    ['Chats','Creations'].forEach((name,i)=>{
-      const b=button(name,()=>{historyView=name;renderHistory();$('historyTab'+i).focus();},'historytab');b.id='historyTab'+i;b.setAttribute('role','tab');b.setAttribute('aria-selected',String(name===historyView));b.setAttribute('aria-controls','historyPanel');b.tabIndex=name===historyView?0:-1;
-      b.onkeydown=e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();historyView=(e.key==='Home'?0:e.key==='End'?1:1-i)?'Creations':'Chats';renderHistory();$('historyTab'+(historyView==='Chats'?0:1)).focus();}};
-      tabs.append(b);if(name===historyView)panel.setAttribute('aria-labelledby',b.id);
-    });
-    if(historyView==='Chats'){
-      chats.slice().reverse().forEach(c=>{
-        const ownTasks=tasks.filter(t=>t.chatId===c.id),pending=ownTasks.find(t=>['submitting','processing','unknown'].includes(t.status));
-        const row=button('',()=>{switchChat(c.id);closeHistory();},'chatrow');row.dataset.chatId=String(c.id);row.setAttribute('aria-current',String(c.id===currentChatId));
-        row.append(element('strong','',c.title),element('span','',pending?(pending.status==='unknown'?'Check status':'Creating…'):ownTasks.length?ownTasks.length+(ownTasks.length===1?' creation':' creations'):c.draft.prompt||c.draft.photo?'Draft':'New chat'));panel.append(row);
-      });
-    }else{
-      const filters=element('div','filters');
-      ['All','Images','Videos','Failed'].forEach(name=>{const b=button(name,()=>{historyFilter=name;renderHistory();});b.classList.toggle('chosen',name===historyFilter);b.setAttribute('aria-pressed',String(name===historyFilter));filters.append(b);});
-      panel.append(filters);
-      const rows=tasks.filter(t=>historyFilter==='All'||historyFilter==='Images'&&t.mode==='Image'||historyFilter==='Videos'&&t.mode==='Video'||historyFilter==='Failed'&&t.status==='failed');
-      if(!rows.length)panel.append(element('p','sheetnote','No creations here yet.'));
-      rows.slice().reverse().forEach(t=>{
-        const row=button('',()=>locateTask(t),'workrow');
-        row.append(element('strong','',t.selected===null?'Your idea':materials[t.selected].name),element('span','',t.mode+' · '+t.ratio+' · '+({submitting:'Starting…',processing:'Creating…',unknown:'Check status',failed:'Failed',success:'Ready'}[t.status])),element('small','',t.prompt));panel.append(row);
-      });
+  const historyText=text=>(text||'').trim().replace(/\s+/g,' ');
+  function historyRow(c,summary,onOpen,current,scene='') {
+    const row=button('',onOpen,'chatrow');row.setAttribute('aria-current',String(current));
+    const top=element('div','history-row-top'),heading=element('strong','history-row-title',c.title||'New chat');top.append(heading);row.append(top);
+    if(Number.isFinite(c.updatedAt)&&c.updatedAt>0){
+      const date=new Date(c.updatedAt),now=new Date(),yesterday=new Date(now.getFullYear(),now.getMonth(),now.getDate()-1);
+      const label=date.toDateString()===now.toDateString()?date.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):date.toDateString()===yesterday.toDateString()?'Yesterday':date.toLocaleDateString('en-US',{month:'short',day:'numeric',...(date.getFullYear()!==now.getFullYear()?{year:'numeric'}:{})});
+      const stamp=element('time','history-row-time',label);stamp.dateTime=date.toISOString();stamp.title=date.toLocaleString('en-US');top.append(stamp);
     }
-    body.append(tabs,panel);
+    const clean=historyText(summary),titleText=historyText(c.title).replace(/…$/,'');
+    if(clean&&clean!==titleText&&!(c.title?.endsWith('…')&&clean.startsWith(titleText)))row.append(element('span','history-row-summary',clean));
+    if(scene&&historyText(c.title).toLowerCase()!==scene.toLowerCase())row.append(element('span','history-row-scene',scene));
+    return row;
+  }
+  function renderHistory() {
+    const body=$('historyBody');if(workspace==='edit'){editor.history(body);return;}body.replaceChildren();
+    chats.filter(c=>c.draft.prompt.trim()||c.draft.photo||Object.values(c.descriptions).some(text=>text.trim())||tasks.some(t=>t.chatId===c.id))
+      .sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0)||b.id-a.id).forEach(c=>{
+        const own=tasks.filter(t=>t.chatId===c.id),summary=c.draft.prompt.trim()||own.slice().reverse().find(t=>t.prompt.trim())?.prompt||'';
+        const row=historyRow(c,summary,()=>{switchChat(c.id);closeHistory();},c.id===currentChatId);row.dataset.chatId=String(c.id);body.append(row);
+      });
+    if(!body.children.length)body.append(element('p','sheetnote','No conversations yet.'));
   }
   editor=window.AgentEdit.create({element,button,icon,toast,openDialog,closeHistory,
-    save:scheduleSave,updateRunControl,pending:pendingTask,locateCreate:locateTask,
+    historyRow,save:scheduleSave,updateRunControl,pending:pendingTask,locateCreate:locateTask,
     showEdit:()=>switchWorkspace('edit'),visible:()=>workspace==='edit',
     trackURL:url=>objectURLs.add(url),
     editHeader:inScene=>{if(workspace==='edit')$('new').hidden=!inScene;},
     clearNotice:task=>{if(noticeEditTask?.id===task.id){noticeEditTask=null;$('completionNotice').hidden=true;}},
     notify:(task,message)=>{noticeEditTask=task;noticeTask=null;$('noticeText').textContent=message;$('completionNotice').hidden=false;}
   });
-  $('prompt').oninput=()=>{draft().prompt=$('prompt').value;saveDescription();invalidateIdea();error('');resizePrompt();};
+  $('prompt').oninput=()=>{draft().prompt=$('prompt').value;saveDescription();remember();invalidateIdea();error('');resizePrompt();};
   $('photo').onclick=()=>$('file').click();
   $('replaceAttachment').onclick=()=>$('file').click();
   $('previewAttachment').onclick=()=>{const p=draft().photo;if(!p||p.unavailable){error('Replace the unavailable photo.');return;}const body=openDialog('Current photo'),img=element('img','resultlarge');img.src=p.url;img.alt='Attached photo';body.append(img);};
@@ -532,7 +532,7 @@
   });
   $('close').onclick=()=>$('dialog').close();$('dialog').addEventListener('close',stopPreview);$('dialog').addEventListener('cancel',stopPreview);
   $('dialog').onclick=event=>{if(event.target===$('dialog')){const r=$('dialog').getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)$('dialog').close();}};
-  $('history').onclick=()=>{remember();historyView='Chats';historyFilter='All';renderHistory();positionHistory();$('historyDrawer').showModal();$('history').setAttribute('aria-expanded','true');};
+  $('history').onclick=()=>{remember();renderHistory();positionHistory();$('historyDrawer').showModal();$('history').setAttribute('aria-expanded','true');};
   $('closeHistory').onclick=closeHistory;$('historyBackdrop').onclick=closeHistory;
   $('historyDrawer').addEventListener('close',()=>$('history').setAttribute('aria-expanded','false'));
   $('historyDrawer').addEventListener('cancel',()=>$('history').setAttribute('aria-expanded','false'));

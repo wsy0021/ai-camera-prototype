@@ -23,14 +23,14 @@
     };
     let currentScene=null,nextChat=4,nextTask=1,notice=null,toolsOpen=false;
     let current={background:1,hairstyle:2,filters:3};
-    const makeChat=(id,scene)=>({id,scene,title:scenes[scene].name,updatedAt:0,descriptions:{free:''},scrollTop:0,revision:0,draft:{prompt:'',selected:null,photo:null,sourceTaskId:null,intensity:70}});
+    const makeChat=(id,scene)=>({id,scene,title:'New chat',createdAt:Date.now(),updatedAt:0,descriptions:{free:''},scrollTop:0,revision:0,draft:{prompt:'',selected:null,photo:null,sourceTaskId:null,intensity:70}});
     let previewRevision=0;
     let chats=[makeChat(1,'background'),makeChat(2,'hairstyle'),makeChat(3,'filters')],tasks=[];
     const active=()=>tasks.find(t=>['processing','unknown'].includes(t.status));
     const chat=()=>chats.find(c=>c.id===current[currentScene]);
     const draft=()=>chat().draft;
     const template=(scene,key)=>scenes[scene].styles.find(t=>t.id===key);
-    const remember=()=>{if(!currentScene)return;const c=chat();c.draft.prompt=$('editPrompt').value;c.descriptions[c.draft.selected||'free']=c.draft.prompt;c.scrollTop=$('editScroll').scrollTop;if(!tasks.some(t=>t.chatId===c.id))c.title=title(c.draft.prompt)||scenes[c.scene].name;};
+    const remember=()=>{if(!currentScene)return;const c=chat();c.draft.prompt=$('editPrompt').value;c.descriptions[c.draft.selected||'free']=c.draft.prompt;c.scrollTop=$('editScroll').scrollTop;if(!tasks.some(t=>t.chatId===c.id))c.title=title(c.draft.prompt)||'New chat';};
     const changed=(touch=false)=>{if(touch&&currentScene)chat().updatedAt=Date.now();host.save();host.updateRunControl();};
     function error(text,action){$('editError').textContent=text||'';$('editError').hidden=!text;$('editPending').hidden=!action;$('editPending').onclick=action||null;}
     function syncPending(){if(!host.pending()&&!$('editPending').hidden)error('');}
@@ -245,11 +245,10 @@
       if(block())return;const owner=chats.find(c=>c.id===chatId);if(!owner)return;
       if(!snapshot.photo||snapshot.photo.unavailable){error('Add a photo to edit.');return;}
       const t={id:nextTask++,scene:owner.scene,chatId,prompt:snapshot.prompt,selected:snapshot.selected,photo:{...snapshot.photo},parentId:snapshot.sourceTaskId||snapshot.id||null,status:'processing',intensity:snapshot.intensity??70,filterVersion:owner.scene==='filters'?window.AgentFilters.version:null,outcome:$('nextOutcome').value};
-      tasks.push(t);owner.updatedAt=Date.now();owner.title=title(t.prompt)||scenes[owner.scene].name;rerenderTasks();error('');changed();
+      tasks.push(t);owner.updatedAt=Date.now();owner.title=title(tasks.find(item=>item.chatId===chatId&&item.prompt.trim())?.prompt||'')||'New chat';rerenderTasks();error('');changed();
       if(t.scene==='filters')renderFilterTask(t);else setTimeout(()=>{if(t.status==='processing')finish(t,t.outcome);},3200);return t;
     }
     function finish(t,outcome){
-      const owner=chats.find(c=>c.id===t.chatId);if(owner)owner.updatedAt=Date.now();
       t.checking=false;t.status=outcome==='unknown'?'unknown':['failed','needs-changes'].includes(outcome)?'failed':'success';t.failureKind=outcome==='needs-changes'?'input':'temporary';
       if(t.status==='success'&&!t.result)t.result={url:t.scene==='background'?'assets/source-portraits/0.jpg':t.scene==='hairstyle'?'assets/studio-portrait.jpg':portrait};
       rerenderTasks();if(currentScene&&chat().id===t.chatId)error('');
@@ -335,12 +334,13 @@
       const next=makeChat(nextChat++,currentScene);chats.push(next);current[currentScene]=next.id;render();changed();$('editPrompt').focus();
     }
     function history(body){
-      remember();body.replaceChildren();body.append(el('p','edithistorytitle','Edit chats'));
-      chats.slice().sort((a,b)=>(b.updatedAt||b.id)-(a.updatedAt||a.id)||b.id-a.id).filter(c=>c.draft.prompt||c.draft.photo||Object.values(c.descriptions).some(text=>text.trim())||tasks.some(t=>t.chatId===c.id)).forEach(c=>{
-        const b=btn('',()=>{enter(c.scene,c.id);host.closeHistory();},'chatrow');b.dataset.editHistoryChat=String(c.id);b.append(el('strong','',c.title),el('span','',scenes[c.scene].name));body.append(b);
+      remember();body.replaceChildren();
+      chats.slice().sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0)||b.id-a.id).filter(c=>c.draft.prompt.trim()||c.draft.photo||Object.values(c.descriptions).some(text=>text.trim())||tasks.some(t=>t.chatId===c.id)).forEach(c=>{
+        const own=tasks.filter(t=>t.chatId===c.id),summary=c.draft.prompt.trim()||own.slice().reverse().find(t=>t.prompt.trim())?.prompt||'';
+        const b=host.historyRow(c,summary,()=>{enter(c.scene,c.id);host.closeHistory();},currentScene===c.scene&&current[c.scene]===c.id,scenes[c.scene].name);
+        b.dataset.editHistoryChat=String(c.id);body.append(b);
       });
-      if(!tasks.length)body.append(el('p','sheetnote','No edits yet.'));
-      tasks.slice().reverse().forEach(t=>{const b=btn('',()=>locate(t),'workrow');b.dataset.editHistoryTask=String(t.id);b.append(el('strong','',scenes[t.scene].name),el('span','',({processing:'Creating…',unknown:'Check status',failed:'Failed',success:'Ready'})[t.status]),el('small','',t.prompt));body.append(b);});
+      if(!body.children.length)body.append(el('p','sheetnote','No conversations yet.'));
     }
     function snapshot(savePhoto){remember();return {version:1,currentScene,current:{...current},chats:chats.map(c=>({...c,revision:0,draft:{...c.draft,photo:savePhoto(c.draft.photo)}})),tasks:tasks.map(({checking,...t})=>({...t,photo:savePhoto(t.photo)}))};}
     function valid(state){
@@ -352,6 +352,7 @@
       if(!state)return;currentScene=state.currentScene;current={...state.current};
       chats=state.chats.map(c=>({...c,revision:0,scrollTop:c.scrollTop||0,draft:{...c.draft,photo:revive(c.draft.photo)}}));
       tasks=state.tasks.map(t=>({...t,photo:revive(t.photo),status:t.status==='processing'?'unknown':t.status,checking:false}));
+      chats.forEach(c=>{c.title=title(tasks.find(t=>t.chatId===c.id&&t.prompt.trim())?.prompt||c.draft.prompt)||'New chat';});
       nextChat=Math.max(...chats.map(c=>c.id))+1;nextTask=Math.max(0,...tasks.map(t=>t.id))+1;show();
     }
     function samplePhoto(){if(!currentScene){host.toast('Choose an edit first.');return;}chat().revision++;draft().photo={name:'sample-photo.jpg',url:portrait};draft().sourceTaskId=null;renderDraft();error('');changed(true);}
