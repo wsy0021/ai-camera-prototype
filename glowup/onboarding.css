@@ -89,12 +89,12 @@
 .portrait-discovery .style-track{animation-play-state:paused}
 .portrait-discovery .style-column-0 .style-track{animation-name:intro-style-flow;animation-duration:9s}
 .portrait-discovery .style-column-1 .style-track{animation-duration:10s}
-.portrait-discovery.is-playing .portrait-opening{animation:portrait-open 2.1s cubic-bezier(.22,1,.36,1) both}
-.portrait-discovery.is-playing .portrait-opening img{animation:portrait-camera 2.1s cubic-bezier(.22,1,.36,1) both}
-.portrait-discovery.is-playing .style-column-0{animation:looks-left 1.1s .75s cubic-bezier(.16,1,.3,1) both}
-.portrait-discovery.is-playing .style-column-1{animation:looks-right 1.2s .85s cubic-bezier(.16,1,.3,1) both}
-.portrait-discovery.is-playing .source-portrait{animation:source-arrive .65s 1.55s cubic-bezier(.16,1,.3,1) both}
-.portrait-discovery.is-playing .style-track{animation-play-state:running;animation-delay:2.1s}
+.portrait-discovery.is-playing .portrait-opening{animation:portrait-open 1.3s cubic-bezier(.22,1,.36,1) both}
+.portrait-discovery.is-playing .portrait-opening img{animation:portrait-camera 1.3s cubic-bezier(.22,1,.36,1) both}
+.portrait-discovery.is-playing .style-column-0{animation:looks-left .7s .4s cubic-bezier(.16,1,.3,1) both}
+.portrait-discovery.is-playing .style-column-1{animation:looks-right .75s .45s cubic-bezier(.16,1,.3,1) both}
+.portrait-discovery.is-playing .source-portrait{animation:source-arrive .4s .9s cubic-bezier(.16,1,.3,1) both}
+.portrait-discovery.is-playing .style-track{animation-play-state:running;animation-delay:1.3s}
 @keyframes portrait-camera{0%{transform:scale(1.12)}40%{transform:scale(1)}100%{transform:scale(1)}}
 @keyframes portrait-open{0%,28%{width:100%;height:100%;opacity:1;transform:translateY(0);border-radius:20px}80%{width:55%;height:82%;opacity:1;transform:translateY(0);border-radius:16px}100%{width:55%;height:82%;opacity:0;transform:translateY(0);border-radius:16px;visibility:hidden}}
 @keyframes looks-left{from{opacity:0;transform:translate3d(-70px,45px,-100px) rotate(-8deg)}to{opacity:1;transform:translate3d(0,0,0) rotate(0)}}

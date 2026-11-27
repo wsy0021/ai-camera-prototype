@@ -111,7 +111,7 @@
   replayEntrance.onclick = () => { step = 0; render(); };
   review.append(replayEntrance);
   const note = document.createElement('p');
-  note.textContent = '新人流程：自动原图展开个人风格 → 特别时刻 → Kiss输入输出与场景切换 → 当前订阅页；关闭或购买完成后可浏览双人模板。第一屏以成片拉近开场，约2秒内收进主列，两侧造型带透视展开，接入9／10秒错向循环；原图以右下圆框辅助说明，不放大原图；当前使用既有不同人物风格图演示交互，同一人多造型素材待补，不代表当前照片已生成这些造型。Kiss A方案展示全屏成片上叠加两张输入照片的对应关系；人物小图仅作示意，不是实际上传控件。Kiss页每1.3秒自动切换日落／雨夜封面与对应输入示例；不显示场景按钮；对应真实Kiss视频待补充，暂不演示靠近到亲吻动作。新人页均为静态参考图，未接入真实视频。完成状态仅保存在本浏览器，不继承 MuseMe 免费体验规则。';
+  note.textContent = '新人流程：自动原图展开个人风格 → 特别时刻 → Kiss输入输出与场景切换 → 当前订阅页；关闭或购买完成后可浏览双人模板。第一屏以成片拉近开场，约1.3秒内收进主列，两侧造型带透视展开，接入9／10秒错向循环；原图以右下圆框辅助说明，不放大原图；当前使用既有不同人物风格图演示交互，同一人多造型素材待补，不代表当前照片已生成这些造型。Kiss A方案展示全屏成片上叠加两张输入照片的对应关系；人物小图仅作示意，不是实际上传控件。Kiss页每1.3秒自动切换日落／雨夜封面与对应输入示例；不显示场景按钮；对应真实Kiss视频待补充，暂不演示靠近到亲吻动作。新人页均为静态参考图，未接入真实视频。完成状态仅保存在本浏览器，不继承 MuseMe 免费体验规则。';
   review.append(note);
   ['assets/compare-editorial-before.jpg', 'assets/onboarding-soft-portrait.jpg', 'assets/onboarding-studio-portrait.jpg', 'assets/onboarding-warm-portrait.jpg', ...slides.map(slide => slide.image), ...scenes.flatMap(scene => [scene.image, ...scene.inputs])].forEach(source => { const image = new Image(); image.src = source; });
   const query = new URLSearchParams(location.search);
