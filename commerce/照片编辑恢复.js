@@ -1,0 +1,8 @@
+/* Local prototype recovery. Photo blobs stay in this browser's IndexedDB. */
+window.CameraEditorRecovery=(()=>{
+ let database;
+ function open(){return database||(database=new Promise((resolve,reject)=>{const request=indexedDB.open('camera-editor-recovery-v1',1);request.onupgradeneeded=()=>request.result.createObjectStore('editors');request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error)}))}
+ async function save(id,slots,selected){if(!id)return false;try{const photos=await Promise.all(slots.map(async p=>{if(!p)return null;const blob=await fetch(p.src).then(r=>{if(!r.ok)throw Error('Photo unavailable');return r.blob()});return {blob,name:p.name,zoom:p.zoom,x:p.x,y:p.y}}));const db=await open();await new Promise((resolve,reject)=>{const tx=db.transaction('editors','readwrite');tx.objectStore('editors').put({photos,selected},id);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error)});return true}catch{return false}}
+ async function load(id){if(!id)return null;try{const db=await open();const saved=await new Promise((resolve,reject)=>{const req=db.transaction('editors').objectStore('editors').get(id);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});if(!saved)return null;const photos=await Promise.all(saved.photos.map(async p=>{if(!p)return null;let url;try{url=URL.createObjectURL(p.blob);const image=new Image();image.src=url;await image.decode();return {src:url,objectUrl:url,name:p.name,width:image.naturalWidth,height:image.naturalHeight,zoom:p.zoom||1,x:p.x||0,y:p.y||0}}catch{if(url)URL.revokeObjectURL(url);return null}}));return {photos,selected:saved.selected}}catch{return null}}
+ return {save,load};
+})();

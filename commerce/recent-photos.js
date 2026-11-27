@@ -1,0 +1,8 @@
+/* Shared local photos for this independent prototype. No upload. */
+(()=>{'use strict';let connection;const urls=new Set();
+function db(){return connection||(connection=new Promise((resolve,reject)=>{const q=indexedDB.open('new-product-v02-recent-photos',1);q.onupgradeneeded=()=>q.result.createObjectStore('photos',{keyPath:'id'});q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error);}));}
+async function transact(mode,fn){const d=await db();return new Promise((resolve,reject)=>{const tx=d.transaction('photos',mode),r=fn(tx.objectStore('photos'));let value;r.onsuccess=()=>value=r.result;tx.oncomplete=()=>resolve(value);tx.onerror=()=>reject(tx.error);});}
+async function list(){return (await transact('readonly',s=>s.getAll())).sort((a,b)=>b.created-a.created);}
+window.ProductPhotos={list,async add(blob,name='Your photo'){if(!blob.type.startsWith('image/'))throw Error('Image required');const id='photo-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);await transact('readwrite',s=>s.put({id,blob,name,created:Date.now()}));const all=await list();for(const p of all.slice(6))await this.remove(p.id);window.dispatchEvent(new Event('product-photos-change'));return id;},async remove(id){await transact('readwrite',s=>s.delete(id));if(sessionStorage.getItem('product-selected-photo')===id)sessionStorage.removeItem('product-selected-photo');},async get(id){return transact('readonly',s=>s.get(id));},url(blob){const u=URL.createObjectURL(blob);urls.add(u);return u;},async capture(src,name){const r=await fetch(src);if(!r.ok)throw Error('Photo unavailable');return this.add(await r.blob(),name);}};
+window.addEventListener('pagehide',()=>{urls.forEach(u=>URL.revokeObjectURL(u));urls.clear();});
+})();

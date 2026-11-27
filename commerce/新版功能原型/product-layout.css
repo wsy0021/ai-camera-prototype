@@ -1,0 +1,310 @@
+/* Independent product shell. One photographic focal point; quiet task controls. */
+:root{--bg:#111112;--fg:#f3f1ed;--muted:#bab3ae;--surface:#24201e;--line:#ffffff24;--product-accent:#f2b181;--product-action-text:#29180e}
+.phone{background:var(--bg)}
+.phone>.top{height:64px;padding:0 20px}
+.phone>.top h1{font-size:24px;font-weight:600;line-height:1.2;letter-spacing:0}
+.brand-heading img{display:none}
+.phone>.view{padding-bottom:24px}
+.phone>.nav{position:relative;inset:auto;flex:none;width:100%;height:82px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;align-items:start;padding:8px 20px 22px;border:0;border-top:1px solid var(--line);border-radius:0;background:var(--bg);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.phone>.nav button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:48px;padding:0;border:0;border-radius:8px;background:transparent;box-shadow:none;color:var(--muted);font-size:12px;line-height:1.2}
+.phone>.nav button::before,.phone>.nav button::after{display:none}
+.phone>.nav button .nav-art{width:23px;height:23px;margin:0}
+.phone>.nav button[aria-current=page]{color:var(--fg);background:transparent;box-shadow:none}
+.phone>.nav button[aria-current=page] .icon-wash{fill:currentColor;fill-opacity:.08}
+/* Creation action shares the navigation row, between Explore and Me. */
+.phone>.nav{grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;padding-top:8px;padding-bottom:22px}
+.phone>.nav>.activity-entry{position:relative;inset:auto;justify-self:center;z-index:1;display:flex;align-items:center;justify-content:center;width:56px;min-width:56px;height:56px;min-height:56px;padding:0;border:0;border-radius:50%;background:var(--product-accent);color:var(--product-action-text);box-shadow:none}
+.phone>.nav>.activity-entry svg{width:24px;height:24px;margin:0}
+.phone>.nav>.activity-entry span{display:none}
+.phone>.nav[hidden],.phone>.nav>.activity-entry[hidden]{display:none}
+.phone[data-product-page=discover]>.top{display:none}
+.product-home{padding:0 20px 72px}
+.product-home section{margin-bottom:24px}
+.product-feature{position:relative;display:block;width:100%;height:184px;padding:0;overflow:hidden;border-radius:16px;text-align:left;background:var(--surface)}
+.product-feature>img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 44%}
+.product-feature:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#151516b8,transparent 85%)}
+.product-feature>span{position:absolute;z-index:1;left:20px;bottom:30px;right:20px}
+.product-feature strong{display:block;max-width:210px;font-size:26px;line-height:1.15;font-weight:600}
+.product-feature small{display:block;margin-top:12px;font-size:14px;color:var(--fg)}
+.product-feature small>span{margin-left:12px}
+.product-task-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;position:relative;z-index:1;margin: -12px 0 0;padding:8px 4px;background:var(--surface);border-radius:12px;border:1px solid var(--line)}
+.product-task{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:8px 0;min-height:76px;min-width:0;text-align:center}
+.product-task svg{width:24px;height:24px;stroke:var(--fg);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.product-task strong{font-size:13px;line-height:1.35;font-weight:500}
+.product-primary-actions{display:grid;grid-template-columns:1.3fr 1fr;gap:12px}
+.product-primary-actions button{display:flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:12px;border-radius:8px;font-size:16px;font-weight:600}
+.product-create-action{background:var(--fg);color:var(--bg)}
+.product-edit-action{background:var(--surface);border:1px solid var(--line)}
+.product-primary-actions svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.product-section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;margin-bottom:8px}
+.product-section-heading h2,.product-creative-heading h2{font-size:18px;line-height:1.35;font-weight:600}
+.product-section-heading>button{min-height:44px;min-width:44px;padding:0;font-size:14px;color:var(--muted)}
+.product-recent .product-section-heading>button{font-size:24px}
+.product-photo-placeholder{display:flex;align-items:center;gap:12px;min-height:56px;width:100%;padding:8px 0;text-align:left;font-size:14px;color:var(--muted)}
+.product-photo-placeholder svg{width:44px;height:44px;padding:10px;border:1px solid var(--line);border-radius:8px}
+.product-recent-list{display:flex;gap:12px;overflow:auto;scrollbar-width:none}
+.product-recent-list>button:not(.product-photo-placeholder){flex:0 0 56px;height:64px;padding:0;border-radius:8px;overflow:hidden}
+.product-recent-list img{display:block;width:100%;height:100%;object-fit:cover}
+.product-look-rail{display:flex;gap:12px;overflow:auto;scrollbar-width:none;margin-right:-20px;padding-right:20px}
+.product-look-rail>button{position:relative;flex:0 0 136px;width:136px;aspect-ratio:3/4;overflow:hidden;border-radius:12px;padding:0;text-align:left;background:var(--surface)}
+.product-look-rail img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.product-look-rail>button:after{content:'';position:absolute;inset:50% 0 0;background:linear-gradient(transparent,#111e)}
+.product-look-rail>button>span{position:absolute;z-index:1;left:12px;right:12px;bottom:12px;font-size:15px;font-weight:500}
+.product-explore-tabs{display:flex;gap:24px;padding:0 20px;position:sticky;top:0;z-index:3;background:var(--bg);border-bottom:1px solid var(--line);margin-bottom:12px}
+.product-explore-tabs button{min-height:48px;padding:0;border-radius:0;font-size:16px;color:var(--muted);border-bottom:2px solid transparent}
+.product-explore-tabs button[aria-selected=true]{color:var(--fg);border-bottom-color:var(--product-accent)}
+.product-creative-heading{padding:8px 20px 16px}
+.phone[data-product-page=featured] .featured-feed{padding-top:0;padding-bottom:72px}
+.phone[data-product-page=templates] .topic-navigation,.phone[data-product-page=videos] .topic-navigation{position:static;margin-bottom:12px;padding-left:20px}
+.phone[data-product-page=create]>.top,.phone[data-product-page=create]>.view{display:none}
+.phone>.product-studio-host{position:relative;inset:auto;width:100%;height:auto;min-height:0;flex:1;z-index:1;background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
+.phone>.product-studio-host[hidden]{display:none}
+#product-workspace{display:block;width:100%;height:100%;min-height:0;flex:1;border:0}
+.product-photo-dialog{width:calc(100% - 40px);max-width:360px;padding:20px;border:1px solid var(--line);border-radius:24px;background:var(--surface);color:var(--fg)}
+.product-photo-dialog::backdrop{background:#000a}
+.product-photo-dialog h2{font-size:22px;margin-bottom:8px}
+.product-photo-dialog p{font-size:14px;margin-bottom:12px}
+.product-photo-dialog button{display:block;width:100%;min-height:48px;padding:12px 0;text-align:left;border-bottom:1px solid var(--line);font-size:15px}
+.product-photo-dialog [data-photo-remove]{color:#e5a9b3;font-size:14px}
+.product-photo-dialog [data-photo-close]{text-align:center;border:0;color:var(--muted)}
+@media(max-width:760px){html{scrollbar-width:none}.stage{display:block;padding:0}.phone{width:min(440px,100%);height:100dvh;min-height:0;border:0;border-radius:0;margin:auto}.review{width:min(440px,100%);padding:24px 20px;margin:auto}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+/* Focused revision: embedded campaign and a dedicated tool directory. */
+.product-feature{width:calc(100% + 40px);margin-left:-20px;height:244px;border-radius:0;background:var(--bg)}
+.product-feature>img{object-position:50% 40%}
+.product-feature:after{background:linear-gradient(0deg,var(--bg) 0%,#17171933 58%,transparent),linear-gradient(90deg,#17171966,transparent 80%)}
+.product-feature>span{left:20px;right:20px;bottom:40px}
+.product-task-grid{margin-top:-12px}
+.phone[data-product-page=tools]>.top{justify-content:space-between;gap:8px}
+.phone[data-product-page=tools]>.top h1{font-size:22px}
+.product-header-spacer{width:44px;flex:none}
+.product-tools{padding:16px 20px 24px}
+.product-tools section+section{margin-top:32px}
+.product-tools h2{font-size:18px;font-weight:600;line-height:24px;margin:0 0 16px}
+.product-tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.product-tool-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;min-height:112px;padding:20px;background:var(--surface);border:1px solid var(--line);border-radius:12px;text-align:left;font-size:16px;line-height:22px}
+.product-tool-card svg{width:26px;height:26px;stroke:var(--fg);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.product-tool-card:active{background:#303033}
+@media(max-height:720px){.product-feature{height:224px}.product-tools{padding-top:8px}.product-tool-card{min-height:100px}}
+
+/* Reuse MuseMe's existing collection feed only in the requested Home region. */
+.product-browse>.editorial{padding:0}
+.product-browse .home-template-feed{margin-top:0}
+
+/* Leave a reachable final row below the centered action. */
+.phone[data-product-page=templates]>.view,.phone[data-product-page=videos]>.view,.phone[data-product-page=me]>.view{padding-bottom:96px}
+
+/* Events uses photographic collections, with the creation action centered in five slots. */
+.phone>.nav [data-tab=events] svg{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.product-events{padding:0 20px 32px}
+.product-event-carousel{position:relative;display:flex;gap:12px;width:calc(100% + 40px);margin:0 -20px;padding:0 20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;scrollbar-width:none;overscroll-behavior-x:contain}
+.product-event-carousel::-webkit-scrollbar{display:none}
+.product-event-feature{position:relative;display:block;flex:0 0 calc(100% - 40px);min-width:0;aspect-ratio:1.32;height:auto;padding:0;overflow:hidden;border-radius:8px;scroll-snap-align:center;text-align:left;background:var(--surface)}
+.product-event-feature>img{display:block;width:100%;height:100%;object-fit:cover}
+.product-event-feature:after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 48%,#000b);pointer-events:none}
+.product-event-copy{position:absolute;z-index:1;left:16px;right:16px;bottom:14px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.product-event-feature strong{display:block;min-width:0;font-size:23px;line-height:1.12;font-weight:650;max-width:210px}
+.product-event-cta{display:flex;flex:none;align-items:center;justify-content:center;min-width:60px;min-height:44px;padding:0 16px;border-radius:24px;background:var(--fg);color:var(--bg);font-size:14px;font-weight:600}
+.product-event-list{display:flex;flex-direction:column;gap:16px;margin-top:24px}
+.product-event-row{padding:16px;border:1px solid #ffffff08;border-radius:12px;background-color:#232326;background-image:repeating-linear-gradient(135deg,transparent 0,transparent 4px,#ffffff02 4px,#ffffff02 5px)}
+
+.product-event-row>button{display:block;width:100%;min-width:0;padding:0;text-align:left;background:transparent}
+.product-event-row-copy{display:block;margin-bottom:12px}
+.product-event-row h2{margin:0 0 5px;font-size:19px;line-height:1.3;font-weight:650}
+.product-event-row-copy>span{display:block;color:var(--muted);font-size:13px;line-height:1.4}
+.product-event-row-art{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;width:100%;aspect-ratio:2.25;overflow:hidden;border-radius:8px;background:var(--surface)}
+.product-event-row-art img{display:block;width:100%;height:100%;min-height:0;object-fit:cover}
+
+/* Catalogue media tabs occupy the header itself, following MuseMe's hierarchy. */
+.phone[data-product-page=templates]>.top,.phone[data-product-page=videos]>.top{padding:0 20px;display:flex;align-items:center}
+.phone>.top .product-explore-tabs{position:static;flex:1;justify-content:center;gap:24px;padding:0;margin:0;border:0;background:transparent}
+.phone>.top .product-explore-tabs button{min-height:56px;font-size:20px;font-weight:600}
+
+.phone>.nav>.activity-entry[aria-current=page]{background:var(--product-accent);color:var(--product-action-text)}
+
+/* Product palette: deep black, upper-right warm light and peach actions. */
+.phone[data-product-page]{background-color:#111112;background-image:radial-gradient(ellipse 100% 80% at 103% -8%,#bc571edb 0%,#8c3d2273 38%,#42271a33 65%,transparent 85%);background-size:100% 430px;background-repeat:no-repeat}
+.phone[data-product-page=templates]>.top,.phone[data-product-page=videos]>.top,.phone[data-product-page=templates]>.top .product-explore-tabs,.phone[data-product-page=videos]>.top .product-explore-tabs{background:transparent}
+.phone[data-product-page=templates] .topic-navigation,.phone[data-product-page=videos] .topic-navigation{background:#16110e66;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.phone[data-product-page=templates] .topic-navigation button:not([aria-selected=true]),.phone[data-product-page=videos] .topic-navigation button:not([aria-selected=true]){background:#ffffff06;color:#d0c8c1}
+
+/* Keep imagery and navigation quiet; reserve the warm accent for actions and selection. */
+.phone>.top{background:transparent}
+.phone .primary,.phone .product-create-action,.phone .product-event-cta{background:var(--product-accent);color:var(--product-action-text)}
+.phone .topic-navigation button[aria-selected=true]{background:var(--product-accent);border-color:var(--product-accent);color:var(--product-action-text)}
+.phone>.nav button[aria-current=page]{color:var(--product-accent)}
+.phone>.nav>.activity-entry,.phone>.nav>.activity-entry[aria-current=page]{background:var(--product-accent);color:var(--product-action-text)}
+.product-event-row{background-color:var(--surface)}
+.phone button:focus-visible,.phone input:focus-visible,.phone select:focus-visible{outline-color:var(--product-accent);accent-color:var(--product-accent)}
+
+/* System status remains neutral; warm product light begins below it. */
+.phone>.status{background:var(--bg);flex-shrink:0}
+
+/* Reuse the existing in-app photo selection and crop flow. */
+.phone>.product-photo-picker{position:absolute;inset:0;z-index:30;width:100%;height:100%;border:0;background:var(--bg)}
+
+/* Internal state controls stay outside the 402 × 874 product canvas. */
+.product-state-review{padding-bottom:24px;border-bottom:1px solid #514033;margin-bottom:24px}
+.product-state-review h2{font-size:20px;margin:0 0 8px}
+.product-state-review h3{font-size:13px;color:#bab3ae;margin:20px 0 8px}
+.product-state-review p{font-size:12px;line-height:1.6}
+.product-state-review .state-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.product-state-review button{display:block;width:100%;text-align:left;min-height:44px;padding:8px 10px;border:1px solid #45372e;border-radius:8px;background:#24201e;color:#f3f1ed;font-size:12px}
+.product-state-review button[aria-pressed=true]{border-color:#f2b181;background:#f2b18118;color:#f2b181}
+.product-state-review label{display:block;font-size:13px;margin:12px 0}
+.product-state-review select{width:100%;margin-top:6px;min-height:44px;background:#24201e;color:#f3f1ed;border:1px solid #514033;border-radius:8px;padding:8px}
+.product-state-review .check{display:flex;align-items:center;gap:8px}
+#review-state-note{margin-top:12px;color:#f2b181}
+
+/* Smoked glass navigation: translucent surface, edge light and warm active state. */
+.phone>.nav{position:absolute;left:12px;right:12px;bottom:22px;top:auto;width:auto;height:74px;z-index:30;padding:7px 10px;gap:0;border:1px solid #ffffff29;border-top-color:#ffffff52;border-radius:32px;background:linear-gradient(115deg,#ffffff13,#ffffff04 42%,#ffffff0a),#242220b8;backdrop-filter:blur(24px) saturate(135%);-webkit-backdrop-filter:blur(24px) saturate(135%);box-shadow:inset 0 1px 0 #ffffff12,inset 0 -1px 0 #ffffff06,0 10px 30px #0005}
+.phone>.nav button{color:#d0cbc6;gap:4px;min-height:54px;font-size:11px;border-radius:20px}
+.phone>.nav button[aria-current=page]{color:var(--product-accent)}
+.phone>.nav>.activity-entry{width:52px;min-width:52px;height:52px;min-height:52px;border-radius:19px;background:linear-gradient(145deg,#f8c49c,#e8a16d);border:1px solid #ffd2ae66;box-shadow:inset 0 1px 0 #ffe0c37a,0 4px 14px #d88d4f26}
+.phone>.nav>.activity-entry[aria-current=page]{color:var(--product-action-text);box-shadow:inset 0 1px 0 #ffe0c37a,0 0 18px #f2b18140}
+.phone>.product-studio-host{margin-bottom:108px}
+.phone>.view{padding-bottom:112px}
+.phone[data-product-page=templates]>.view,.phone[data-product-page=videos]>.view,.phone[data-product-page=me]>.view{padding-bottom:112px}
+@supports not (backdrop-filter:blur(1px)){.phone>.nav{background:#2b2826}}
+
+/* Home shortcuts share the navigation's smoked glass material. */
+.product-task-grid{background:linear-gradient(115deg,#ffffff13,#ffffff04 42%,#ffffff0a),#242220b8;border:1px solid #ffffff29;border-top-color:#ffffff52;border-radius:20px;backdrop-filter:blur(24px) saturate(135%);-webkit-backdrop-filter:blur(24px) saturate(135%);box-shadow:inset 0 1px 0 #ffffff12,inset 0 -1px 0 #ffffff06,0 10px 30px #0004}
+@supports not (backdrop-filter:blur(1px)){.product-task-grid{background:#2b2826}}
+
+/* Me: balanced centered heading and a quiet glass segmented control. */
+.phone[data-product-page=me]>.top{position:relative;display:flex;align-items:center;justify-content:center;padding:0 64px}
+.phone[data-product-page=me]>.top .brand-heading{min-width:0;justify-content:center}
+.phone[data-product-page=me]>.top h1{text-align:center;font-size:18px;line-height:1.3;white-space:nowrap;letter-spacing:-.2px}
+.phone[data-product-page=me]>.top .actions{display:contents}
+.phone[data-product-page=me]>.top .saved-entry{position:absolute;left:14px;top:10px;width:44px;height:44px;display:grid;place-items:center}
+.phone[data-product-page=me]>.top [data-route=settings]{position:absolute;right:14px;top:10px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:#ffffff09;border:1px solid #ffffff13}
+.phone[data-product-page=me]>.top [data-route=settings] svg{width:21px;height:21px}
+.phone[data-product-page=me] .me-task-module .media-tabs{display:flex;align-items:center;justify-content:center;gap:4px;width:224px;max-width:calc(100% - 40px);padding:4px;margin:4px auto 20px;border:1px solid #ffffff20;border-top-color:#ffffff32;border-radius:25px;background:linear-gradient(120deg,#ffffff0a,#ffffff02),#242220b8;box-shadow:inset 0 1px 0 #ffffff08;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.phone[data-product-page=me] .me-task-module .media-tabs button{flex:1;min-height:40px;padding:0 16px;border-radius:20px;font-size:13px;font-weight:500;color:var(--muted)}
+.phone[data-product-page=me] .me-task-module .media-tabs button[aria-selected=true]{color:var(--product-action-text);background:var(--product-accent);box-shadow:inset 0 1px 0 #ffe0c350}
+.phone[data-product-page=me] .me-task-module .media-tabs button:after{display:none}
+
+/* Media switch spans the same content width as the creations grid. */
+.phone[data-product-page=me] .me-task-module .media-tabs{width:calc(100% - 40px);max-width:none;margin:4px 20px 20px}
+
+/* Home: direct workspace actions sit below the specific task shortcuts. */
+.product-workspace-actions{position:relative;z-index:2;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0 0}
+.product-workspace-action{display:flex;align-items:center;justify-content:center;gap:10px;min-height:58px;min-width:0;padding:14px 18px;border:1px solid #ffffff29;border-top-color:#ffffff52;border-radius:18px;background:linear-gradient(115deg,#ffffff13,#ffffff04),#242220e6;color:#f3f1ed;font:inherit;font-size:16px;font-weight:600;backdrop-filter:blur(24px) saturate(135%);-webkit-backdrop-filter:blur(24px) saturate(135%);box-shadow:inset 0 1px 0 #ffffff12,0 6px 18px #0003}
+.product-workspace-action svg{width:22px;height:22px;fill:none;stroke:var(--product-accent);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.product-workspace-action:active{background:#3b322b}
+.product-workspace-action:focus-visible{outline:2px solid var(--product-accent);outline-offset:3px}
+
+/* Six specific tasks; the general editing entry lives in the AI Edit button. */
+.product-task-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+/* Home campaign rail: native touch scrolling, pagination and full-width slides. */
+.product-campaigns{position:relative;width:calc(100% + 40px);margin-left:-20px;height:244px}
+.product-campaign-track{display:flex;width:100%;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-x pan-y}
+.product-campaign-track::-webkit-scrollbar{display:none}
+.product-campaign-track>.product-feature{flex:0 0 100%;width:100%;height:100%;margin:0;scroll-snap-align:start;scroll-snap-stop:always;user-select:none}
+.product-campaign-track .product-feature>span{bottom:52px}
+.product-campaign-track .product-feature strong{max-width:300px}
+.product-campaign-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;z-index:2}
+.product-campaign-dots button{display:grid;place-items:center;width:32px;height:32px;padding:0;background:transparent;border:0}
+.product-campaign-dots button span{width:5px;height:5px;border-radius:5px;background:#ffffff70}
+.product-campaign-dots button[aria-current=true] span{width:18px;background:var(--product-accent)}
+.product-campaign-dots button:focus-visible{outline:2px solid var(--product-accent);outline-offset:-2px;border-radius:8px}
+@media(max-height:720px){.product-campaigns{height:224px}}
+
+/* Events: one featured banner followed by a unified activity list. */
+.product-experiences{padding-top:4px}
+.product-experiences button{font:inherit;color:var(--fg);text-align:left}
+.experience-hero{display:block;position:relative;isolation:isolate;width:100%;height:180px;padding:0;overflow:hidden;border:0;border-radius:20px;background:#272c30}
+.experience-hero-art{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.experience-hero-art img{width:100%;height:100%;min-width:0;object-fit:cover;object-position:center 35%}
+.experience-hero:after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 20%,#11111250 50%,#111112e6 100%);pointer-events:none}
+.experience-hero-copy{position:absolute;bottom:18px;left:18px;right:18px;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.experience-hero-copy>strong{font-size:27px;line-height:1.12;letter-spacing:-.7px}
+.experience-action{display:inline-flex;align-items:center;gap:22px;min-height:38px;padding:0 16px;background:var(--product-accent);color:var(--product-action-text);border-radius:24px;font-size:12px;font-weight:600}
+.experience-list{margin-top:16px}
+.experience-categories{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:0 0 12px;padding:4px;border:1px solid #ffffff16;border-top-color:#ffffff29;border-radius:16px;background:linear-gradient(115deg,#ffffff09,#ffffff01 55%,#f2b18105),#242220a6;box-shadow:inset 0 1px 0 #ffffff08,0 4px 12px #0002;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.experience-categories::-webkit-scrollbar{display:none}
+.experience-categories button{position:relative;flex:1 0 auto;min-height:44px;padding:0 15px;text-align:center;border:1px solid transparent;border-radius:12px;background:none;color:var(--muted);font-size:13px;white-space:nowrap}
+.experience-categories button[aria-selected=true]{color:#f9dcc5;font-weight:600;border-color:#f2b18130;background:linear-gradient(125deg,#f2b18129,#f2b18112);box-shadow:inset 0 1px 0 #ffe0c31a,0 2px 6px #0002}
+.experience-categories button:focus-visible{outline-offset:-3px}
+.experience-list-items{display:flex;flex-direction:column;gap:12px}
+.experience-list-card{display:block;position:relative;isolation:isolate;width:100%;aspect-ratio:1.8;min-height:0;padding:0;border:0;border-radius:6px;overflow:hidden;background:#302a29}
+.experience-list-card[hidden]{display:none}
+.experience-list-card:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 38%,#0003 60%,#000b 100%);pointer-events:none}
+.experience-list-art{position:absolute;inset:0;display:flex;overflow:hidden;background:#302a29}
+.experience-list-art img{width:100%;height:100%;min-width:0;object-fit:cover;object-position:center 35%}
+.experience-hair-art{background:#aba0b8}
+.experience-hair-art img{width:50%;object-fit:contain;object-position:center}
+.experience-card-copy{position:absolute;z-index:1;bottom:16px;left:16px;right:16px;display:flex;flex-direction:column;gap:4px;color:#fff}
+.experience-card-copy>strong{font-size:19px;line-height:1.25;font-weight:650;letter-spacing:-.3px}
+.experience-card-copy>span{color:#ffffffb8;font-size:11px;line-height:1.4}
+.product-experiences button:focus-visible{outline:2px solid var(--product-accent);outline-offset:3px}
+@media(max-height:720px){.experience-hero{height:164px}}
+
+/* Six Home shortcuts, with the complete catalogue in a bottom sheet. */
+.product-task-surface{position:relative;z-index:1;margin-top:-12px;border:1px solid #ffffff29;border-top-color:#ffffff52;border-radius:20px;background:linear-gradient(115deg,#ffffff13,#ffffff04 42%,#ffffff0a),#242220ed;box-shadow:inset 0 1px 0 #ffffff12,0 10px 30px #0004;overflow:hidden}
+.product-task-surface>.product-task-grid{margin:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none}
+.product-tools-more{display:flex;align-items:center;justify-content:center;gap:6px;width:calc(100% - 32px);min-height:40px;margin:0 16px;padding:0 0 2px;border-top:1px solid #ffffff14;color:var(--muted);font-size:12px}
+.product-tools-more svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.5}
+.product-tools-overlay{position:absolute;inset:0;z-index:70;background:#0009;display:flex;align-items:flex-end;overscroll-behavior:contain}
+.product-tools-sheet{width:100%;max-height:78%;min-height:300px;display:flex;flex-direction:column;border:1px solid #ffffff24;border-bottom:0;border-radius:28px 28px 0 0;background:#242220;color:var(--fg);padding:10px 20px max(24px,env(safe-area-inset-bottom));box-shadow:0 -12px 50px #0005;animation:product-tools-enter .24s ease-out}
+.product-tools-handle{width:32px;height:4px;background:#ffffff35;border-radius:4px;margin:0 auto 10px;flex-shrink:0}
+.product-tools-sheet header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-shrink:0}
+.product-tools-sheet h2{font-size:20px;font-weight:600;margin:0}
+.product-tools-sheet header button{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ffffff09}
+.product-tools-sheet header svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5}
+.product-tools-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 8px;overflow-y:auto;overscroll-behavior:contain;min-height:0}
+.product-tools-list .product-task{min-height:88px;gap:12px;border-radius:14px;background:#ffffff05}
+.product-tools-list .product-task:hover{background:#ffffff0b}
+@keyframes product-tools-enter{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.product-tools-sheet{animation:none}}
+
+/* Two commerce paths: product stage and story frames. */
+.product-workspace-actions{gap:12px;margin-top:20px}
+.product-workspace-action.commerce-entry{position:relative;isolation:isolate;display:block;min-height:106px;padding:22px 12px 16px;text-align:left;overflow:visible;border-radius:17px;border:1px solid #f8d4b47a;background:linear-gradient(110deg,#f6d6bb,#dba47c);color:#402a20;box-shadow:inset 0 1px 0 #fff8,0 5px 15px #0002;backdrop-filter:none}
+.product-workspace-action.commerce-entry-drama{background:linear-gradient(110deg,#e3dcf5,#b4a3d7);border-color:#ece2ff8c;color:#352a4c}
+.commerce-entry-art{position:absolute;z-index:-1;right:-5px;top:-25px;width:110px;height:106px;object-fit:contain;pointer-events:none}
+.commerce-entry-copy{position:relative;display:flex;flex-direction:column;gap:7px;padding-top:21px;z-index:1}
+.commerce-entry-copy strong{font-size:17px;font-weight:750;letter-spacing:-.3px}
+.commerce-entry-copy small{font-size:10px;font-weight:500;opacity:.72;white-space:nowrap}
+.commerce-entry-arrow{position:absolute;right:11px;bottom:12px;font-size:17px;font-weight:500}
+.commerce-entry:active{filter:brightness(.94);transform:translateY(1px)}
+
+/* Commerce home: creation takes priority over supporting tools. */
+.product-start>.product-workspace-actions{margin-top:14px;margin-bottom:0}
+.product-start>.product-task-surface{margin-top:14px;background:#ffffff04;border-color:#ffffff14;border-radius:16px;box-shadow:none}
+.product-start>.product-task-surface .product-task-grid{padding:6px 4px;gap:0}
+.product-start>.product-task-surface .product-task{min-height:62px;padding:7px 0;gap:6px}
+.product-start>.product-task-surface .product-task svg{width:20px;height:20px;stroke:#bdb5ae}
+.product-start>.product-task-surface .product-task strong{font-size:12px;color:#bdb5ae;font-weight:400}
+
+/* Home refinement: compact campaign, clear creation priority, light supporting tools. */
+.product-home .product-campaigns{height:196px}
+.product-home .product-campaign-track .product-feature>span{bottom:48px}
+.product-home .product-campaign-track .product-feature strong{font-size:24px;line-height:1.25}
+.product-home .product-campaign-dots{bottom:8px}
+.product-home .product-start>.product-workspace-actions{margin-top:16px}
+.product-home .commerce-entry-art{width:100px;height:96px;top:-18px;right:-2px}
+.product-home .product-start>.product-task-surface{margin-top:14px;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible}
+.product-home .product-start>.product-task-surface .product-task-grid{padding:0;gap:2px 0}
+.product-home .product-start>.product-task-surface .product-task{min-height:55px;padding:6px 0;gap:6px}
+.product-home .product-start{margin-bottom:16px}
+@media(max-height:720px){.product-home .product-campaigns{height:180px}}
+
+/* Unified discovery: three top tabs, three bottom entries. */
+.phone[data-product-page=discover]>.top{display:flex;align-items:center;padding:0 20px;background:transparent}
+.phone>.top .product-explore-tabs{justify-content:center;gap:28px}
+.phone>.top .product-explore-tabs button{font-size:20px;min-height:56px}
+.phone>.nav{grid-template-columns:repeat(3,minmax(0,1fr))}
+.product-home .product-campaigns{width:calc(100% + 40px);margin-left:-20px}
+
+/* Banner and paired creation entries live at the top of the Selling tab. */
+.commerce-selling-hero{padding:0 20px 20px}
+.commerce-selling-hero .product-campaigns{height:196px}
+.commerce-selling-hero .product-campaign-track .product-feature>span{bottom:48px}
+.commerce-selling-hero .product-campaign-track .product-feature strong{font-size:24px;line-height:1.25}
+.commerce-selling-hero .product-campaign-dots{bottom:8px}
+.commerce-selling-hero .product-workspace-actions{margin-top:16px}
+.commerce-selling-hero .commerce-entry-art{width:100px;height:96px;top:-18px;right:-2px}
+@media(max-height:720px){.commerce-selling-hero .product-campaigns{height:180px}}

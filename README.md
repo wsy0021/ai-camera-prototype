@@ -1,5 +1,9 @@
 # AI 相机交互原型
 
+- [国内AI带货原型（当前协作版）](https://wsy0021.github.io/ai-camera-prototype/commerce/)
+- [独立新产品评审](https://wsy0021.github.io/ai-camera-prototype/new-product/)
+- [MuseMe历史原型](https://wsy0021.github.io/ai-camera-prototype/)
+
 默认入口：`index.html` → 评审讲解台。点击“打开对应原型”体验各阶段。
 
 - 完整体验：`应用启动页_v0.1.html`

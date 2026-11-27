@@ -1,0 +1,69 @@
+.phone[data-product-page="me"] #top{height:64px;padding:0 22px}
+.phone[data-product-page="me"] #top h1{font-size:24px;font-weight:700;letter-spacing:0}
+.commerce-library{padding:0 18px 32px;color:var(--fg)}
+.cm-tabs{display:flex;gap:28px;position:sticky;top:0;z-index:2;background:#111112;padding-top:4px;margin-bottom:16px;border-bottom:1px solid #ffffff12}
+.cm-tabs button{position:relative;min-height:48px;font-size:17px;font-weight:600;color:#858583;padding:0 0 14px}
+.cm-tabs button[aria-selected="true"]{color:#f6f4ef}
+.cm-tabs button[aria-selected="true"]:after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:3px;width:24px;border-radius:3px;background:#ffc198}
+.cm-filters{display:flex;gap:6px;overflow-x:auto;margin-bottom:20px;scrollbar-width:none}
+.cm-filters button{flex-shrink:0;min-height:36px;padding:0 12px;border-radius:18px;font-size:13px;color:#a7a7a3;display:flex;gap:5px;align-items:center}
+.cm-filters button[aria-pressed="true"]{background:#f4f1e9;color:#252421;font-weight:600}
+.cm-filters button span{font-size:11px;opacity:.75}
+.cm-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 12px}
+.cm-work{display:block;padding:0;text-align:left;min-width:0;color:#f6f4ef;background:none}
+.cm-cover{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:12px;background:#262624}
+.cm-cover>img{display:block;width:100%;height:100%;object-fit:cover}
+.cm-state{position:absolute;top:9px;left:9px;background:#151515bb;backdrop-filter:blur(8px);padding:5px 8px;border-radius:7px;font-size:11px;display:flex;align-items:center;gap:5px;color:white}
+.cm-state.failed,.cm-state.unknown{background:#30251ee8;color:#ffcaab}
+.cm-state.running{background:#252a29e8;color:#e6f2ed}
+.cm-recovery{position:absolute;bottom:0;left:0;right:0;padding:26px 10px 12px;background:linear-gradient(transparent,#000c);font-size:12px;color:#ffe4d1}
+.cm-work>strong{display:block;font-size:14px;font-weight:600;line-height:1.5;margin:10px 0 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cm-work>small{display:flex;justify-content:space-between;gap:4px;color:#92928d;font-size:11px}
+.cm-progress{position:absolute;bottom:12px;left:12px;right:12px;height:3px;background:#ffffff44;border-radius:2px;overflow:hidden}
+.cm-progress i{display:block;width:43%;height:100%;background:#ffd0ae}
+.cm-spinner{width:10px;height:10px;border:1.5px solid #fff5;border-top-color:white;border-radius:50%;animation:cm-spin 1s linear infinite}
+@keyframes cm-spin{to{transform:rotate(360deg)}}
+.cm-empty{padding:96px 18px 24px;text-align:center}
+.cm-empty>span{display:grid;place-items:center;font-size:30px;color:#d0b39c;width:64px;height:64px;background:#242321;border-radius:20px;margin:0 auto 22px}
+.cm-empty h2{font:600 18px/1.5 -apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;color:#f5f3ee;margin:0 0 10px}
+.cm-empty p{font-size:13px;color:#92928d;line-height:1.7;margin:0}
+.cm-empty .primary{margin:24px auto 0;width:auto;min-width:136px;min-height:44px;border-radius:22px;padding:0 26px;font-size:14px;background:#ffc198;color:#2b201a}
+.cm-empty.filtered{padding-top:90px}.cm-text{color:#ffc198;font-size:13px;min-height:44px;margin-top:0}
+.cm-count{font-size:12px;color:#93938f;margin:4px 0 18px}.cm-count span{margin-left:6px}
+.cm-favorite{position:relative;min-width:0}.cm-favorite .commerce-tile{margin:0}.cm-favorite .commerce-tile img{aspect-ratio:3/4;object-fit:cover;border-radius:12px}
+.cm-favorite .commerce-tile>button>span{font-size:14px;line-height:1.5;font-weight:600;margin-top:10px}
+.cm-unfavorite{position:absolute;top:8px;right:8px;width:36px;height:36px;display:grid;place-items:center;background:#1717179c;color:#ffc198;border-radius:50%;font-size:18px}
+@media(max-height:740px){.cm-empty{padding-top:56px}}
+@media(prefers-reduced-motion:reduce){.cm-spinner{animation:none}}
+
+.phone[data-product-page="me"] #toast{top:60px;bottom:auto;left:50%;right:auto;transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);pointer-events:none}
+
+.cm-account{display:flex;align-items:center;width:100%;gap:14px;padding:12px 0 28px;text-align:left;color:#f4f2ee;background:none}.cm-avatar{width:58px;height:58px;border-radius:50%;background:linear-gradient(140deg,#4c4039,#282522);color:#ffc198;display:grid;place-items:center;flex-shrink:0;border:1px solid #ffffff15}.cm-avatar svg{width:32px;height:32px}.cm-account strong{display:block;font-size:19px;font-weight:600;line-height:1.5}.cm-account small{display:block;color:#91918b;font-size:12px;margin-top:5px}
+#settings-panel{background:#171717;padding-bottom:36px}#settings-panel .settings-head{background:#171717}#settings-panel .settings-head h2{font-size:20px;font-weight:600}#settings-panel .settings-group{margin:0 20px 22px}#settings-panel .settings-group h3{font-size:12px;color:#92928c;margin-bottom:10px}#settings-panel .settings-rows{background:#242422;border:1px solid #ffffff0b}#settings-panel .settings-row{min-height:56px;font-size:14px;border-color:#ffffff0d}#settings-panel .end{display:flex;gap:10px;align-items:center}#settings-panel .end i{font-style:normal;font-size:18px}.cs-logout{display:block;margin:28px 20px 0;width:calc(100% - 40px);height:48px;border:1px solid #ffffff20;border-radius:12px;color:#e7b99a;font-size:14px}.cs-detail{padding:4px 24px}.cs-detail h3{font-size:17px;line-height:1.5;margin:18px 0 10px;font-weight:600}.cs-detail p{font-size:13px;line-height:1.8;color:#a2a29b;margin:0 0 24px}.cs-info{padding:20px 0}.cs-info strong{font-size:22px}.cs-info p{margin-top:8px}.cs-note{background:#242422;color:#a7a397;font-size:12px;line-height:1.8;padding:16px;border-radius:12px;margin:16px 0 26px}.cs-primary{background:#ffc198;color:#302219;min-height:46px;width:100%;border-radius:23px;font-size:14px;margin-top:18px}.cs-cancel{width:100%;min-height:46px;font-size:14px;margin-top:12px}.cs-label{display:block;font-size:17px;font-weight:600;margin:18px 0 18px}#cs-feedback{display:block;width:100%;min-height:190px;resize:vertical;background:#242422;border:1px solid #ffffff15;border-radius:12px;color:#f5f3ee;font:14px/1.7 -apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;padding:16px}#cs-feedback:focus{outline:1px solid #ffc198}.cs-feedback-status{margin-top:12px!important;font-size:12px!important}.cs-about-icon{margin:24px auto 26px;width:76px;height:76px;border-radius:23px;display:grid;place-items:center;background:#3e332b;color:#ffc198;font-size:38px}
+.phone:has(#settings-panel:not([hidden])) > .nav{display:none}
+
+/* Account and settings share one row; no duplicate page heading. */
+.phone[data-product-page="me"] #top{display:none}
+.cm-account-row{display:flex;align-items:center;gap:14px;padding:18px 0 26px}
+.cm-account-row .cm-account{flex:1;min-width:0;width:auto;padding:0}
+.cm-account-row .cm-settings{flex:none;width:44px;height:44px}
+
+.phone[data-product-page="me"]{background-image:radial-gradient(ellipse 100% 80% at 103% -8%,#bc571e35 0%,#8c3d221a 38%,transparent 75%)}
+.cm-empty.filtered h2{margin-bottom:4px}
+
+/* MuseMe task-card pattern: muted source during processing, result first on success. */
+.cm-cover.running>img{filter:blur(5px) brightness(.48);transform:scale(1.06)}
+.cm-cover.failed>img{filter:grayscale(1) brightness(.32)}
+.cm-cover.unknown>img{filter:brightness(.4)}
+.cm-task-status{position:absolute;inset:auto 0 0;padding:32px 12px 14px;background:linear-gradient(transparent,#111112dd);display:flex;flex-direction:column;gap:5px}
+.cm-task-status strong{font-size:13px;font-weight:600;line-height:1.4;color:#f3f1ed}
+.cm-task-status small{font-size:11px;color:#b6b2ab;line-height:1.5}
+.cm-task-status.failed strong{color:#f0aaa7}
+.cm-task-status.done{padding:24px 10px 10px}
+.cm-task-status.done strong{font-size:11px;font-weight:500}
+.cm-glow,.cm-failure-icon,.cm-unknown-icon{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);display:grid;place-items:center}
+.cm-glow{color:#f3f1ed;font-size:32px;animation:cm-glow 3.8s ease-in-out infinite}
+.cm-failure-icon{width:34px;height:34px;border:1.5px solid #f0aaa7aa;border-radius:50%;color:#f0aaa7;font-size:21px;font-weight:500}
+.cm-unknown-icon{font-size:32px;color:#d1b7a4}
+@keyframes cm-glow{0%,100%{opacity:.35}50%{opacity:.85}}
+@media(prefers-reduced-motion:reduce){.cm-glow{animation:none;opacity:.7}}

@@ -1,0 +1,23 @@
+/* Domestic settings prototype; no native permissions or account service. */
+(() => {
+const panel=document.querySelector('#settings-panel');let opener=null,detail='',draft='';
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function signed(){try{return sessionStorage.getItem('commerce-login-demo')==='signed'}catch{return false}}
+const row=(id,title,value='')=>`<button class="settings-row" data-cs="${id}"><span>${title}</span><span class="end">${value?`<span>${value}</span>`:''}<i aria-hidden="true">›</i></span></button>`;
+const group=(title,rows)=>`<section class="settings-group"><h3>${title}</h3><div class="settings-rows">${rows}</div></section>`;
+function head(title,back='home'){return `<div class="saved-top settings-head"><button class="icon" data-cs="${back}" aria-label="${back==='close'?'返回我的':'返回设置'}">‹</button><h2>${title}</h2><span></span></div>`}
+function home(){detail='';panel.innerHTML=head('设置','close')+group('账号',row('account','账号与安全',signed()?'已登录':'未登录'))+group('通用',row('data','数据与存储')+row('permissions','隐私与权限'))+group('帮助与关于',row('feedback','意见反馈')+row('about','关于我们')+row('terms','用户协议')+row('privacy','隐私政策'))+(signed()?'<button class="cs-logout" data-cs="logout">退出登录</button>':'')+'<p class="version">版本 0.1 · 原型预览</p>';panel.scrollTop=0}
+function body(title,html){detail=title;panel.innerHTML=head(title)+`<section class="cs-detail">${html}</section>`;panel.scrollTop=0;panel.querySelector('button')?.focus()}
+function show(id){switch(id){
+case 'account':body('账号与安全',signed()?`<div class="cs-info"><strong>创作用户</strong><p>当前使用演示账号</p></div><p>真实手机号绑定、修改与账号注销将在账号服务接入后开放。</p>`:`<h3>登录你的账号</h3><p>使用手机号验证码登录。</p><button class="cs-primary" data-cs="login">登录／注册</button>`);break;
+case 'data':body('数据与存储','<h3>本机创作记录</h3><p>当前任务、收藏与历史对话保存在本机浏览器中，尚未同步至账号。</p><div class="cs-note">清除浏览器数据可能导致记录丢失。</div><h3>缓存管理</h3><p>缓存清理功能尚未接入，当前不会清除你的商品图片、对话或作品。</p>');break;
+case 'permissions':body('隐私与权限','<h3>照片使用</h3><p>仅在你主动选择图片时读取所选文件。当前原型不读取完整相册。</p><h3>相机与麦克风</h3><p>当前未使用相机和麦克风。</p><div class="cs-note">正式应用的权限状态与系统设置入口将在客户端接入后提供。</div>');break;
+case 'feedback':try{draft=localStorage.getItem('commerce-feedback-draft-v1')||''}catch{}body('意见反馈',`<label class="cs-label" for="cs-feedback">想告诉我们什么？</label><textarea id="cs-feedback" maxlength="500" placeholder="描述遇到的问题或建议…">${esc(draft)}</textarea><p class="cs-feedback-status" role="status">${draft?'已恢复本机草稿':'反馈暂未接入提交服务，可先保存草稿。'}</p><button class="cs-primary" data-cs="save-feedback">保存草稿</button>`);break;
+case 'about':body('关于我们','<div class="cs-about-icon" aria-hidden="true">▷</div><h3>AI 创作</h3><p>把商品与想法，变成视频和照片作品。</p><p>版本 0.1 · 原型预览</p><div class="cs-note">产品正式名称、主体信息与联系方式待确认。</div>');break;
+case 'terms':case 'privacy':body(id==='terms'?'用户协议':'隐私政策','<h3>正式内容待补充</h3><p>当前仅展示页面结构。正式上线前补齐运营主体、服务范围与对应协议内容。</p>');break;
+case 'logout':body('退出登录','<h3>确认退出当前账号？</h3><p>本机任务、作品、收藏和对话记录会保留。</p><button class="cs-primary" data-cs="confirm-logout">确认退出</button><button class="cs-cancel" data-cs="home">暂不退出</button>');break;
+}}
+openSettings=function(initial=''){hideNudge();opener=document.activeElement;home();panel.hidden=false;panel.setAttribute('aria-label','设置');document.querySelector('#top').inert=true;view.inert=true;document.querySelector('#nav').inert=true;if(initial==='account'){show('account');panel.querySelector('[data-cs=home]')?.setAttribute('data-cs','close');panel.querySelector('button')?.setAttribute('aria-label','返回我的')}panel.querySelector('button').focus()};
+closeSettings=function(){panel.hidden=true;document.querySelector('#top').inert=false;view.inert=false;document.querySelector('#nav').inert=false;opener?.focus({preventScroll:true})};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-cs]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();const id=b.dataset.cs;if(id==='close'){closeSettings();return}if(id==='home'){home();panel.querySelector('button').focus();return}if(id==='login'){const u=new URL(location.href);u.searchParams.set('tab','me');u.searchParams.set('panel','settings');location.href='手机号登录_v0.1.html?return='+encodeURIComponent(u.href);return}if(id==='confirm-logout'){try{sessionStorage.removeItem('commerce-login-demo')}catch{}render();home();panel.querySelector('button').focus();return}if(id==='save-feedback'){draft=document.querySelector('#cs-feedback').value;try{localStorage.setItem('commerce-feedback-draft-v1',draft);panel.querySelector('[role=status]').textContent='已保存至本机，尚未提交'}catch{panel.querySelector('[role=status]').textContent='保存失败，请复制内容后重试'}return}show(id)},true);
+})();
