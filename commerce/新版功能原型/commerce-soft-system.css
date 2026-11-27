@@ -126,3 +126,5 @@ body:has(> #composer) .handle{background:#d4d4d8!important}
 body:has(> #composer) .assistant-copy{background:#f7f7f8!important;border:0}
 body:has(> #composer) .user-message{background:#ededf0!important}
 .phone[data-product-page=me] .cm-unfavorite{color:#444449!important}
+
+body:has(> #composer)>header [data-action=new]{display:grid;place-items:center}
