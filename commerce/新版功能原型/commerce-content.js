@@ -19,15 +19,26 @@ productNav=function(){return [[commerceDiscoveryTab,'发现',navigationSvg('disc
 productFloatingEntry.querySelector('span').textContent='创作';productFloatingEntry.setAttribute('aria-label','创作');
 const commerceHeader=header;
 header=function(){if(['discover','templates','videos'].includes(tab))return productExploreTabs();if(tab==='me')return '<div class="brand-heading"><h1>我的</h1></div><div class="actions"><button class="saved-entry" data-action="saved" aria-label="我的收藏">'+svg('heart')+'</button><button class="icon" data-route="settings" aria-label="设置">'+svg('settings')+'</button></div>';return commerceHeader();};
-// Undecided tool functions remain neutral placeholders, with the same six positions.
-productToolItems=function(){return Array.from({length:6},(_,i)=>productTask('功能待定',`<rect x="4" y="4" width="16" height="16" rx="5"/><path d="M8 12h8m-4-4v8"/>`,`data-commerce-tool="${i}"`));};
+// Trial discovery shortcuts: names and order remain content placeholders.
+const discoveryQuickItems=[
+ ['视频带货','<rect x="3" y="5" width="14" height="14" rx="3"/><path d="m17 9 4-2v10l-4-2M8 9l5 3-5 3Z"/>'],
+ ['AI写真','<rect x="4" y="3" width="16" height="18" rx="3"/><circle cx="12" cy="9" r="3"/><path d="M7 20v-2a5 5 0 0 1 10 0v2"/>'],
+ ['照片编辑','<path d="m15 4 5 5-11 11H4v-5ZM12 7l5 5M4 5h5M6.5 2.5v5"/>'],
+ ['图片生视频','<rect x="3" y="4" width="18" height="16" rx="3"/><path d="m4 16 5-5 4 4m1-8 5 3-5 3Z"/>'],
+ ['全部','<rect x="4" y="4" width="6" height="6" rx="2"/><rect x="14" y="4" width="6" height="6" rx="2"/><rect x="4" y="14" width="6" height="6" rx="2"/><rect x="14" y="14" width="6" height="6" rx="2"/>']
+];
+productToolItems=function(){return discoveryQuickItems.map(([title,paths],i)=>productTask(title,paths,`data-commerce-tool="${i}"`));};
+productTaskSection=function(){return `<div class="discovery-entry-block"><div class="discovery-featured">${[
+ ['短剧创作','让灵感变成故事','../assets/portraits-v3/city-portrait.jpg','story'],
+ ['主角是我','走进你的电影片段','../assets/portraits-v3/studio-portrait.jpg','star']
+].map(([title,sub,img,style],i)=>`<button class="discovery-featured-card discovery-${style}" data-commerce-tool="featured-${i}"><span class="discovery-featured-copy"><strong>${title}</strong><small>${sub}</small></span><img src="${img}" alt=""/><span class="discovery-featured-play" aria-hidden="true">▷</span></button>`).join('')}</div><div class="discovery-quick" aria-label="快捷功能">${productToolItems().join('')}</div></div>`;};
 const commerceMe=()=>`<div class="me-modules"><div class="media-tabs" role="tablist"><button role="tab" aria-selected="true">我的作品</button><button data-commerce-tasks role="tab" aria-selected="false">我的任务</button></div><div class="creation-empty compact-empty"><h2>还没有带货作品</h2><p>从一个模板开始，制作你的第一条视频</p><button class="primary" data-tab="templates">去选模板</button></div></div>`;
 const commerceBaseContent=content;
 content=function(){if(tab==='me')return commerceMe();const state=pageStates[tab];if(state==='loading')return '<div class="state" role="status"><span class="spinner"></span><p>正在加载</p></div>';if(state==='error')return emptyView('加载失败','请检查网络后重试','重试','retry');if(state==='empty')return emptyView('暂无内容','换个分类看看','查看推荐','browse');return commerceBaseContent();};
 const commerceBaseRender=render;
 render=function(){if(['discover','templates','videos'].includes(tab))commerceDiscoveryTab=tab;commerceBaseRender();document.documentElement.lang='zh-CN';document.title='AI带货｜产品原型';document.querySelector('.phone').setAttribute('aria-label','带货创作原型');};
 function commercePreview(item){savePosition();const origin=new URL(location.href);origin.searchParams.set('tab',tab);origin.searchParams.set('type',type);origin.searchParams.set('category',category);location.href='带货模板与制作_v0.1.html?id='+encodeURIComponent(item.id)+'&return='+encodeURIComponent(origin.href);}
-document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.hasAttribute('data-commerce-tool')){e.stopImmediatePropagation();notify('功能分类稍后确定');return;}if(b.hasAttribute('data-commerce-tasks')){e.stopImmediatePropagation();location.href='带货模板与制作_v0.1.html?stage=tasks&return='+encodeURIComponent(location.href);return;}const d=b.dataset;if(d.productStudio==='create'||d.productStudio==='edit'){e.stopImmediatePropagation();type='photo';category=d.productStudio==='edit'?'drama':'selling';go('templates');category=d.productStudio==='edit'?'drama':'selling';render();return;}let item;if(d.commerceTemplate)item=commerceItems.find(t=>t.id===d.commerceTemplate);else if(d.template||d.use){const t=templates.find(t=>t.id===(d.template||d.use));item=commerceItems.find(c=>c.id===t?.commerceId);}if(item){e.stopImmediatePropagation();commercePreview(item);return;}if(d.collection){e.stopImmediatePropagation();category='recommend';go('templates');return;}},true);
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.hasAttribute('data-commerce-tool')){e.stopImmediatePropagation();notify(b.textContent.trim().split('\n')[0]+'：功能筹备中');return;}if(b.hasAttribute('data-commerce-tasks')){e.stopImmediatePropagation();location.href='带货模板与制作_v0.1.html?stage=tasks&return='+encodeURIComponent(location.href);return;}const d=b.dataset;if(d.productStudio==='create'||d.productStudio==='edit'){e.stopImmediatePropagation();type='photo';category=d.productStudio==='edit'?'drama':'selling';go('templates');category=d.productStudio==='edit'?'drama':'selling';render();return;}let item;if(d.commerceTemplate)item=commerceItems.find(t=>t.id===d.commerceTemplate);else if(d.template||d.use){const t=templates.find(t=>t.id===(d.template||d.use));item=commerceItems.find(c=>c.id===t?.commerceId);}if(item){e.stopImmediatePropagation();commercePreview(item);return;}if(d.collection){e.stopImmediatePropagation();category='recommend';go('templates');return;}},true);
 
 // Categories stay in one horizontal rail; the complete list is available on demand.
 const commerceCategoryOffsets={};

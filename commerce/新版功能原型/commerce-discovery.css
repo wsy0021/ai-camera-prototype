@@ -1,0 +1,20 @@
+/* Recommendation entry trial: two image cards and five quiet shortcuts. */
+.phone[data-product-page=discover] .product-start{margin:0 0 20px}
+.discovery-entry-block{padding-top:4px}
+.discovery-featured{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.discovery-featured-card{position:relative;display:flex;align-items:center;min-width:0;height:102px;padding:16px 12px;overflow:hidden;border:0;border-radius:14px;text-align:left;color:#f6f1ea;background:#302d29;isolation:isolate}
+.discovery-star{background:#302d34;color:#f3eff5}
+.discovery-featured-copy{position:relative;z-index:2;display:flex;flex-direction:column;gap:7px;width:65%}
+.discovery-featured-copy strong{font-size:17px;font-weight:650;line-height:1.3;letter-spacing:-.4px;white-space:nowrap}
+.discovery-featured-copy small{font-size:10px;line-height:1.4;color:#b7afa4;white-space:nowrap}
+.discovery-star small{color:#b4acbc}
+.discovery-featured-card img{position:absolute;right:-3px;top:9px;width:61px;height:86px;object-fit:cover;object-position:center 30%;border-radius:7px;transform:rotate(8deg);box-shadow:-6px 4px 14px #33291d18;z-index:1}
+.discovery-star img{transform:rotate(-7deg);right:-3px}
+.discovery-featured-play{position:absolute;bottom:13px;right:15px;color:white;font-size:17px;z-index:2;text-shadow:0 1px 6px #0008}
+.discovery-quick{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding:14px 0 0}
+.discovery-quick .product-task{padding:7px 0 5px;min-height:66px;gap:9px;background:none;border:0;border-radius:9px;color:#504b43}
+.discovery-quick .product-task svg{width:25px;height:25px;fill:none;stroke:#ded6cc;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.discovery-quick .product-task strong{font-size:11px;line-height:1.4;font-weight:500;white-space:nowrap;color:#d0c7bc}
+.discovery-featured-card:active,.discovery-quick .product-task:active{opacity:.72}
+.discovery-entry-block button:focus-visible{outline:2px solid #ba842e;outline-offset:3px}
+@media(max-width:380px){.discovery-featured-card{height:96px;padding-left:10px}.discovery-featured-copy strong{font-size:16px}.discovery-featured-card img{width:54px;height:82px}.discovery-featured-copy small{font-size:9px}}
