@@ -9,7 +9,7 @@ modes.selling.prompts.push('围绕商品包装，写一个开箱视频方案','�
 let promptPage=0,historyFilter='all',templateCategory='recommend',templateCatalog=false;
 let chats=read(key,[]),chat,editing=null,busy=false,timer=null,modeChoice=null,lastFocus=null,uploading=false,directUpload=null;
 let wanted;try{wanted=new URL(parent.location.href).searchParams.get('chat')}catch{}
-chat=chats.find(c=>c.id===(wanted||read(activeKey,'')))||fresh();
+chat=chats.find(c=>c.id===wanted)||fresh();
 const linkedDraft=chat.handoff?.version===chat.version?read('commerce-flow-v1',{})[chat.handoff.slot]:null;if(linkedDraft?.sourceChat===chat.id&&linkedDraft.shots?.length===3){Object.assign(chat,{name:linkedDraft.name,selling:linkedDraft.selling,image:linkedDraft.image,plan:linkedDraft.shots});}
 function fresh(){return {id:crypto.randomUUID(),mode:'general',name:'',selling:'',image:'',input:'',messages:[],plan:null,version:0,updated:Date.now()}}
 function notify(text){$('#notice').textContent=text;clearTimeout(notify.timer);notify.timer=setTimeout(()=>$('#notice').textContent='',text.length>24?3200:2000)}
@@ -26,6 +26,7 @@ const featurePages={
  photoedit:{title:'想把照片改成什么样？',intro:'上传照片，告诉我需要修改的地方。',section:'想先调整哪里？',choices:[['换背景','把背景换成干净的摄影棚，人物保持不变'],['换发型','试试齐肩短发，保留原本的脸和表情'],['调滤镜','给照片加一个暖调胶片滤镜']]}
 };
 function featureWelcome(){const p=featurePages[chat.mode];return `<section class="welcome dedicated-welcome feature-${chat.mode}"><div class="dedicated-icon feature-icon">${icon(modes[chat.mode].icon)}</div><h2>${p.title}</h2><p>${p.intro}</p><button class="start-product" data-action="${isPhoto()?'attach-photo':'product'}"><span class="plus">＋</span><span><strong>${chat.image?(isPhoto()?'更换参考照片':'更换商品图'):(isPhoto()?'上传参考照片':'上传商品图')}</strong></span></button><section class="feature-directions"><div class="starter-label">${p.section}</div><div class="direction-list">${p.choices.map(([name,prompt])=>`<button data-prompt="${esc(prompt)}">${name}</button>`).join('')}</div></section>${suggestions()}</section>`}
+function openHome(){if(busy)stop();if(!save())return;closeSheet();chat=chats.find(c=>c.mode==='general'&&!c.messages.length&&!c.input&&!c.image)||fresh();promptPage=0;modeChoice=null;save();render();$('#conversation').scrollTop=0;}
 function goHub(){if(busy)stop();if(!save())return;chat=chats.find(c=>c.id===chat.entryChat&&c.mode==='general')||fresh();promptPage=0;save();render()}
 function newConversation(){if(busy)stop();if(!save())return;const mode=chat.mode,entryChat=chat.entryChat;chat=fresh();chat.mode=mode;if(entryChat)chat.entryChat=entryChat;save();modeChoice=null;render()}
 
@@ -93,5 +94,5 @@ if(b.dataset.selectMode){const mode=b.dataset.selectMode;closeSheet();setMode(mo
 if(b.dataset.chat){const next=chats.find(c=>c.id===b.dataset.chat);if(next){chat=next;modeChoice=null;save();closeSheet();render()}}});
 $('#image-file').onchange=async e=>{const file=e.target.files[0],targetId=directUpload;directUpload=null;e.target.value='';if(!file||(!targetId&&!editing))return;if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>5*1024*1024){notify('请选择 5MB 以内的 JPG、PNG 或 WebP 图片');return}const current=editing;uploading=true;const u=URL.createObjectURL(file);try{const image=new Image();image.src=u;await image.decode();const canvas=document.createElement('canvas'),scale=Math.min(1,800/Math.max(image.width,image.height));canvas.width=Math.max(1,Math.round(image.width*scale));canvas.height=Math.max(1,Math.round(image.height*scale));canvas.getContext('2d').drawImage(image,0,0,canvas.width,canvas.height);const data=canvas.toDataURL('image/jpeg',.78);if(targetId){if(chat.id!==targetId)return;const before=structuredClone(chat);chat.image=data;if(isPhoto())chat.name='参考照片';chat.plan=null;chat.version++;if(!save()){chat=before;return}render();notify('照片已添加')}else{if(editing!==current)return;current.image=data;$('.upload').innerHTML=`<img src="${esc(current.image)}" alt="当前照片"><span>更换照片</span>`}}catch{notify('图片无法读取，请换一张图片')}finally{uploading=false;URL.revokeObjectURL(u)}};
 $('#layer').addEventListener('click',e=>{if(e.target===$('#layer'))closeSheet()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();if(e.key==='Tab'&&$('#layer').children.length){const nodes=[...$('#layer').querySelectorAll('button,input,textarea,select')].filter(x=>!x.disabled),first=nodes[0],last=nodes.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
-window.CommerceAgent={setMode};document.documentElement.dataset.ready='true';render(Boolean(chat.messages.length));
+window.CommerceAgent={setMode,openHome};document.documentElement.dataset.ready='true';render(Boolean(chat.messages.length));
 })();
