@@ -1,6 +1,6 @@
 # AI带货 · 交互原型
 
-发布版本：commerce-20261127-r2。国内AI带货探索版，与仓库根目录MuseMe及new-product独立。
+发布版本：commerce-20261127-r3。国内AI带货探索版，与仓库根目录MuseMe及new-product独立。
 
 - [默认入口](index.html)
 - [创作助手](新版功能原型/首页功能探索_v0.1.html?tab=create&type=photo)
