@@ -18,3 +18,15 @@
 .discovery-featured-card:active,.discovery-quick .product-task:active{opacity:.72}
 .discovery-entry-block button:focus-visible{outline:2px solid #ba842e;outline-offset:3px}
 @media(max-width:380px){.discovery-featured-card{height:96px;padding-left:10px}.discovery-featured-copy strong{font-size:16px}.discovery-featured-card img{width:54px;height:82px}.discovery-featured-copy small{font-size:9px}}
+
+.discovery-all-panel[hidden]{display:none}
+.discovery-all-panel{margin-top:12px;padding:16px 12px 10px;border:1px solid #ffffff14;border-radius:14px;background:#242220}
+.discovery-all-heading{display:flex;align-items:center;justify-content:space-between;padding:0 4px 10px}
+.discovery-all-heading h2{margin:0;font-size:14px;font-weight:600;color:#f3eee7}
+.discovery-all-heading button{min-height:32px;padding:4px 6px;font-size:12px;color:#bfb5a8}
+.discovery-all-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 2px}
+.discovery-all-grid .product-task{min-height:72px;padding:10px 0;gap:9px}
+.discovery-all-grid .product-task svg{width:25px;height:25px;fill:none;stroke:#ded6cc;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.discovery-all-grid .product-task strong{font-size:11px;font-weight:500;color:#d0c7bc;white-space:nowrap}
+.discovery-quick [aria-expanded=true]{background:#ffffff0a}
+.discovery-quick [aria-expanded=true] svg,.discovery-quick [aria-expanded=true] strong{color:#f1b37d;stroke:#f1b37d}
