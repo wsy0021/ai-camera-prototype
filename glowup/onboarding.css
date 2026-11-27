@@ -87,8 +87,8 @@
 .portrait-discovery .style-column{opacity:0}
 .portrait-discovery .source-portrait{opacity:0}
 .portrait-discovery .style-track{animation-play-state:paused}
-.portrait-discovery .style-column-0 .style-track{animation-name:intro-style-flow;animation-duration:12s}
-.portrait-discovery .style-column-1 .style-track{animation-duration:14s}
+.portrait-discovery .style-column-0 .style-track{animation-name:intro-style-flow;animation-duration:9s}
+.portrait-discovery .style-column-1 .style-track{animation-duration:10s}
 .portrait-discovery.is-playing .portrait-opening{animation:portrait-open 2.1s cubic-bezier(.22,1,.36,1) both}
 .portrait-discovery.is-playing .portrait-opening img{animation:portrait-camera 2.1s cubic-bezier(.22,1,.36,1) both}
 .portrait-discovery.is-playing .style-column-0{animation:looks-left 1.1s .75s cubic-bezier(.16,1,.3,1) both}
