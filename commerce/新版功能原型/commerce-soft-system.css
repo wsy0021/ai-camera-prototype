@@ -1,115 +1,128 @@
-/* Soft Minimalism v0.1: current Create / Me presentation, scoped from discovery. */
+/* Neutral white v0.2: current Create / Me presentation, scoped from discovery. */
 .phone:is([data-product-page=create],[data-product-page=me]),body:has(> #composer){
- --bg:#faf8f3;--fg:#302d28;--text:#302d28;--muted:#6f685d;--card:#fff;--line:#e6dfd3;--accent:#f2b64e;--product-accent:#f2b64e;--product-action-text:#3d2d12;
- background:#faf8f3!important;background-image:none!important;color:#302d28!important;color-scheme:light;
+ --bg:#ffffff;--fg:#242426;--text:#242426;--muted:#66666c;--card:#fff;--line:#e5e5e8;--accent:#f2b64e;--product-accent:#f2b64e;--product-action-text:#242426;
+ background:#ffffff!important;background-image:none!important;color:#242426!important;color-scheme:light;
 }
-.phone:is([data-product-page=create],[data-product-page=me])>.status{background:#faf8f3!important;color:#302d28!important}
-.phone:is([data-product-page=create],[data-product-page=me])>.nav{height:80px!important;padding:8px 20px 16px!important;background:#faf8f3!important;border-top:1px solid #e6dfd3!important;backdrop-filter:none!important}
-.phone:is([data-product-page=create],[data-product-page=me])>.nav button{color:#6f685d!important;font-size:12px;line-height:18px}
-.phone:is([data-product-page=create],[data-product-page=me])>.nav button[aria-current=page]{color:#855214!important}
-.phone:is([data-product-page=create],[data-product-page=me])>.nav>.activity-entry{background:transparent!important;box-shadow:none!important;color:#6f685d!important;border:0!important;border-radius:16px!important}
-.phone:is([data-product-page=create],[data-product-page=me])>.nav>.activity-entry[aria-current=page]{background:#fff0d5!important;color:#855214!important}
+.phone:is([data-product-page=create],[data-product-page=me])>.status{background:#ffffff!important;color:#242426!important}
+.phone:is([data-product-page=create],[data-product-page=me])>.nav{height:80px!important;padding:8px 20px 16px!important;background:#ffffff!important;border-top:1px solid #e5e5e8!important;backdrop-filter:none!important}
+.phone:is([data-product-page=create],[data-product-page=me])>.nav button{color:#66666c!important;font-size:12px;line-height:18px}
+.phone:is([data-product-page=create],[data-product-page=me])>.nav button[aria-current=page]{color:#444449!important}
+.phone:is([data-product-page=create],[data-product-page=me])>.nav>.activity-entry{background:transparent!important;box-shadow:none!important;color:#66666c!important;border:0!important;border-radius:16px!important}
+.phone:is([data-product-page=create],[data-product-page=me])>.nav>.activity-entry[aria-current=page]{background:#fff4da!important;color:#242426!important}
 .phone[data-product-page=create]>.product-studio-host{margin-bottom:80px!important}
 .phone[data-product-page=me]>.view{padding-bottom:104px!important}
-.phone:is([data-product-page=create],[data-product-page=me]) button:focus-visible,body:has(> #composer) button:focus-visible{outline:2px solid #9b641f!important;outline-offset:3px}
+.phone:is([data-product-page=create],[data-product-page=me]) button:focus-visible,body:has(> #composer) button:focus-visible{outline:2px solid #505056!important;outline-offset:3px}
 /* Create: quiet header, clear choice grid, independently anchored composer. */
-body:has(> #composer)>header{height:52px;min-height:52px;padding:4px 16px;background:#faf8f3!important;border-bottom:1px solid #e6dfd3!important;box-shadow:none}
-body:has(> #composer)>header h1{font-size:17px!important;line-height:24px;font-weight:600;color:#302d28}
-body:has(> #composer)>header .icon{width:44px;height:44px;background:transparent!important;border:0!important;border-radius:12px;color:#6f685d!important}
-body:has(> #composer)>header .icon:active{background:#f2efe8!important}
-body:has(> #composer)>#conversation{background:#faf8f3!important;padding:24px 20px 24px;scroll-padding-bottom:24px}
+body:has(> #composer)>header{height:52px;min-height:52px;padding:4px 16px;background:#ffffff!important;border-bottom:1px solid #e5e5e8!important;box-shadow:none}
+body:has(> #composer)>header h1{font-size:17px!important;line-height:24px;font-weight:600;color:#242426}
+body:has(> #composer)>header .icon{width:44px;height:44px;background:transparent!important;border:0!important;border-radius:12px;color:#66666c!important}
+body:has(> #composer)>header .icon:active{background:#f5f5f7!important}
+body:has(> #composer)>#conversation{background:#ffffff!important;padding:24px 20px 24px;scroll-padding-bottom:24px}
 body:has(> #composer) .creation-home{max-width:520px;margin:0 auto;padding-top:0!important}
 .creation-intro{text-align:center;padding:0 0 24px}
 .creation-mark{height:48px;width:56px;margin:0 auto 12px}
 .creation-mark svg{width:100%;height:100%;display:block}
-body:has(> #composer) .creation-intro h2{font-size:24px!important;line-height:34px!important;letter-spacing:0!important;font-weight:600;margin:0!important;color:#302d28}
-.creation-intro p{margin:8px 0 0;font-size:13px;line-height:20px;color:#6f685d}
+body:has(> #composer) .creation-intro h2{font-size:24px!important;line-height:34px!important;letter-spacing:0!important;font-weight:600;margin:0!important;color:#242426}
+.creation-intro p{margin:8px 0 0;font-size:13px;line-height:20px;color:#66666c}
 body:has(> #composer) .feature-grid{gap:12px!important;margin:0!important}
-body:has(> #composer) .feature-entry{position:relative;display:flex;flex-direction:column;align-items:flex-start;overflow:visible;padding:16px!important;min-height:128px!important;border:1px solid #e6dfd3!important;border-radius:18px!important;background:#fff!important;box-shadow:none!important;text-align:left}
-.feature-symbol{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:#fff0d5;color:#855214}
+body:has(> #composer) .feature-entry{position:relative;display:flex;flex-direction:column;align-items:flex-start;overflow:visible;padding:16px!important;min-height:128px!important;border:1px solid transparent!important;border-radius:18px!important;background:#f7f7f8!important;box-shadow:none!important;text-align:left}
+.feature-symbol{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:#f4f4f5;color:#444449}
 .feature-symbol svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.feature-portrait .feature-symbol,.feature-photoedit .feature-symbol{background:#f2efe8;color:#6f685d}
-.feature-card-arrow{position:absolute;right:14px;top:17px;font-size:18px;color:#797166;line-height:24px}
+.feature-portrait .feature-symbol,.feature-photoedit .feature-symbol{background:#f5f5f7;color:#66666c}
+.feature-card-arrow{position:absolute;right:14px;top:17px;font-size:18px;color:#737379;line-height:24px}
 body:has(> #composer) .feature-copy{display:block;padding:12px 0 0!important}
-body:has(> #composer) .feature-entry strong{font-size:15px!important;line-height:22px;font-weight:600;color:#302d28!important}
-body:has(> #composer) .feature-entry small{font-size:12px!important;line-height:18px;color:#6f685d!important;margin-top:4px;white-space:normal}
-body:has(> #composer) .feature-entry:active{background:#fff0d5!important;border-color:#918575!important}
+body:has(> #composer) .feature-entry strong{font-size:15px!important;line-height:22px;font-weight:600;color:#242426!important}
+body:has(> #composer) .feature-entry small{font-size:12px!important;line-height:18px;color:#66666c!important;margin-top:4px;white-space:normal}
+body:has(> #composer) .feature-entry:active{background:#f4f4f5!important;border-color:#8b8b91!important}
 body:has(> #composer) .try-prompts{margin-top:24px!important}
-body:has(> #composer) .try-heading{font-size:13px;line-height:20px;color:#6f685d!important;margin-bottom:0;min-height:44px}
-body:has(> #composer) .try-heading button{min-height:44px;padding:0 0 0 12px;font-size:13px;color:#855214!important}
-body:has(> #composer) .prompt-row{font-size:14px;line-height:22px;min-height:48px;padding:12px 0!important;margin:0;background:transparent!important;border-radius:0!important;border-bottom:1px solid #e6dfd3;color:#302d28!important}
-body:has(> #composer) .prompt-row i{color:#797166!important;font-size:16px}
-body:has(> #composer)>#composer{background:#fff!important;border:1px solid #918575!important;border-radius:24px!important;box-shadow:0 4px 20px rgba(70,50,20,.04)!important;padding:16px!important;margin:8px 16px 16px!important}
-body:has(> #composer)>#composer:focus-within{border-color:#9b641f!important;box-shadow:0 0 0 2px #fff0d5!important}
-body:has(> #composer) #message{font-size:15px;min-height:48px;max-height:96px;line-height:24px;color:#302d28!important}
-body:has(> #composer) textarea::placeholder{color:#797166!important}
+body:has(> #composer) .try-heading{font-size:13px;line-height:20px;color:#66666c!important;margin-bottom:0;min-height:44px}
+body:has(> #composer) .try-heading button{min-height:44px;padding:0 0 0 12px;font-size:13px;color:#444449!important}
+body:has(> #composer) .prompt-row{font-size:14px;line-height:22px;min-height:48px;padding:12px 0!important;margin:0;background:transparent!important;border-radius:0!important;border-bottom:1px solid #e5e5e8;color:#242426!important}
+body:has(> #composer) .prompt-row i{color:#737379!important;font-size:16px}
+body:has(> #composer)>#composer{background:#f7f7f8!important;border:1px solid #d4d4d8!important;border-radius:24px!important;box-shadow:0 4px 20px rgba(0,0,0,.025)!important;padding:16px!important;margin:8px 16px 16px!important}
+body:has(> #composer)>#composer:focus-within{border-color:#505056!important;box-shadow:0 0 0 2px #e9e9ec!important}
+body:has(> #composer) #message{font-size:15px;min-height:48px;max-height:96px;line-height:24px;color:#242426!important}
+body:has(> #composer) textarea::placeholder{color:#737379!important}
 body:has(> #composer) .composer-tools{margin-top:8px;padding-top:0;min-height:44px;gap:8px}
-body:has(> #composer) .add,body:has(> #composer) #examples-button{font-size:13px;line-height:20px;min-height:44px;color:#6f685d!important;padding:8px 4px}
-body:has(> #composer) #mode-label{color:#6f685d!important;font-size:12px}
-body:has(> #composer) .send{width:44px;height:44px;min-width:44px;border-radius:50%;background:#f2b64e!important;color:#3d2d12!important;font-size:24px;box-shadow:none}
-body:has(> #composer) .send:disabled{background:#f2efe8!important;color:#797166!important;opacity:1}
+body:has(> #composer) .add,body:has(> #composer) #examples-button{font-size:13px;line-height:20px;min-height:44px;color:#66666c!important;padding:8px 4px}
+body:has(> #composer) #mode-label{color:#66666c!important;font-size:12px}
+body:has(> #composer) .send{width:44px;height:44px;min-width:44px;border-radius:50%;background:#f2b64e!important;color:#242426!important;font-size:24px;box-shadow:none}
+body:has(> #composer) .send:disabled{background:#f5f5f7!important;color:#737379!important;opacity:1}
 body:has(> #composer) .send:active{background:#e5a538!important}
 /* Dedicated conversations, uploads and in-context sheets use the same type and surfaces. */
 body:has(> #composer) .dedicated-welcome{padding-top:8px!important}
-body:has(> #composer) .dedicated-icon{width:48px!important;height:48px;background:#fff0d5!important;color:#855214!important;border-radius:16px;margin-bottom:20px}
-body:has(> #composer) .dedicated-welcome h2{font-size:24px!important;line-height:34px!important;letter-spacing:0!important;color:#302d28;margin:0 0 8px}
-body:has(> #composer) .dedicated-welcome>p{font-size:15px;line-height:24px;color:#6f685d!important}
-body:has(> #composer) .start-product{min-height:76px;margin-top:24px;padding:16px;background:#fff!important;border:1px dashed #918575!important;border-radius:16px;color:#302d28!important}
+body:has(> #composer) .dedicated-icon{width:48px!important;height:48px;background:#f4f4f5!important;color:#444449!important;border-radius:16px;margin-bottom:20px}
+body:has(> #composer) .dedicated-welcome h2{font-size:24px!important;line-height:34px!important;letter-spacing:0!important;color:#242426;margin:0 0 8px}
+body:has(> #composer) .dedicated-welcome>p{font-size:15px;line-height:24px;color:#66666c!important}
+body:has(> #composer) .start-product{min-height:76px;margin-top:24px;padding:16px;background:#fff!important;border:1px dashed #8b8b91!important;border-radius:16px;color:#242426!important}
 body:has(> #composer) .start-product strong{font-size:15px;line-height:22px}
-body:has(> #composer) .start-product .plus{color:#855214}
+body:has(> #composer) .start-product .plus{color:#444449}
 body:has(> #composer) .feature-directions{margin-top:24px}
-body:has(> #composer) .starter-label{font-size:13px;line-height:20px;color:#6f685d;margin-bottom:12px}
-body:has(> #composer) .direction-list button{min-height:44px;padding:10px 14px;background:#fff;border:1px solid #918575!important;color:#302d28!important;font-size:14px;border-radius:12px}
-body:has(> #composer) .user-message{background:#fff0d5!important;color:#302d28!important;font-size:15px;line-height:24px;border-radius:16px 16px 4px 16px}
-body:has(> #composer) .assistant-name{color:#6f685d!important;font-size:12px;line-height:18px}
-body:has(> #composer) .assistant-copy{background:#fff!important;color:#302d28!important;border:1px solid #e6dfd3;border-radius:4px 16px 16px 16px;padding:16px;font-size:15px;line-height:24px}
-body:has(> #composer) .product-card,body:has(> #composer) .plan{background:#fff!important;border-color:#e6dfd3!important}
-body:has(> #composer) .product-card small,body:has(> #composer) .shot p,body:has(> #composer) .photo-brief p{color:#6f685d!important;font-size:13px;line-height:20px}
-body:has(> #composer) .sheet{background:#faf8f3!important;border-radius:24px 24px 0 0;box-shadow:0 12px 32px rgba(40,30,15,.12)!important}
-body:has(> #composer) #layer{background:rgba(25,22,17,.32)!important}
+body:has(> #composer) .starter-label{font-size:13px;line-height:20px;color:#66666c;margin-bottom:12px}
+body:has(> #composer) .direction-list button{min-height:44px;padding:10px 14px;background:#fff;border:1px solid #8b8b91!important;color:#242426!important;font-size:14px;border-radius:12px}
+body:has(> #composer) .user-message{background:#f4f4f5!important;color:#242426!important;font-size:15px;line-height:24px;border-radius:16px 16px 4px 16px}
+body:has(> #composer) .assistant-name{color:#66666c!important;font-size:12px;line-height:18px}
+body:has(> #composer) .assistant-copy{background:#fff!important;color:#242426!important;border:1px solid #e5e5e8;border-radius:4px 16px 16px 16px;padding:16px;font-size:15px;line-height:24px}
+body:has(> #composer) .product-card,body:has(> #composer) .plan{background:#fff!important;border-color:#e5e5e8!important}
+body:has(> #composer) .product-card small,body:has(> #composer) .shot p,body:has(> #composer) .photo-brief p{color:#66666c!important;font-size:13px;line-height:20px}
+body:has(> #composer) .sheet{background:#ffffff!important;border-radius:24px 24px 0 0;box-shadow:0 12px 32px rgba(0,0,0,.12)!important}
+body:has(> #composer) #layer{background:rgba(0,0,0,.32)!important}
 body:has(> #composer) .sheet-top h3{font-size:17px;line-height:24px}
 body:has(> #composer) .sheet .icon{width:44px;height:44px}
-body:has(> #composer) .sheet .hint,body:has(> #composer) .sheet small,body:has(> #composer) .history-row small{font-size:13px;line-height:20px;color:#6f685d!important}
-body:has(> #composer) .sheet input,body:has(> #composer) .sheet textarea{border-color:#918575!important;font-size:15px;line-height:24px}
-body:has(> #composer) .primary{min-height:48px;background:#f2b64e!important;color:#3d2d12!important;font-size:15px}
-body:has(> #composer) .template-categories button{min-height:44px;color:#6f685d!important}
+body:has(> #composer) .sheet .hint,body:has(> #composer) .sheet small,body:has(> #composer) .history-row small{font-size:13px;line-height:20px;color:#66666c!important}
+body:has(> #composer) .sheet input,body:has(> #composer) .sheet textarea{border-color:#8b8b91!important;font-size:15px;line-height:24px}
+body:has(> #composer) .primary{min-height:48px;background:#f2b64e!important;color:#242426!important;font-size:15px}
+body:has(> #composer) .template-categories button{min-height:44px;color:#66666c!important}
 body:has(> #composer) .history-sidebar{border-radius:0 24px 24px 0}
 /* Me: one account row, two content tabs, media first and explicit three-state labels. */
 .phone[data-product-page=me] .commerce-library{padding:0 20px 32px!important}
 .phone[data-product-page=me] .cm-account-row{padding:24px 0 32px!important;margin:0;gap:12px}
-.phone[data-product-page=me] .cm-avatar{width:56px;height:56px;background:#fff0d5!important;color:#855214!important;border:0!important}
+.phone[data-product-page=me] .cm-avatar{width:56px;height:56px;background:#f4f4f5!important;color:#444449!important;border:0!important}
 .phone[data-product-page=me] .cm-avatar svg{width:28px;height:28px}
-.phone[data-product-page=me] .cm-account{gap:12px;color:#302d28!important}
+.phone[data-product-page=me] .cm-account{gap:12px;color:#242426!important}
 .phone[data-product-page=me] .cm-account strong{font-size:20px!important;line-height:28px}
-.phone[data-product-page=me] .cm-account small{font-size:13px;line-height:20px;margin-top:4px;color:#6f685d!important}
-.phone[data-product-page=me] .cm-settings{color:#6f685d!important}
-.phone[data-product-page=me] .cm-tabs{background:#faf8f3!important;gap:28px!important;margin:0 0 20px;padding:0}
-.phone[data-product-page=me] .cm-tabs button{font-size:17px!important;line-height:24px;min-height:48px!important;padding-bottom:14px;color:#6f685d!important}
-.phone[data-product-page=me] .cm-tabs button[aria-selected=true]{color:#302d28!important}
+.phone[data-product-page=me] .cm-account small{font-size:13px;line-height:20px;margin-top:4px;color:#66666c!important}
+.phone[data-product-page=me] .cm-settings{color:#66666c!important}
+.phone[data-product-page=me] .cm-tabs{background:#ffffff!important;gap:28px!important;margin:0 0 20px;padding:0}
+.phone[data-product-page=me] .cm-tabs button{font-size:17px!important;line-height:24px;min-height:48px!important;padding-bottom:14px;color:#66666c!important}
+.phone[data-product-page=me] .cm-tabs button[aria-selected=true]{color:#242426!important}
 .phone[data-product-page=me] .cm-tabs button[aria-selected=true]:after{background:#f2b64e!important;width:28px!important}
 .phone[data-product-page=me] .cm-grid{gap:24px 12px!important}
-.phone[data-product-page=me] .cm-cover{aspect-ratio:4/5;border-radius:16px!important;background:#f2efe8!important}
+.phone[data-product-page=me] .cm-cover{aspect-ratio:4/5;border-radius:16px!important;background:#f5f5f7!important}
 .phone[data-product-page=me] .cm-cover.running>img{filter:blur(5px) brightness(.65)}
 .phone[data-product-page=me] .cm-cover.failed>img{filter:grayscale(.4) brightness(.65)}
-.phone[data-product-page=me] .cm-task-status{position:absolute;inset:12px auto auto 12px;display:block;padding:5px 8px;border-radius:8px;background:#fff0d5;line-height:18px}
-.phone[data-product-page=me] .cm-task-status strong{font-size:12px;line-height:18px;font-weight:500;color:#855214}
+.phone[data-product-page=me] .cm-task-status{position:absolute;inset:12px auto auto 12px;display:block;padding:5px 8px;border-radius:8px;background:#fff4da;line-height:18px}
+.phone[data-product-page=me] .cm-task-status strong{font-size:12px;line-height:18px;font-weight:500;color:#765014}
 .phone[data-product-page=me] .cm-task-status.done{background:#edf5ef}
 .phone[data-product-page=me] .cm-task-status.done strong{color:#386044}
 .phone[data-product-page=me] .cm-task-status.failed{background:#fbeeeb}
 .phone[data-product-page=me] .cm-task-status.failed strong{color:#985044}
-.phone[data-product-page=me] .cm-task-hint{position:absolute;inset:auto 0 0;padding:24px 12px 12px;background:linear-gradient(transparent,rgba(25,22,17,.8));color:#fff;font-size:12px;line-height:18px}
+.phone[data-product-page=me] .cm-task-hint{position:absolute;inset:auto 0 0;padding:24px 12px 12px;background:linear-gradient(transparent,rgba(0,0,0,.8));color:#fff;font-size:12px;line-height:18px}
 .phone[data-product-page=me] .cm-work>strong{font-size:15px!important;line-height:22px;margin:10px 0 6px;white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
-.phone[data-product-page=me] .cm-work>small{font-size:12px;line-height:18px;color:#6f685d!important;flex-wrap:wrap;gap:4px}
+.phone[data-product-page=me] .cm-work>small{font-size:12px;line-height:18px;color:#66666c!important;flex-wrap:wrap;gap:4px}
 .phone[data-product-page=me] .cm-failure-icon{color:#fff;border-color:#fff9;width:40px;height:40px}
 .phone[data-product-page=me] .cm-glow{width:40px;height:40px;font-size:0;border:2px solid #ffffff40;border-top-color:#fff;border-right-color:#fff;border-radius:50%;animation:cm-spin 1.4s linear infinite;left:calc(50% - 20px);top:calc(50% - 20px);transform:none}
 .phone[data-product-page=me] .cm-empty{padding:80px 16px 24px}
-.phone[data-product-page=me] .cm-empty>span{width:64px;height:64px;border-radius:20px;background:#fff0d5!important;color:#855214!important}
-.phone[data-product-page=me] .cm-empty h2{font-size:20px!important;line-height:28px!important;letter-spacing:0!important;color:#302d28!important}
-.phone[data-product-page=me] .cm-empty p{font-size:13px;line-height:20px;color:#6f685d!important}
-.phone[data-product-page=me] .cm-empty .primary{background:#f2b64e!important;color:#3d2d12!important;min-height:48px;border-radius:16px;font-size:15px}
-.phone[data-product-page=me] .cm-unfavorite{width:44px;height:44px;background:#fff!important;color:#855214!important}
-.phone[data-product-page=me] .cm-favorite .commerce-tile>button>span{color:#302d28;font-size:15px;line-height:22px}
-.phone[data-product-page=me] .cm-count{font-size:13px;color:#6f685d!important}
+.phone[data-product-page=me] .cm-empty>span{width:64px;height:64px;border-radius:20px;background:#f4f4f5!important;color:#444449!important}
+.phone[data-product-page=me] .cm-empty h2{font-size:20px!important;line-height:28px!important;letter-spacing:0!important;color:#242426!important}
+.phone[data-product-page=me] .cm-empty p{font-size:13px;line-height:20px;color:#66666c!important}
+.phone[data-product-page=me] .cm-empty .primary{background:#f2b64e!important;color:#242426!important;min-height:48px;border-radius:16px;font-size:15px}
+.phone[data-product-page=me] .cm-unfavorite{width:44px;height:44px;background:#fff!important;color:#444449!important}
+.phone[data-product-page=me] .cm-favorite .commerce-tile>button>span{color:#242426;font-size:15px;line-height:22px}
+.phone[data-product-page=me] .cm-count{font-size:13px;color:#66666c!important}
 @media(max-width:380px){body:has(> #composer)>#conversation{padding-left:16px;padding-right:16px}.phone[data-product-page=me] .commerce-library{padding-left:16px!important;padding-right:16px!important}body:has(> #composer) .feature-entry{padding:14px!important}}
 @media(max-height:740px){body:has(> #composer)>#conversation{padding-top:16px}.creation-intro{padding-bottom:20px}.creation-mark{height:48px;width:56px;margin-bottom:12px}body:has(> #composer) .feature-entry{min-height:120px!important}body:has(> #composer) .try-prompts{margin-top:20px!important}.phone[data-product-page=me] .cm-empty{padding-top:48px}}
 @media(prefers-reduced-motion:reduce){.phone[data-product-page=me] .cm-glow{animation:none}body:has(> #composer) *{scroll-behavior:auto!important}}
+
+/* Remove inherited warm component colors in sheets and less frequent conversation states. */
+body:has(> #composer) .feature-icon{color:#55555b!important;background:#f4f4f5!important}
+body:has(> #composer) .shot blockquote,body:has(> #composer) .sheet label,body:has(> #composer) .history-row{color:#242426!important}
+body:has(> #composer) .sheet input,body:has(> #composer) .sheet textarea,body:has(> #composer) .sheet select{color:#242426!important;background:#fff!important}
+body:has(> #composer) .history-row,body:has(> #composer) .shot,body:has(> #composer) .plan-heading{border-color:#e5e5e8!important}
+body:has(> #composer) .history-row[aria-current=true],body:has(> #composer) .template-categories button[aria-pressed=true]{background:#f0f0f2!important;color:#242426!important}
+body:has(> #composer) .example-item,body:has(> #composer) .example-detail>img{background:#f5f5f7!important;border-color:#e5e5e8!important}
+body:has(> #composer) .example-back,body:has(> #composer) .replace-note{color:#66666c!important}
+body:has(> #composer) .handle{background:#d4d4d8!important}
+body:has(> #composer) .assistant-copy{background:#f7f7f8!important;border:0}
+body:has(> #composer) .user-message{background:#ededf0!important}
+.phone[data-product-page=me] .cm-unfavorite{color:#444449!important}

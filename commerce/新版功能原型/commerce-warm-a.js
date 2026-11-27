@@ -1,1 +1,8 @@
-(()=>{const sheet=document.createElement('link');sheet.rel='stylesheet';sheet.href='commerce-warm-a.css?v=warm-a-05';sheet.media='not all';document.head.append(sheet);const system=document.createElement('link');system.rel='stylesheet';system.href='commerce-soft-system.css?v=soft-01';document.head.append(system);const phone=document.querySelector('.phone');function update(){sheet.media=['create','me'].includes(phone?.dataset.productPage)?'all':'not all'}if(phone)new MutationObserver(update).observe(phone,{attributes:true,attributeFilter:['data-product-page']});update()})();
+// Enable the product theme only on the two reviewed pages. Styles are loaded in the head.
+(() => {
+ const phone=document.querySelector('.phone');
+ const sheets=['commerce-warm-style','commerce-system-style'].map(id=>document.getElementById(id)).filter(Boolean);
+ function update(){const media=['create','me'].includes(phone?.dataset.productPage)?'all':'not all';for(const sheet of sheets)sheet.media=media;}
+ if(phone)new MutationObserver(update).observe(phone,{attributes:true,attributeFilter:['data-product-page']});
+ update();
+})();
