@@ -1,5 +1,7 @@
 # AI 相机交互原型
 
+- [GlowUp 新人流程与产品原型](https://wsy0021.github.io/ai-camera-prototype/glowup/?onboarding=1&splash=1)
+
 - [国内AI带货原型（当前协作版）](https://wsy0021.github.io/ai-camera-prototype/commerce/)
 - [独立新产品评审](https://wsy0021.github.io/ai-camera-prototype/new-product/)
 - [MuseMe历史原型](https://wsy0021.github.io/ai-camera-prototype/)

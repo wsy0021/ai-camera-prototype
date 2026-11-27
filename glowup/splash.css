@@ -1,0 +1,11 @@
+/* A quiet brand introduction before the image-led onboarding. */
+.startup-screen{position:fixed;inset:0;z-index:9000;overflow:auto;background:#23232b;opacity:1;transition:opacity 240ms ease-out}
+.startup-screen[hidden]{display:none}
+.startup-canvas{position:relative;width:402px;max-width:100%;height:874px;margin:0 auto;background:#121217;color:#faf7ff;overflow:hidden}
+.startup-wordmark{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);margin:0;white-space:nowrap;color:#faf7ff;font:italic 62px/1.1 Georgia,serif;letter-spacing:-3.8px;animation:startup-reveal 650ms ease-out both}
+.startup-spark{position:absolute;width:20px;height:20px;right:-21px;top:0;fill:#cdb9ee}
+.startup-screen.is-leaving{opacity:0;pointer-events:none}
+body.startup-active{overflow:hidden}
+@keyframes startup-reveal{from{opacity:0}to{opacity:1}}
+@media(max-width:600px){.startup-canvas{width:100%;height:100svh;min-height:320px}}
+@media(prefers-reduced-motion:reduce){.startup-wordmark{animation:none}.startup-screen{transition:none}}
